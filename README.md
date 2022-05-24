@@ -31,6 +31,36 @@ Keywords:
 
 ## 2. Papers
 
+### 2.1 Base Papers
+ <table>
+  <tr>
+    <th>Title</th>
+    <th>Summary</th>
+    <th>Keywords</th>
+    <th>Link</th>
+  </tr>
+  <tr>
+    <td>
+    Neural Architecture Search with Reinforcement Learning
+    </td>
+    <td>
+    The paper that introduced Neural Architecture Search. The idea of using a recurrent neural network to compose
+    neural network architectures.
+    </td>
+    <td>NAS, RNN</td>
+    <td>
+    <a href="https://www.ibm.com/cloud/learn/recurrent-neural-networks">here</a>
+    </td>
+  </tr>
+  <tr>
+    <td>Centro comercial Moctezuma</td>
+    <td>Francisco Chang</td>
+    <td>Mexico</td>
+    <td>Mexico</td>
+  </tr>
+</table>
+
+### 2.2 Chosen Papers (Survey)
 | Title          | Summary          | Keywords      |
 | :------------- | :----------:     | -----------:  |
 | foo            | bar              | baz           |
