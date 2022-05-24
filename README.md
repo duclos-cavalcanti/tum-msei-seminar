@@ -111,10 +111,10 @@ Neural Network that uses sequential data or time-series data.
 
 
 ### 3.2 NAS
-Methods can be categorized by
-- Search Space
-- Search Strategy
-- Performance Estimation Strategy
+NAS Methods can be categorized/differentiated by three main portions of their process:
+1. Search Space
+2. Search Strategy
+3. Performance Estimation Strategy
 
 ### 3.3 Reinforcement Learning
 ### 3.4 Evolutionary Algorithms
