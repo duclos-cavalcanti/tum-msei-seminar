@@ -42,6 +42,13 @@ Keywords:
 
 ## 3. Notebook
 ### 3.1 Neural Networks
+1. Recurrent Neural Networks ([link](https://www.ibm.com/cloud/learn/recurrent-neural-networks]))
+
+Neural Network that uses sequential data or time-series data.
+- Have **Memory**, they take info from prior inputs to influence the current input and output.
+- Utilize Training data to learn.
+
+
 ### 3.2 NAS
 ### 3.3 Reinforcement Learning
 ### 3.4 Evolutionary Algorithms
