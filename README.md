@@ -77,7 +77,10 @@ Keywords:
   Neural Architecture Search: A Survey
   </a> </td>
   <td>
-  bla bla bla
+  Evaluates NAS as sub-field of Auto-ML and surveys the field as of the current
+  state of the art during the publicatoin of said paper. Also breaks down the main
+  methods within NAS and shows what options exist to mix and match them. A great starting point
+  to learn about this field!
 
   <br>
   <br>
@@ -108,6 +111,11 @@ Neural Network that uses sequential data or time-series data.
 
 
 ### 3.2 NAS
+Methods can be categorized by
+- Search Space
+- Search Strategy
+- Performance Estimation Strategy
+
 ### 3.3 Reinforcement Learning
 ### 3.4 Evolutionary Algorithms
 ### 3.5 Search Space Design
