@@ -40,12 +40,13 @@ Keywords:
   <th>Summary</th>
 </tr>
 <tr>
-  <td> <a href="https://www.ibm.com/cloud/learn/recurrent-neural-networks">
+  <td> <a href="https://arxiv.org/abs/1611.01578">
   Neural Architecture Search with Reinforcement Learning
   </a> </td>
   <td>
   The paper that introduced Neural Architecture Search. The idea of using a recurrent neural network to compose
-  neural network architectures.
+  neural network architectures. Presents a new research direction that which enables the automation of finding
+  good neural network architectures.
 
   <br>
   <br>
@@ -55,6 +56,7 @@ Keywords:
   What is that?
   </li>
   </ul>
+  Cited 3979, 2017
   </td>
 </tr>
 <tr>
@@ -64,11 +66,33 @@ Keywords:
 </table>
 
 ### 2.2 Chosen Papers (Survey)
-| Title          | Summary          | Keywords      |
-| :------------- | :----------:     | -----------:  |
-| foo            | bar              | baz           |
-| foo            | bar              | baz           |
-| foo            | bar              | baz           |
+<table>
+<tr>
+  <th>Title</th>
+  <th>Summary</th>
+</tr>
+<tr>
+  <td> <a href="https://arxiv.org/abs/1611.01578">
+  Neural Architecture Search: A Survey
+  </a> </td>
+  <td>
+  bla bla bla
+
+  <br>
+  <br>
+  <ul>Questions
+  <li>
+  ?
+  </li>
+  </ul>
+  Cited 1540, 2019
+  </td>
+</tr>
+<tr>
+  <td>Foo</td>
+  <td>Bar</td>
+</tr>
+</table>
 
 
 <a name="notebook"/>
