@@ -2,6 +2,8 @@
 
 1. [Topic](#topic)
 2. [Papers](#papers)
+    1. [Base Papers](#bp)
+    2. [Chosen Papers](#cp)
 3. [Notebook](#notebook)
     1. [Neural Networks](#nn)
     2. [NAS](#nas)
@@ -32,32 +34,33 @@ Keywords:
 ## 2. Papers
 
 ### 2.1 Base Papers
- <table>
-  <tr>
-    <th>Title</th>
-    <th>Summary</th>
-    <th>Keywords</th>
-    <th>Link</th>
-  </tr>
-  <tr>
-    <td>
-    Neural Architecture Search with Reinforcement Learning
-    </td>
-    <td>
-    The paper that introduced Neural Architecture Search. The idea of using a recurrent neural network to compose
-    neural network architectures.
-    </td>
-    <td>NAS, RNN</td>
-    <td>
-    <a href="https://www.ibm.com/cloud/learn/recurrent-neural-networks">here</a>
-    </td>
-  </tr>
-  <tr>
-    <td>Centro comercial Moctezuma</td>
-    <td>Francisco Chang</td>
-    <td>Mexico</td>
-    <td>Mexico</td>
-  </tr>
+<table>
+<tr>
+  <th>Title</th>
+  <th>Summary</th>
+</tr>
+<tr>
+  <td> <a href="https://www.ibm.com/cloud/learn/recurrent-neural-networks">
+  Neural Architecture Search with Reinforcement Learning
+  </a> </td>
+  <td>
+  The paper that introduced Neural Architecture Search. The idea of using a recurrent neural network to compose
+  neural network architectures.
+
+  <br>
+  <br>
+  <ul>Questions
+  <li>
+  RNN as controller, provides flexible method, then able to search variable-length architecture space.
+  What is that?
+  </li>
+  </ul>
+  </td>
+</tr>
+<tr>
+  <td>Foo</td>
+  <td>Bar</td>
+</tr>
 </table>
 
 ### 2.2 Chosen Papers (Survey)
