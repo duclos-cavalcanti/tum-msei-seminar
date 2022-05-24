@@ -9,6 +9,7 @@
     2. [NAS](#nas)
     3. [Reinforcement Learning](#rl)
     4. [Evolutionary Algorithms](#ea)
+    5. [Search Space Design](#ea)
 4. [Links](#links)
 
 <a name="topic"/>
@@ -109,5 +110,6 @@ Neural Network that uses sequential data or time-series data.
 ### 3.2 NAS
 ### 3.3 Reinforcement Learning
 ### 3.4 Evolutionary Algorithms
+### 3.5 Search Space Design
 
 ## 4. Links
