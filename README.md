@@ -103,9 +103,7 @@ Keywords:
 
 ## 3. Notebook
 ### 3.1 Neural Networks
-1. Basics
-
-Computational Graphs / ML / Functions
+Computational Graphs / Functions
 - `Parameters` / `Hyperparameters`
 - `Score` Function
 - `Loss` Function + Regularization
@@ -122,13 +120,17 @@ hierarchical computation.
 - a different number of layers (NN) gives more precision and flexibility to the purpose of the neural network.
 In the example of image classification, extra layers can be seen as extra templates to recognize an image.
 
+#### 3.1.1 Types
+1. Fully Connected Layers
+All nodes of layer (i - 1) are connected to nodes of layer i.
+
 2. Convolutional Neural Networks
 
 3. Recurrent Neural Networks ([link](https://www.ibm.com/cloud/learn/recurrent-neural-networks]))
 
 Neural Network that uses sequential data or time-series data.
 - Has **Memory**, they take info from prior inputs to influence the current input and output.
-- Utilize Training data to learn.
+- Utilize Training data to learn (as well).
 
 
 ### 3.2 NAS
