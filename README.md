@@ -33,7 +33,10 @@ Keywords:
 
 <a name="papers"/>
 
-## 2. [Papers](https://ml4aad.org/automl/literature-on-neural-architecture-search/)
+## 2. Papers
+
+[Here](https://ml4aad.org/automl/literature-on-neural-architecture-search/) you can find a great database of all relevant
+publications around NAS.
 
 ### 2.1 Base Papers
 <table>
