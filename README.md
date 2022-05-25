@@ -155,7 +155,7 @@ All nodes of layer (i - 1) are connected to nodes of layer i.
 2. Convolutional Neural Networks
 - Used for images
 
-3. Recurrent Neural Networks ([link](https://www.ibm.com/cloud/learn/recurrent-neural-networks]))
+3. Recurrent Neural Networks ([link](https://www.ibm.com/cloud/learn/recurrent-neural-networks))
 - Used for Audio/Temporal signals
 
 Neural Network that uses sequential data or time-series data.
@@ -170,7 +170,35 @@ NAS Methods can be categorized/differentiated by three main portions of their pr
 3. Performance Estimation Strategy
 
 ### 3.3 Reinforcement Learning
-### 3.4 Evolutionary Algorithms
+A branch of ML that can be seen as a framework for learning how to interact with the environment
+from experience.
+
+```
+
+       ------------------------------------------
+       |                                        |
+       | Reward: r                              |
+       v                                        |
+----------------------                          |
+|    Agent           |----------------->  ENVIRONMENT
+|    Policy: p(s, a) |    Action: a             |
+----------------------                          |
+        ^                                       |
+        |            State: s                   |
+        ----------------------------------------
+
+
+```
+
+### 3.4 Evolutionary Algorithms ([link](https://www.youtube.com/watch?v=CZE86BPDqCI))
+Based on the biological principal of natural selection.
+
+Process:
+- Establish population of control laws
+- Let theme compete, see how effective they are and rate them based on their fitness
+- Breed the "next-generation" of control laws based on the most effective ones
+
+
 ### 3.5 Search Space Design
 
 ## 4. Links
