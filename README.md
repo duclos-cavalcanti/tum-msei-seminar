@@ -57,7 +57,7 @@ Keywords:
   What is that?
   </li>
   </ul>
-  Cited 3979, 2017
+  Cited 3979 times, 2017
   </td>
 </tr>
 <tr>
@@ -78,7 +78,7 @@ Keywords:
   </a> </td>
   <td>
   Evaluates NAS as sub-field of Auto-ML and surveys the field as of the current
-  state of the art during the publicatoin of said paper. Also breaks down the main
+  state of the art during the publication of said paper. Also breaks down the main
   methods within NAS and shows what options exist to mix and match them. A great starting point
   to learn about this field!
 
@@ -89,7 +89,7 @@ Keywords:
   ?
   </li>
   </ul>
-  Cited 1540, 2019
+  Cited 1540 times, 2019
   </td>
 </tr>
 <tr>
@@ -103,10 +103,31 @@ Keywords:
 
 ## 3. Notebook
 ### 3.1 Neural Networks
-1. Recurrent Neural Networks ([link](https://www.ibm.com/cloud/learn/recurrent-neural-networks]))
+1. Basics
+
+Computational Graphs / ML / Functions
+- `Parameters` / `Hyperparameters`
+- `Score` Function
+- `Loss` Function + Regularization
+    - `Optimization`: Finding parameters 'w' that minimizes Loss
+        - Can be done by computing gradient of said function
+        - `Backpropagation` is a method to fine tune parameters to approach the best solution.
+        This is done by leveraging the computational graph format of neural networks and
+        their nodes.
+
+Neural Networks
+- are just a class of functions where simpler functions are stacked upon each other in a hierarchical
+manner in order to make a more complex non-linear function. Essentially multiple stages of
+hierarchical computation.
+- a different number of layers (NN) gives more precision and flexibility to the purpose of the neural network.
+In the example of image classification, extra layers can be seen as extra templates to recognize an image.
+
+2. Convolutional Neural Networks
+
+3. Recurrent Neural Networks ([link](https://www.ibm.com/cloud/learn/recurrent-neural-networks]))
 
 Neural Network that uses sequential data or time-series data.
-- Have **Memory**, they take info from prior inputs to influence the current input and output.
+- Has **Memory**, they take info from prior inputs to influence the current input and output.
 - Utilize Training data to learn.
 
 
