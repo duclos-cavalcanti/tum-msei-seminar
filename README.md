@@ -5,6 +5,7 @@
     1. [Base Papers](#bp)
     2. [Chosen Papers](#cp)
 3. [Notebook](#notebook)
+    0. [Machine Learning](#ml)
     1. [Neural Networks](#nn)
     2. [NAS](#nas)
     3. [Reinforcement Learning](#rl)
@@ -102,7 +103,23 @@ Keywords:
 <a name="notebook"/>
 
 ## 3. Notebook
+### 3.0 Machine Learning
+Types:
+- Supervised Learning (Labels)
+    - Classification (Discrete Data)
+    - Regression (Continuous Data)
+    - Optimization and Control (Modified system or control parameters)
+- Unsupervised Learning (No Labels)
+    - Data mining - an Unsupervised algorithm finds out / learns clusters of data of distinguishing features and also
+    learn that there are different categories to be classified from these clusters.
+        - Clustering (Discrete Data)
+        - Pattern/Feature extraction (Discrete Data)
+- Semi-Supervised Learning
+    - Reinforcement Learning (Modifies system or control parameters)
+    - Generative Models (Model)
+
 ### 3.1 Neural Networks
+#### 3.1.1 Basics
 Computational Graphs / Functions
 - `Parameters` / `Hyperparameters`
 - `Score` Function
@@ -114,19 +131,32 @@ Computational Graphs / Functions
         their nodes.
 
 Neural Networks
-- are just a class of functions where simpler functions are stacked upon each other in a hierarchical
+- are just a `class of functions / graph` where simpler functions are stacked upon each other in a hierarchical
 manner in order to make a more complex non-linear function. Essentially multiple stages of
 hierarchical computation.
 - a different number of layers (NN) gives more precision and flexibility to the purpose of the neural network.
 In the example of image classification, extra layers can be seen as extra templates to recognize an image.
+- the "abstraction" of a `layer` has the nice property that it allows us to use efficient **vectorized**
+code (e.g. matrix multiplies)
 
-#### 3.1.1 Types
+Training (example Mini-Batch Stochastic Gradient Descent or SGD)
+
+Loop:
+1. `Sample` a batch of data
+2. `Forward` prop it through the graph (network), get loss
+3. `Backprop` to calculate the gradients
+4. `Update` the parameters using the gradient
+
+
+#### 3.1.2 Types
 1. Fully Connected Layers
 All nodes of layer (i - 1) are connected to nodes of layer i.
 
 2. Convolutional Neural Networks
+- Used for images
 
 3. Recurrent Neural Networks ([link](https://www.ibm.com/cloud/learn/recurrent-neural-networks]))
+- Used for Audio/Temporal signals
 
 Neural Network that uses sequential data or time-series data.
 - Has **Memory**, they take info from prior inputs to influence the current input and output.
