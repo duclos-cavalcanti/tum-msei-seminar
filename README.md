@@ -33,7 +33,7 @@ Keywords:
 
 <a name="papers"/>
 
-## 2. Papers
+## 2. [Papers](https://ml4aad.org/automl/literature-on-neural-architecture-search/)
 
 ### 2.1 Base Papers
 <table>
@@ -163,15 +163,20 @@ Neural Network that uses sequential data or time-series data.
 - Utilize Training data to learn (as well).
 
 
-### 3.2 NAS
+### 3.2 NAS ([link](https://www.youtube.com/watch?v=wL-p5cjDG64))
+* ResNet - found out about skip connections and identity learning
+
 NAS Methods can be categorized/differentiated by three main portions of their process:
 1. Search Space
 2. Search Strategy
 3. Performance Estimation Strategy
 
-### 3.3 Reinforcement Learning
+### 3.3 Reinforcement Learning ([link](https://www.youtube.com/watch?v=0MNVhXEX9to))
 A branch of ML that can be seen as a framework for learning how to interact with the environment
 from experience.
+
+- Ocasionally, very ocasionally gets a reward
+- Is in its core an optimization problem, where we aim to find the optimal policy set.
 
 ```
 
@@ -187,8 +192,15 @@ from experience.
         |            State: s                   |
         ----------------------------------------
 
+            Value Function: Vpi(s)
 
 ```
+Value Function:
+- Expected Reward I'd get in the future if I start at that state(s) and I enact
+  that policy(pi)
+
+- Computes the value of being in a certain state(s) given a policy(pi).
+
 
 ### 3.4 Evolutionary Algorithms ([link](https://www.youtube.com/watch?v=CZE86BPDqCI))
 Based on the biological principal of natural selection.
