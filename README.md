@@ -5,12 +5,10 @@
     1. [Base Papers](#bp)
     2. [Chosen Papers](#cp)
 3. [Notebook](#notebook)
-    0. [Machine Learning](#ml)
-    1. [Neural Networks](#nn)
-    2. [NAS](#nas)
-    3. [Reinforcement Learning](#rl)
-    4. [Evolutionary Algorithms](#ea)
-    5. [Search Space Design](#ea)
+    1. [NAS](#nas)
+    2. [Reinforcement Learning](#rl)
+    3. [Evolutionary Algorithms](#ea)
+    4. [Search Space Design](#ea)
 4. [Links](#links)
 
 <a name="topic"/>
@@ -47,11 +45,12 @@ publications around NAS.
 <tr>
   <td> <a href="https://arxiv.org/abs/1611.01578">
   Neural Architecture Search with Reinforcement Learning
-  </a> </td>
+  </a> (Zoph and Lee 2017) </td>
   <td>
-  The paper that introduced Neural Architecture Search. The idea of using a recurrent neural network to compose
-  neural network architectures. Presents a new research direction that which enables the automation of finding
-  good neural network architectures.
+  Paper that sparked Neural Architecture Search to the mainstream. They obtained competetive performance on the
+  CIFAR 10 and Penn Treebank benchmarks with a search strategy based on reinforcement learning. Vast computational
+  resources were necessary: 800 GPUs for 3 to 4 Weeks. Future efforts were made on top of this paper to reduce computational
+  costs and improve performance.
 
   <br>
   <br>
@@ -106,75 +105,28 @@ publications around NAS.
 <a name="notebook"/>
 
 ## 3. Notebook
-### 3.0 Machine Learning
-Types:
-- Supervised Learning (Labels)
-    - Classification (Discrete Data)
-    - Regression (Continuous Data)
-    - Optimization and Control (Modified system or control parameters)
-- Unsupervised Learning (No Labels)
-    - Data mining - an Unsupervised algorithm finds out / learns clusters of data of distinguishing features and also
-    learn that there are different categories to be classified from these clusters.
-        - Clustering (Discrete Data)
-        - Pattern/Feature extraction (Discrete Data)
-- Semi-Supervised Learning
-    - Reinforcement Learning (Modifies system or control parameters)
-    - Generative Models (Model)
+### 3.1 NAS ([link](https://www.youtube.com/watch?v=wL-p5cjDG64))
+NAS Methods can be categorized/differentiated by three dimensions:
+1. `Search Space`
+    - Defines which architectures can be represented. Incorporating prior knowledge reduces.
+    - Problem: Even with constrains, remains i) non-continuous and ii) high dimensional
+    search space size (good), however it also introduces bias (bad).
+2. `Search Strategy`
+    - premature convergence vs find well performing architectures quickly (exploration-exploitation trade off)
+    - examples of strategies: random search, Bayesian optimization, evolutionary methods, RL and gradient based
+    methods.
+3. `Performance Estimation Strategy`
+    - Standard training and validation is computationally expensive and limits
+    the number of architectures that can be explored.
 
-### 3.1 Neural Networks
-#### 3.1.1 Basics
-Computational Graphs / Functions
-- `Parameters` / `Hyperparameters`
-- `Score` Function
-- `Loss` Function + Regularization
-    - `Optimization`: Finding parameters 'w' that minimizes Loss
-        - Can be done by computing gradient of said function
-        - `Backpropagation` is a method to fine tune parameters to approach the best solution.
-        This is done by leveraging the computational graph format of neural networks and
-        their nodes.
-
-Neural Networks
-- are just a `class of functions / graph` where simpler functions are stacked upon each other in a hierarchical
-manner in order to make a more complex non-linear function. Essentially multiple stages of
-hierarchical computation.
-- a different number of layers (NN) gives more precision and flexibility to the purpose of the neural network.
-In the example of image classification, extra layers can be seen as extra templates to recognize an image.
-- the "abstraction" of a `layer` has the nice property that it allows us to use efficient **vectorized**
-code (e.g. matrix multiplies)
-
-Training (example Mini-Batch Stochastic Gradient Descent or SGD)
-
-Loop:
-1. `Sample` a batch of data
-2. `Forward` prop it through the graph (network), get loss
-3. `Backprop` to calculate the gradients
-4. `Update` the parameters using the gradient
+Notes from [video](https://www.youtube.com/watch?v=wL-p5cjDG64):
+1. ResNet - found out about skip connections and identity learning
 
 
-#### 3.1.2 Types
-1. Fully Connected Layers
-All nodes of layer (i - 1) are connected to nodes of layer i.
-
-2. Convolutional Neural Networks
-- Used for images
-
-3. Recurrent Neural Networks ([link](https://www.ibm.com/cloud/learn/recurrent-neural-networks))
-- Used for Audio/Temporal signals
-
-Neural Network that uses sequential data or time-series data.
-- Has **Memory**, they take info from prior inputs to influence the current input and output.
-- Utilize Training data to learn (as well).
+![image](.imgs/nas.png)
 
 
-### 3.2 NAS ([link](https://www.youtube.com/watch?v=wL-p5cjDG64))
-* ResNet - found out about skip connections and identity learning
-
-NAS Methods can be categorized/differentiated by three main portions of their process:
-1. Search Space
-2. Search Strategy
-3. Performance Estimation Strategy
-
-### 3.3 Reinforcement Learning ([link](https://www.youtube.com/watch?v=0MNVhXEX9to))
+### 3.2 Reinforcement Learning ([link](https://www.youtube.com/watch?v=0MNVhXEX9to))
 A branch of ML that can be seen as a framework for learning how to interact with the environment
 from experience.
 
@@ -205,7 +157,7 @@ Value Function:
 - Computes the value of being in a certain state(s) given a policy(pi).
 
 
-### 3.4 Evolutionary Algorithms ([link](https://www.youtube.com/watch?v=CZE86BPDqCI))
+### 3.3 Evolutionary Algorithms ([link](https://www.youtube.com/watch?v=CZE86BPDqCI))
 Based on the biological principal of natural selection.
 
 Process:
@@ -214,6 +166,6 @@ Process:
 - Breed the "next-generation" of control laws based on the most effective ones
 
 
-### 3.5 Search Space Design
+### 3.4 Search Space Design
 
 ## 4. Links
