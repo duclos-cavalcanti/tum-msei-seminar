@@ -4,8 +4,6 @@
     1. [Machine Learning](#ml)
     2. [Neural Networks](#nn)
     3. [Reinforcement Learning](#rl)
-    4. [Evolutionary Algorithms](#ea)
-    5. [Search Space Design](#ssd)
 2. [Links](#links)
 
 <a name="basics"/>
@@ -100,16 +98,5 @@ Value Function:
   that policy(pi)
 
 - Computes the value of being in a certain state(s) given a policy(pi).
-
-### 3.4 Evolutionary Algorithms ([link](https://www.youtube.com/watch?v=CZE86BPDqCI))
-Based on the biological principal of natural selection.
-
-Process:
-- Establish population of control laws
-- Let theme compete, see how effective they are and rate them based on their fitness
-- Breed the "next-generation" of control laws based on the most effective ones
-
-
-### 3.5 Search Space Design
 
 ## 2. Links

@@ -8,7 +8,6 @@
     1. [NAS](#nas)
     2. [Reinforcement Learning](#rl)
     3. [Evolutionary Algorithms](#ea)
-    4. [Search Space Design](#ea)
 4. [Links](#links)
 
 <a name="topic"/>
@@ -69,7 +68,7 @@ publications around NAS.
 </tr>
 </table>
 
-### 2.2 Chosen Papers (Survey)
+### 2.2 Chosen Papers (For the Survey)
 <table>
 <tr>
   <th>Title</th>
@@ -96,8 +95,25 @@ publications around NAS.
   </td>
 </tr>
 <tr>
-  <td>Foo</td>
-  <td>Bar</td>
+  <td> <a href="https://arxiv.org/abs/1611.01578">
+  Neural Architecture Search with Reinforcement Learning
+  </a> (Zoph and Lee 2017) </td>
+  <td>
+  Paper that sparked Neural Architecture Search to the mainstream. They obtained competetive performance on the
+  CIFAR 10 and Penn Treebank benchmarks with a search strategy based on reinforcement learning. Vast computational
+  resources were necessary: 800 GPUs for 3 to 4 Weeks. Future efforts were made on top of this paper to reduce computational
+  costs and improve performance.
+
+  <br>
+  <br>
+  <ul>Questions
+  <li>
+  RNN as controller, provides flexible method, then able to search variable-length architecture space.
+  What is that?
+  </li>
+  </ul>
+  Cited 3979 times, 2017
+  </td>
 </tr>
 </table>
 
@@ -165,7 +181,7 @@ Process:
 - Let theme compete, see how effective they are and rate them based on their fitness
 - Breed the "next-generation" of control laws based on the most effective ones
 
-
-### 3.4 Search Space Design
+Miller et al. 1989: Used genetic algorithms to propose architectures and use backpropagation to
+optimize their weights.
 
 ## 4. Links
