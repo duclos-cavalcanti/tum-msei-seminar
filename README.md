@@ -134,6 +134,15 @@ NAS Methods can be categorized/differentiated by three dimensions:
 3. `Performance Estimation Strategy`
     - Standard training and validation is computationally expensive and limits
     the number of architectures that can be explored.
+    - However, training each architecture to be evaluated from scratch frequently yields computational demands in the order
+    of thousand of GPU days.
+    - Naturally this created the need to develop methods for speeing up performance estimation which is done in this
+    section of the process/dimension.
+    - Speed-up Methods:
+        - Lower fidelity estimates
+        - learning curve extrapolation
+        - weight inheritance/Network Morphisms
+        - One-Shot Models/Weight Sharing
 
 Notes from [video](https://www.youtube.com/watch?v=wL-p5cjDG64):
 1. ResNet - found out about skip connections and identity learning
@@ -181,7 +190,14 @@ Process:
 - Let theme compete, see how effective they are and rate them based on their fitness
 - Breed the "next-generation" of control laws based on the most effective ones
 
-Miller et al. 1989: Used genetic algorithms to propose architectures and use backpropagation to
+Notes:
+- Miller et al. 1989: First used genetic algorithms to propose architectures and use backpropagation to
 optimize their weights.
+- Nowadays SGD-based weight optimization outperform raw evolutionary ones, however the evolutionary algorithms
+are still used to propose new architectures / optimize the current architecture.
+- Ev. Algorithms mutations in this context are local operations such as adding or removing a layer, altering the hyperparameters
+of a layer, adding skip connections, as well as altering training hyperparameters. After training the offsprings, their fitness
+is evaluated and they are added to the population.
+
 
 ## 4. Links
