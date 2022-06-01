@@ -63,8 +63,8 @@ publications around NAS.
   </td>
 </tr>
 <tr>
-  <td>Foo</td>
-  <td>Bar</td>
+  <td>   </td>
+  <td>   </td>
 </tr>
 </table>
 
@@ -115,6 +115,30 @@ publications around NAS.
   Cited 3979 times, 2017
   </td>
 </tr>
+<tr>
+  <td> <a href="https://arxiv.org/pdf/1802.03268.pdf">
+  Efficient Neural Architecture Search via Parameters Sharing
+  </a> (Hieu Pham, Melody Y. Guan, Barret Zoph, Quoc V. Le, Jeff Dean 2018) </td>
+  <td>
+  Reduced computation costs significantly in comparison to Zoph and Lee. Search takes less than 16 hours and have a lower test error on CIFAR-10. Trick is to share computations among experiments. All with one desktop GPU. The time consuming step was training/sampling all childs in parallel. Here the different networks are trained "together" and share the same weights (somehow it works).
+
+  <br>
+  <br>
+  Cited 1971 times, 2018
+  </td>
+</tr>
+<tr>
+  <td> <a href="https://www.sciencedirect.com/science/article/abs/pii/S0925231221018439?via%3Dihub">
+  A Review of Neural Architecture Search
+  </a> (Dilyara Baymurzinaa, Eugene Golikova, Mikhail Burtsev) </td>
+  <td>
+  More recent review/survey
+
+  <br>
+  <br>
+  Cited 2 times, 2021/2022
+  </td>
+</tr>
 </table>
 
 
@@ -122,6 +146,7 @@ publications around NAS.
 
 ## 3. Notebook
 ### 3.1 NAS ([link](https://www.youtube.com/watch?v=wL-p5cjDG64))
+#### NAS; Dimensions
 NAS Methods can be categorized/differentiated by three dimensions:
 1. `Search Space`
     - Defines which architectures can be represented. Incorporating prior knowledge reduces.
@@ -144,11 +169,22 @@ NAS Methods can be categorized/differentiated by three dimensions:
         - weight inheritance/Network Morphisms
         - One-Shot Models/Weight Sharing
 
-Notes from [video](https://www.youtube.com/watch?v=wL-p5cjDG64):
-1. ResNet - found out about skip connections and identity learning
-
-
 ![image](.imgs/nas.png)
+
+#### Nas Timeline
+##### 1. Zoph and Lee (2017), used 8000 GPUs
+- Posed as a policy gradient/RL problem: (Not good)
+- The controller (RNN) is the policy in itself, it samples architectures with probability P and trains a child arch.
+- 8000 GPUs, 6 months
+- beat human architectures in an automated fashion, kickstarted NAS
+
+![image](.imgs/nas_idea.png)
+
+##### 2. ENAS - Efficient NAS
+
+
+#### [Notes from MR Lecture](https://www.youtube.com/watch?v=wL-p5cjDG64):
+1. ResNet - found out about skip connections and identity learning
 
 
 ### 3.2 Reinforcement Learning ([link](https://www.youtube.com/watch?v=0MNVhXEX9to))
