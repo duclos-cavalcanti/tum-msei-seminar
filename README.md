@@ -6,8 +6,7 @@
     2. [Chosen Papers](#cp)
 3. [Notebook](#notebook)
     1. [NAS](#nas)
-    2. [Reinforcement Learning](#rl)
-    3. [Evolutionary Algorithms](#ea)
+    2. [Evolutionary Algorithms](#ea)
 4. [Links](#links)
 
 <a name="topic"/>
@@ -77,7 +76,10 @@ publications around NAS.
 <tr>
   <td> <a href="https://arxiv.org/abs/1611.01578">
   Neural Architecture Search: A Survey
-  </a> </td>
+  </a>
+  <br>
+  &#9200 Survey
+  </td>
   <td>
   Evaluates NAS as sub-field of Auto-ML and surveys the field as of the current
   state of the art during the publication of said paper. Also breaks down the main
@@ -95,9 +97,13 @@ publications around NAS.
   </td>
 </tr>
 <tr>
-  <td> <a href="https://arxiv.org/abs/1611.01578">
-  Neural Architecture Search with Reinforcement Learning
-  </a> (Zoph and Lee 2017) </td>
+  <td>
+    <a href="https://arxiv.org/abs/1611.01578">
+      Neural Architecture Search with Reinforcement Learning
+    </a> (Zoph and Lee 2017)
+    <br>
+    &#9889  Framed as RL
+  </td>
   <td>
   Paper that sparked Neural Architecture Search to the mainstream. They obtained competetive performance on the
   CIFAR 10 and Penn Treebank benchmarks with a search strategy based on reinforcement learning. Vast computational
@@ -116,11 +122,17 @@ publications around NAS.
   </td>
 </tr>
 <tr>
-  <td> <a href="https://arxiv.org/pdf/1802.03268.pdf">
-  Efficient Neural Architecture Search via Parameters Sharing
-  </a> (Hieu Pham, Melody Y. Guan, Barret Zoph, Quoc V. Le, Jeff Dean 2018) </td>
   <td>
-  Reduced computation costs significantly in comparison to Zoph and Lee. Search takes less than 16 hours and have a lower test error on CIFAR-10. Trick is to share computations among experiments. All with one desktop GPU. The time consuming step was training/sampling all childs in parallel. Here the different networks are trained "together" and share the same weights (somehow it works).
+    <a href="https://arxiv.org/pdf/1802.03268.pdf">
+      Efficient Neural Architecture Search via Parameters Sharing
+    </a>
+    (Hieu Pham, Melody Y. Guan, Barret Zoph, Quoc V. Le, Jeff Dean 2018)
+    <br>
+    &#9889  Framed as RL
+  </td>
+  <td>
+  Reduced computation costs significantly in comparison to Zoph and Lee. Search takes less than 16 hours and have a lower test error on CIFAR-10. Trick is to share computations among experiments. All with one desktop GPU. The time consuming step was training/sampling all childs in parallel. Here the different networks are trained "together" and share the same weights (somehow it works). Also another trick is to
+use/inject prior human knowledge to fix "macros" AKA basically giving an initial skeleton of the architecture, making the search space smaller with less degrees of freedom. Then they do a "micro search" which is basically searching within cells themselves instead of varying different architecture compositions etc.
 
   <br>
   <br>
@@ -128,9 +140,47 @@ publications around NAS.
   </td>
 </tr>
 <tr>
+  <td> <a href="https://openaccess.thecvf.com/content_ECCV_2018/html/Chenxi_Liu_Progressive_Neural_Architecture_ECCV_2018_paper.html">
+  Progressive Neural Architecture Search
+  </a>
+  (Chenxi Liu, Barret Zoph, Maxim Neumann, Jonathon Shlens, Wei Hua, Li-Jia Li, Li Fei-Fei, Alan Yuille, Jonathan Huang, Kevin Murphy 2018)
+    <br>
+    &#9889 Evolutionary Algo
+  </td>
+  <td>
+  No controller, No RL. They grow networks using algorithms based on genetic/evolutionary algos. Simple procedure, search time is much much lower than NASNet. Performance is okay.
+
+  <br>
+  <br>
+  Cited 1510 times, 2018
+  </td>
+</tr>
+<tr>
+  <td> <a href="https://arxiv.org/abs/1806.09055">
+  DARTS
+  </a>
+  (Hanxiao Liu, Karen Simonyan, Yiming Yang 2018)
+    <br>
+    &#9889 Discrete Derivative Problem
+  </td>
+  <td>
+  No controller, No intermediate performance prediciton which may cause diversion.
+  Outperforms everything before it and achieves state of the art on Cifar 10. Continuous relaxation
+  of a discrete search problem. Does mostly cell (micro) search!
+
+  <br>
+  <br>
+  Cited  2568 times, 2018
+  </td>
+</tr>
+<tr>
   <td> <a href="https://www.sciencedirect.com/science/article/abs/pii/S0925231221018439?via%3Dihub">
   A Review of Neural Architecture Search
-  </a> (Dilyara Baymurzinaa, Eugene Golikova, Mikhail Burtsev) </td>
+  </a>
+  (Dilyara Baymurzinaa, Eugene Golikova, Mikhail Burtsev 2022)
+  <br>
+  &#9200 Survey
+  </td>
   <td>
   More recent review/survey
 
@@ -172,6 +222,12 @@ NAS Methods can be categorized/differentiated by three dimensions:
 ![image](.imgs/nas.png)
 
 #### Nas Timeline
+1. An RL problem: They framed as an interaction problem, as they do not know the transition
+will be among the search space and also they have differentiable rewards. This gives some reason to
+frame NAS as an RL problem and the usage of policy gradient. This was done in 1. and 2.
+2. Evolutionary: Done in 3.
+3. Evolutionary: Done in 4.
+
 ##### 1. Zoph and Lee (2017), used 8000 GPUs
 - Posed as a policy gradient/RL problem: (Not good)
 - The controller (RNN) is the policy in itself, it samples architectures with probability P and trains a child arch.
@@ -181,44 +237,27 @@ NAS Methods can be categorized/differentiated by three dimensions:
 ![image](.imgs/nas_idea.png)
 
 ##### 2. ENAS - Efficient NAS
+- Reduced computation costs significantly in comparison to Zoph and Lee.
+- Search takes less than 16 hours and have a lower test error on CIFAR-10.
+- One of the tricks is to share computations among experiments.
+- All with one desktop GPU.
 
+##### 3. Progressive Neural Architecture Search
+- Grows networks, no controller, no RL.
+- Similar to Genetic/Evolutionary Algorithms, fit parents are passed along, mutation, etc
+- Use intermediate performance predictors to predict performance and save time training layers until
+the end.
+
+##### 4. DARTS
+- No controllers, no intermediate performance prediction
+- outperforms everything else before it
+- Doesn't cast NAS as an RL problem
 
 #### [Notes from MR Lecture](https://www.youtube.com/watch?v=wL-p5cjDG64):
 1. ResNet - found out about skip connections and identity learning
 
 
-### 3.2 Reinforcement Learning ([link](https://www.youtube.com/watch?v=0MNVhXEX9to))
-A branch of ML that can be seen as a framework for learning how to interact with the environment
-from experience.
-
-- Ocasionally, very ocasionally gets a reward
-- Is in its core an optimization problem, where we aim to find the optimal policy set.
-
-```
-
-       ------------------------------------------
-       |                                        |
-       | Reward: r                              |
-       v                                        |
-----------------------                          |
-|    Agent           |----------------->  ENVIRONMENT
-|    Policy: p(s, a) |    Action: a             |
-----------------------                          |
-        ^                                       |
-        |            State: s                   |
-        ----------------------------------------
-
-            Value Function: Vpi(s)
-
-```
-Value Function:
-- Expected Reward I'd get in the future if I start at that state(s) and I enact
-  that policy(pi)
-
-- Computes the value of being in a certain state(s) given a policy(pi).
-
-
-### 3.3 Evolutionary Algorithms ([link](https://www.youtube.com/watch?v=CZE86BPDqCI))
+### 3.2 Evolutionary Algorithms ([link](https://www.youtube.com/watch?v=CZE86BPDqCI))
 Based on the biological principal of natural selection.
 
 Process:
