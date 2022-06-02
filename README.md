@@ -102,7 +102,7 @@ publications around NAS.
       Neural Architecture Search with Reinforcement Learning
     </a> (Zoph and Lee 2017)
     <br>
-    &#9889  Framed as RL
+    &#9889  Search: RL
   </td>
   <td>
   Paper that sparked Neural Architecture Search to the mainstream. They obtained competetive performance on the
@@ -128,7 +128,7 @@ publications around NAS.
     </a>
     (Hieu Pham, Melody Y. Guan, Barret Zoph, Quoc V. Le, Jeff Dean 2018)
     <br>
-    &#9889  Framed as RL
+    &#9889  Search: RL
   </td>
   <td>
   Reduced computation costs significantly in comparison to Zoph and Lee. Search takes less than 16 hours and have a lower test error on CIFAR-10. Trick is to share computations among experiments. All with one desktop GPU. The time consuming step was training/sampling all childs in parallel. Here the different networks are trained "together" and share the same weights (somehow it works). Also another trick is to
@@ -145,7 +145,7 @@ use/inject prior human knowledge to fix "macros" AKA basically giving an initial
   </a>
   (Chenxi Liu, Barret Zoph, Maxim Neumann, Jonathon Shlens, Wei Hua, Li-Jia Li, Li Fei-Fei, Alan Yuille, Jonathan Huang, Kevin Murphy 2018)
     <br>
-    &#9889 Evolutionary Algo
+    &#9889 Search: Evolutionary
   </td>
   <td>
   No controller, No RL. They grow networks using algorithms based on genetic/evolutionary algos. Simple procedure, search time is much much lower than NASNet. Performance is okay.
@@ -161,12 +161,18 @@ use/inject prior human knowledge to fix "macros" AKA basically giving an initial
   </a>
   (Hanxiao Liu, Karen Simonyan, Yiming Yang 2018)
     <br>
-    &#9889 Discrete Derivative Problem
+    &#9889 Search: Discrete Derivative Problem / Gradient-based
   </td>
   <td>
   No controller, No intermediate performance prediciton which may cause diversion.
   Outperforms everything before it and achieves state of the art on Cifar 10. Continuous relaxation
   of a discrete search problem. Does mostly cell (micro) search!
+  <br>
+  <br>
+  &#9989 Very Promising! Exposes RL as a very slow search space method for NAS!
+  <br>
+  <br>
+  &#9940 Reread this! Complicated
 
   <br>
   <br>
@@ -222,11 +228,13 @@ NAS Methods can be categorized/differentiated by three dimensions:
 ![image](.imgs/nas.png)
 
 #### Nas Timeline
-1. An RL problem: They framed as an interaction problem, as they do not know the transition
-will be among the search space and also they have differentiable rewards. This gives some reason to
-frame NAS as an RL problem and the usage of policy gradient. This was done in 1. and 2.
-2. Evolutionary: Done in 3.
-3. Evolutionary: Done in 4.
+1. `RL`: They framed NAS as an interaction problem, as they do not know the transitions
+among the search space and also have differentiable rewards. This gives some reason to
+frame NAS as an RL problem with usage of policy gradient to fine tune the parameters.
+This was done in 1. and 2.
+
+2. `Evolutionary`: Done in 3.
+3. `Continuous relaxation of a discrete search / gradient based`. : Done in 4.
 
 ##### 1. Zoph and Lee (2017), used 8000 GPUs
 - Posed as a policy gradient/RL problem: (Not good)
@@ -252,9 +260,12 @@ the end.
 - No controllers, no intermediate performance prediction
 - outperforms everything else before it
 - Doesn't cast NAS as an RL problem
+- Continuous relaxation of a discrete search problem.
+- Does mostly cell (micro) search!
 
-#### [Notes from MR Lecture](https://www.youtube.com/watch?v=wL-p5cjDG64):
-1. ResNet - found out about skip connections and identity learning
+
+[First Video](https://www.youtube.com/watch?v=wL-p5cjDG64)
+[Second Video](https://www.youtube.com/watch?v=BAtBwgV1fG0)
 
 
 ### 3.2 Evolutionary Algorithms ([link](https://www.youtube.com/watch?v=CZE86BPDqCI))
