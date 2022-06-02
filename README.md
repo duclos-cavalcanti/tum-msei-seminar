@@ -2,8 +2,8 @@
 
 1. [Topic](#topic)
 2. [Papers](#papers)
-    1. [Base Papers](#bp)
-    2. [Chosen Papers](#cp)
+    1. [Chosen Papers](#cp)
+    2. [Possible Papers](#bp)
 3. [Notebook](#notebook)
     1. [NAS](#nas)
     2. [Evolutionary Algorithms](#ea)
@@ -34,40 +34,7 @@ Keywords:
 [Here](https://ml4aad.org/automl/literature-on-neural-architecture-search/) you can find a great database of all relevant
 publications around NAS.
 
-### 2.1 Base Papers
-<table>
-<tr>
-  <th>Title</th>
-  <th>Summary</th>
-</tr>
-<tr>
-  <td> <a href="https://arxiv.org/abs/1611.01578">
-  Neural Architecture Search with Reinforcement Learning
-  </a> (Zoph and Lee 2017) </td>
-  <td>
-  Paper that sparked Neural Architecture Search to the mainstream. They obtained competetive performance on the
-  CIFAR 10 and Penn Treebank benchmarks with a search strategy based on reinforcement learning. Vast computational
-  resources were necessary: 800 GPUs for 3 to 4 Weeks. Future efforts were made on top of this paper to reduce computational
-  costs and improve performance.
-
-  <br>
-  <br>
-  <ul>Questions
-  <li>
-  RNN as controller, provides flexible method, then able to search variable-length architecture space.
-  What is that?
-  </li>
-  </ul>
-  Cited 3979 times, 2017
-  </td>
-</tr>
-<tr>
-  <td>   </td>
-  <td>   </td>
-</tr>
-</table>
-
-### 2.2 Chosen Papers (For the Survey)
+### 2.1 Chosen Papers (For the Survey)
 <table>
 <tr>
   <th>Title</th>
@@ -79,6 +46,8 @@ publications around NAS.
   </a>
   <br>
   &#9200 Survey
+  <br>
+  &#127936 Base Paper
   </td>
   <td>
   Evaluates NAS as sub-field of Auto-ML and surveys the field as of the current
@@ -177,6 +146,128 @@ use/inject prior human knowledge to fix "macros" AKA basically giving an initial
   <br>
   <br>
   Cited  2568 times, 2018
+  </td>
+</tr>
+<tr>
+  <td> <a href="https://arxiv.org/abs/1806.09055">
+  RENAS: Reinforced Evolutionary Architecture Search
+  </a>
+  (Yukang Chen, Gaofeng Meng, Qian Zhang, Shiming Xiang, Chang Huang, Lisen Mu, Xinggang Wang 2019)
+    <br>
+    &#9889 Search: Evolutionary
+  </td>
+  <td>
+  RENAS, which is an evolutionary method with reinforced mutation for NAS. It addresses the high
+  computation methods that are present in the NAS space with the intent to diminish
+  <br>
+  <br>
+  &#9989 Evo. Algos. and has competetive performance to CIFAR-10
+
+  <br>
+  <br>
+  &#9940 For some reason not as cited as I thought it would be
+
+  <br>
+  <br>
+  Cited  82 times, 2019, highest paper that cited it was 180
+  </td>
+</tr>
+<tr>
+  <td> <a href="https://arxiv.org/abs/1905.01392">
+  A genetic mixed‑integer optimization of neural network hyper‑parameters
+  </a> (Kyle Spurlock, Heba Elgazzar 2022)
+    <br>
+    &#9889 Search: Evolutionary
+  </td>
+  <td>
+ A common NAS approach is the genetic
+algorithm (GA); however, its usage is often exclusively tied to either the learnable
+parameters, or the meta-parameters that augment the learning. This work proposes
+an experimental approach for optimizing both real-valued weights and discrete
+meta-parameters simultaneously. Experimental results have shown that the current
+approach evolves both parameter sets effectively for simple problems like Iris, but
+still struggles in finding an optimal model for more rigorous problems.
+  <br>
+  <br>
+  &#9940 Cited 0 times, but is new
+
+  <br>
+  <br>
+  Cited 0 times, 2022
+  </td>
+</tr>
+<tr>
+  <td> <a href="http://www.ijnc.org/index.php/ijnc/article/view/276">
+  Neural Architecture Search based on Genetic Algorithm and Deployed in a Bare-Metal Kubernetes Cluster
+  </a> (Andreas Klos, Marius Rosenbaum, Wolfram Schiffmann)
+    <br>
+    &#9889 Search: Evolutionary
+  </td>
+  <td>
+Scalable and highly available multi-objective Neural Architecture Search and adopted it to the modern thinking of developing applications by subdividing an already existing, monolithic approach – based on a Genetic Algorithm – into microservices. Moreover, we adjusted the initial population creation by mutating each individual 1,000 times, extended the approach by inception layers, implemented it as island model and achieved on MNIST, Fashion-MNIST and CIFAR-10 dataset 99.75%, 94.35% and 89.90% test accuracy, respectively. Also addresses high computation costs within NAS.
+  <br>
+  <br>
+  &#9940 Cited 0 times, but is new
+
+  <br>
+  <br>
+  Cited 0 times, 2022
+  </td>
+</tr>
+<tr>
+<tr>
+  <td> <a href="https://arxiv.org/abs/1905.01392">
+  A Survey on Neural Architecture Search
+  </a> (Martin Wistuba, Ambrish Rawat, Tejaswini Pedapati 2019)
+  <br>
+  &#9200 Survey
+  </td>
+  <td>
+Presents a novel framework that allows an end-to-end ASIC implementation of a low-power hardware for time series classification using NNs. This includes a neural architecture search (NAS), which optimizes the NN configuration for accuracy and energy efficiency at the same time
+
+  <br>
+  <br>
+  Cited 178 times, 2019
+  </td>
+</tr>
+<tr>
+</table>
+
+### 2.2 Possible Papers
+<table>
+<tr>
+  <th>Title</th>
+  <th>Summary</th>
+</tr>
+<tr>
+  <td> <a href="https://www.mdpi.com/2079-9268/12/1/2">
+  A Framework for Ultra Low-Power Hardware Accelerators <br>
+  Using NNs for Embedded Time Series Classification
+  </a> (...) </td>
+  <td>
+Presents a novel framework that allows an end-to-end ASIC implementation of a low-power hardware for time series classification using NNs. This includes a neural architecture search (NAS), which optimizes the NN configuration for accuracy and energy efficiency at the same time
+  <br>
+  <br>
+  &#9940 Not cited, not even once
+
+  <br>
+  <br>
+  Cited 0 times, 2021
+  </td>
+</tr>
+<tr>
+  <td> <a href="https://dl.acm.org/doi/10.1145/3486618">
+Enable Deep Learning on Mobile Devices: Methods, Systems, and Applications
+  </a> (...) </td>
+  <td>
+  Uses NAS alongside other model compression methods such as pruning, factorization, quantization as well as compact model design. Also uses automated pruning and quantization. Done to enable the use of complex deep learning methods on resource constrained devices such as mobile phones and IoT devices.
+  <br>
+  <br>
+  &#9940 Not cited
+
+  <br>
+  <br>
+  Cited 0 times, 2022
   </td>
 </tr>
 <tr>
