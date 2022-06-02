@@ -41,6 +41,23 @@ publications around NAS.
   <th>Summary</th>
 </tr>
 <tr>
+  <td> <a href="http://proceedings.mlr.press/v70/real17a.html">
+  Large-Scale Evolution of Image Classifiers
+  </a>
+  <br>
+  &#9889 Search: Evolutionary
+  <br>
+  &#127936 Base Paper
+  </td>
+  <td>
+  One of the first notable evolutionary search space attempt for NAS.
+
+  <br>
+  <br>
+  Cited 1294 times, 2017
+  </td>
+</tr>
+<tr>
   <td> <a href="https://arxiv.org/abs/1611.01578">
   Neural Architecture Search: A Survey
   </a>
@@ -173,6 +190,51 @@ use/inject prior human knowledge to fix "macros" AKA basically giving an initial
   </td>
 </tr>
 <tr>
+  <td> <a href="https://ojs.aaai.org/index.php/AAAI/article/view/4405">
+  Regularized Evolution for Image Classifier Architecture Search
+  </a>
+  (Esteban Real, Alok Aggarwal, Yanping Huang, Quoc V.Le 2019)
+    <br>
+    &#9889 Search: Evolutionary
+  </td>
+  <td>
+  ...
+  <br>
+  <br>
+  Cited  1973 times, 2019
+  </td>
+</tr>
+<tr>
+  <td> <a href="https://ojs.aaai.org/index.php/AAAI/article/view/4405">
+  AS-NAS: Adaptive Scalable Neural Architecture Search With Reinforced Evolutionary Algorithm for Deep Learning
+  </a>
+  (...)
+    <br>
+    &#9889 Search: Evolutionary and RL
+  </td>
+  <td>
+Unlike the typical reinforcement learning (RL)-based and evolutionary algorithm (EA)-based NAS methods, a simplified RL algorithm is developed and used as the reinforced operator controller to adaptively select the efficient operators of IDEA. Without the complex actor–critic parts, the reinforced IDEA based on simplified RL can enhance the search efficiency of the original EA with lower computational cost
+  <br>
+  <br>
+  Cited  19 times, 2020
+  </td>
+</tr>
+<tr>
+  <td> <a href="https://ieeexplore.ieee.org/abstract/document/9508774">
+  A Survey on Evolutionary Neural Architecture Search
+  </a> (Yuqiao Liu, Yanan Sun, Bing Xue, Mengjie Zhang, Gary G. Yen, Kay Chen Tan 2021)
+  <br>
+  &#9200 Survey
+  </td>
+  <td>
+  More recent review/survey, specifically for Evolutionary methods!
+
+  <br>
+  <br>
+  Cited 71 times, 2021
+  </td>
+</tr>
+<tr>
   <td> <a href="https://arxiv.org/abs/1905.01392">
   A genetic mixed‑integer optimization of neural network hyper‑parameters
   </a> (Kyle Spurlock, Heba Elgazzar 2022)
@@ -215,6 +277,45 @@ Scalable and highly available multi-objective Neural Architecture Search and ado
   </td>
 </tr>
 <tr>
+  <td> <a href="https://dl.acm.org/doi/10.1145/3491396.3506510">
+  A Training-free Genetic Neural Architecture Search
+  </a> (Meng-Ting Wu, Hung-I Lin, Chun-Wei Tsai)
+    <br>
+    &#9889 Search: Evolutionary
+  </td>
+  <td>
+  Presents an efficient NAS in this study, called genetic algorithm and noise immunity for neural architecture search without training (GA-NINASWOT).
+  <br>
+  <br>
+  Simulation results show that GA-NINASWOT outperforms all the other state-of-the-art weight-sharing methods and NASWOT compared in this study in terms of the accuracy and computational time. Moreover, GA-NINASWOT gives a result that is comparable to those found by the non-weight-sharing methods while reducing 99% of the search time.
+  <br>
+  <br>
+  &#9940 Cited 0 times, but is new
+
+  <br>
+  <br>
+  Cited 0 times, 2022
+  </td>
+</tr>
+<tr>
+  <td> <a href="https://dl.acm.org/doi/10.1145/3491396.3506510">
+CURIOUS: Efficient Neural Architecture Search Based on a Performance Predictor and Evolutionary Search
+  </a> (Shayan Hassantabar, Xiaoliang Dai, Niraj K. Jha 2022)
+    <br>
+    &#9889 Search: Evolutionary
+  </td>
+  <td>
+To address challenges such as high computational costs for RL-based searches, we propose the CURIOUS NN synthesis methodology. It uses a performance predictor to efficiently navigate the architectural search space with an evolutionary search process. The predictor is built using quasi Monte-Carlo sampling, boosted decision tree regression, and an intelligent iterative sampling method. It is designed to be sample-efficient. CURIOUS starts from a base architecture and explores the architectural search space to obtain a variant of the base architecture with the highest performance.
+  <br>
+  <br>
+  &#9940 Cited 0 times, but is new
+
+  <br>
+  <br>
+  Cited 0 times, 2022
+  </td>
+</tr>
+<tr>
 <tr>
   <td> <a href="https://arxiv.org/abs/1905.01392">
   A Survey on Neural Architecture Search
@@ -223,7 +324,7 @@ Scalable and highly available multi-objective Neural Architecture Search and ado
   &#9200 Survey
   </td>
   <td>
-Presents a novel framework that allows an end-to-end ASIC implementation of a low-power hardware for time series classification using NNs. This includes a neural architecture search (NAS), which optimizes the NN configuration for accuracy and energy efficiency at the same time
+  More recent review/survey
 
   <br>
   <br>
@@ -356,7 +457,21 @@ the end.
 
 
 [First Video](https://www.youtube.com/watch?v=wL-p5cjDG64)
+
 [Second Video](https://www.youtube.com/watch?v=BAtBwgV1fG0)
+
+```plantuml
+
+@startuml
+
+(Large-Scale Evolution 2017) -down->(PNAS 2018)
+(PNAS 2018) -down->(Regularized Evolution for IMAS 2019)
+(Regularized Evolution for IMAS 2019) -down->(RENAS 2019)
+(RENAS 2019) -down->(AS-NAS 2020)
+
+@enduml
+
+```
 
 
 ### 3.2 Evolutionary Algorithms ([link](https://www.youtube.com/watch?v=CZE86BPDqCI))
