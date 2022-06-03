@@ -341,6 +341,21 @@ To address challenges such as high computational costs for RL-based searches, we
   <th>Summary</th>
 </tr>
 <tr>
+  <td> <a href="https://dl.acm.org/doi/10.1145/3486618">
+MnasNet: Platform-Aware Neural Architecture Search for Mobile
+  </a> (...)
+  <br>
+  &#9889 Search: RL
+  </td>
+  <td>
+Is proposed an automated mobile neural architecture search (MNAS) approach, which explicitly incorporate model latency into the main objective so that the search can identify a model that achieves a good trade-off between accuracy and latency. Unlike previous work, where latency is considered via another, often inaccurate proxy (e.g., FLOPS), our approach directly measures real-world inference latency by executing the model on mobile phones. To further strike the right balance between flexibility and search space size, we propose a novel factorized hierarchical search space that encourages layer diversity throughout the network.
+
+  <br>
+  <br>
+  Cited 1851 times, 2019
+  </td>
+</tr>
+<tr>
   <td> <a href="https://www.mdpi.com/2079-9268/12/1/2">
   A Framework for Ultra Low-Power Hardware Accelerators <br>
   Using NNs for Embedded Time Series Classification
