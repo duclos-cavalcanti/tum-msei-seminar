@@ -198,14 +198,18 @@ use/inject prior human knowledge to fix "macros" AKA basically giving an initial
     &#9889 Search: Evolutionary
   </td>
   <td>
-  ...
+Here, we evolve an image classifier—
+AmoebaNet-A—that surpasses hand-designs for the first time.
+To do this, we modify the tournament selection evolution-
+ary algorithm by introducing an age property to favor the
+younger genotypes
   <br>
   <br>
   Cited  1973 times, 2019
   </td>
 </tr>
 <tr>
-  <td> <a href="https://ojs.aaai.org/index.php/AAAI/article/view/4405">
+  <td> <a href="https://ieeexplore.ieee.org/abstract/document/9360872">
   AS-NAS: Adaptive Scalable Neural Architecture Search With Reinforced Evolutionary Algorithm for Deep Learning
   </a>
   (...)
@@ -408,25 +412,39 @@ Enable Deep Learning on Mobile Devices: Methods, Systems, and Applications
 <a name="notebook"/>
 
 ## 3. Notebook
-### 3.1 NAS ([link](https://www.youtube.com/watch?v=wL-p5cjDG64))
+### 3.1 NAS
+[First Video](https://www.youtube.com/watch?v=wL-p5cjDG64)
+
+[Second Video](https://www.youtube.com/watch?v=BAtBwgV1fG0)
+
 #### NAS; Dimensions
 NAS Methods can be categorized/differentiated by three dimensions:
 1. `Search Space`
     - Defines which architectures can be represented. Incorporating prior knowledge reduces.
     - Problem: Even with constrains, remains i) non-continuous and ii) high dimensional
     search space size (good), however it also introduces bias (bad).
+    - Examples:
+      - Chain Structured NNS
+      - Multi-Branch Networks
+      - Search of Motifs/Cells rather than whole arch (Micro x Macro)
+![image](.imgs/layers.png)
 2. `Search Strategy`
     - premature convergence vs find well performing architectures quickly (exploration-exploitation trade off)
-    - examples of strategies: random search, Bayesian optimization, evolutionary methods, RL and gradient based
+    - Examples:
+      - Random searches
+      - Bayesian optimization
+      - Evolutionary methods
+      - RL
+      - Gradient based
     methods.
 3. `Performance Estimation Strategy`
     - Standard training and validation is computationally expensive and limits
     the number of architectures that can be explored.
     - However, training each architecture to be evaluated from scratch frequently yields computational demands in the order
     of thousand of GPU days.
-    - Naturally this created the need to develop methods for speeing up performance estimation which is done in this
-    section of the process/dimension.
-    - Speed-up Methods:
+    - Naturally this created the need to develop methods for speeing up performance estimation which is done in this section of the process/dimension.
+    - Examples of Speed-up Methods:
+        - Good Ol' fashioned training and validation
         - Lower fidelity estimates
         - learning curve extrapolation
         - weight inheritance/Network Morphisms
@@ -471,10 +489,7 @@ the end.
 - Does mostly cell (micro) search!
 
 
-[First Video](https://www.youtube.com/watch?v=wL-p5cjDG64)
-
-[Second Video](https://www.youtube.com/watch?v=BAtBwgV1fG0)
-
+##### NAS Evolutionary Algos Developement
 ```plantuml
 
 @startuml
