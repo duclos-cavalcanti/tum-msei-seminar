@@ -67,6 +67,9 @@ run: $(if $(call exist-docker-image),,build) run-clean
 pdf:
 	@echo "## Creating pdf ##"
 	@xelatex seminar.tex
+	@bibtex seminar
+	@pdflatex seminar.tex
+	@pdflatex seminar.tex
 
 .PHONY: view
 view:
