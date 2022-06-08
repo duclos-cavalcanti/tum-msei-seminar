@@ -523,3 +523,9 @@ is evaluated and they are added to the population.
 
 
 ## 4. Links
+
+## Questions
+
+- [ ] Should previous work (2017 - 2020) be placed in introduction or state of the art? (Prob SOTA)
+- [ ] Should tinyML be in introduction? if so, how in depth should I go?
+- [ ] title is shit
