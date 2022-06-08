@@ -402,9 +402,6 @@
 % Read the url.sty source comments for usage information. Basically,
 % \url{my_url_here}.
 
-% correct bad hyphenation here
-\hyphenation{op-tical net-works semi-conduc-tor}
-
 \begin{document}
 %
 % paper title
@@ -424,17 +421,23 @@
 There is no question regarding the impact, that deep learning
 has brought onto society and science. Additionally, there has been
 significant progress lately within the field and it's application onto a variety of tasks,
-largely due to either improvements to existing architectures or novel ones alltogether. The process
+largely due to either improvements to existing architectures or the creation of novel ones alltogether. The process
 of developing state of the art architectures is not a simple one and involves not only a large deal of
 domain expertise, but also intuition and some level of trial and error. This is not ideal as it is both time
-consuming and an error-prone. This, among other reasons, has motivated the field of \textit{neural architecture search}
-and the different methods of its application.
+consuming and error-prone. Therefore the motivation behind the field of \textit{neural architecture search}
+and its different methods has grown remarkably within the last 5 years. The challenges involved in NAS are many
+and among them, there is a concern with computational costs and time feasability. This however becomes a different
+problem within the context of \textit{tinyML}, which is an expanding field at the intersection of machine learning and
+embedded systems. Due to the resource constrained conditions involved in most of the embedded devices and the state of the
+art techniques employed to reduce the size and complexity of the deployed models, the stages concerning training, validation
+and inference are substantially faster in comparison to the more complex models used in the research of
+network architecture search.
 
 \end{abstract}
 
 \section{Introduction}
-In general a scientific paper starts with an introduction to the topic.
-
+The success of deep learning has also created an equal demand for \textit{architecture engineering}. Given the
+increasing complexity of this process and the still existing susceptibility to errors during the
 
 \section{State of the Art}
 In this section an analysis of the available literature on the topic is done.
