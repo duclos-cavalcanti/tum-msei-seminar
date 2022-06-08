@@ -452,7 +452,7 @@ NAS Methods can be categorized/differentiated by three dimensions:
 
 ![image](.imgs/nas.png)
 
-#### Nas Timeline
+#### NAS Timeline
 1. `RL`: They framed NAS as an interaction problem, as they do not know the transitions
 among the search space and also have differentiable rewards. This gives some reason to
 frame NAS as an RL problem with usage of policy gradient to fine tune the parameters.
@@ -488,22 +488,6 @@ the end.
 - Continuous relaxation of a discrete search problem.
 - Does mostly cell (micro) search!
 
-
-##### NAS Evolutionary Algos Developement
-```plantuml
-
-@startuml
-
-(Large-Scale Evolution 2017) -down->(PNAS 2018)
-(PNAS 2018) -down->(Regularized Evolution for IMAS 2019)
-(Regularized Evolution for IMAS 2019) -down->(RENAS 2019)
-(RENAS 2019) -down->(AS-NAS 2020)
-
-@enduml
-
-```
-
-
 ### 3.2 Evolutionary Algorithms ([link](https://www.youtube.com/watch?v=CZE86BPDqCI))
 Based on the biological principal of natural selection.
 
@@ -521,8 +505,26 @@ are still used to propose new architectures / optimize the current architecture.
 of a layer, adding skip connections, as well as altering training hyperparameters. After training the offsprings, their fitness
 is evaluated and they are added to the population.
 
+```plantuml
+
+@startuml
+
+(Large-Scale Evolution 2017) -down->(PNAS 2018)
+(PNAS 2018) -down->(Regularized Evolution for IMAS 2019)
+(Regularized Evolution for IMAS 2019) -down->(RENAS 2019)
+(RENAS 2019) -down->(AS-NAS 2020)
+
+@enduml
+
+```
 
 ## 4. Links
+- [Literature on NAS](https://ml4aad.org/automl/literature-on-neural-architecture-search/)
+  - Database
+- [Microsoft Research NAS Lecture](https://www.youtube.com/watch?v=wL-p5cjDG64):
+  - Great video on NAS, heavily based on the 2019 Survey Paper!
+- [Microsoft Research: NAS Directions](https://www.youtube.com/watch?v=BAtBwgV1fG0)
+  - Great video on possible NAS directions and what tools are used around it
 
 ## Questions
 
