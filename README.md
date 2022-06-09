@@ -4,9 +4,10 @@
 2. [Papers](#papers)
     1. [Chosen Papers](#cp)
     2. [Possible Papers](#bp)
-3. [Notebook](#notebook)
+3. [Structure](#structure)
+4. [Notebook](#notebook)
     1. [NAS](#nas)
-4. [Links](#links)
+5. [Links](#links)
 
 <a name="topic"/>
 
@@ -406,11 +407,46 @@ Enable Deep Learning on Mobile Devices: Methods, Systems, and Applications
 </tr>
 </table>
 
+<a name="structure"/>
+
+## 3. Paper Structure
+
+```plantuml
+
+@startuml
+skinparam componentStyle rectangle
+
+node "Base Papers" {
+    A - [ Neural Architecture Search: A Survey ]
+    [ A Survey on Evolutionary Neural Architecture Search ] - A
+ }
+
+node "Evolutionary/RL Papers" {
+    B - [ Foo ]
+    [ Bar ] - B
+ }
+
+node "Important Breakthrough Papers" {
+    C - [ Baz ]
+    [ Boo ] - C
+ }
+
+cloud {
+     [ Paper ]
+}
+
+A --> [ Paper ]
+B --> [ Paper ]
+C --> [ Paper ]
+
+@enduml
+
+```
 
 <a name="notebook"/>
 
-## 3. Notebook
-### 3.1 NAS
+## 4. Notebook
+### 4.1 NAS
 #### NAS Dimensions
 NAS Methods can be categorized/differentiated by three dimensions:
 1. `Search Space`
@@ -482,7 +518,7 @@ the end.
 - Continuous relaxation of a discrete search problem.
 - Does mostly cell (micro) search!
 
-## 4. Links
+## 5. Links
 - [Literature on NAS](https://ml4aad.org/automl/literature-on-neural-architecture-search/)
   - Database
 - [Microsoft Research NAS Lecture](https://www.youtube.com/watch?v=wL-p5cjDG64):
@@ -492,6 +528,8 @@ the end.
 
 ## Questions/Points
 
+- [ ] Bibliography with lines and pages specifically?
+  - R:
 - [ ] Should previous work (2017 - 2020) be placed in introduction or state of the art? Probably State of the Art.
   - R:
 - [ ] Should tinyML be in introduction? if so, how in depth should I go?
@@ -508,12 +546,4 @@ the end.
 ## ToDo's
 - [ ] Rethink Title
 - [ ] I have found recent TinyML + NAS Work after 2020! Remember to include it.
-
-```plantuml
-
-@startuml
-class Example
-@enduml
-
-```
 

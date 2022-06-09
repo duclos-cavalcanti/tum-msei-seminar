@@ -86,26 +86,31 @@ explore unseen architectures and also possibly limiting the complexity of the de
 
 The simplest approach is to define an architecture as a \textit{chain-structured neural network}, which essentially consists of a
 sequence of layers whose inputs are the output of their preceding layer. In this case the space is parametrized by maximum number
-of layers, type of operations per layer, and hyperparameters conditioned on the chosen operation.
+of layers, type of operations per layer, and hyperparameters conditioned by the chosen operation.
 
 The next step consists then of including more modern design elements such as skip connections, which has already been seen
 in \cite{zoph2016neural} and \cite{pmlr-v70-real17a}. This allows to build more complex \textit{multi-branch networks}, which
 cannot be described as simple sequential layer chaining, but as a structure where each layer's input is a function of
-previous layer outputs. This increases significantly the degrees of freedom of architecture design, which leads to a much
-larger search space.
+previous layer outputs. Therefore, a chain-structured neural network can be seen as an edge-case or simplification of the multi-branch network.
+This increases significantly the degrees of freedom of architecture design, which leads to a much larger search space.
 
 Another predominant trend includes the search within \textit{cells} or \textit{blocks}, initially considered by works such as
-\cite{zhong2018practical} and \cite{zoph2018learning}. The proposal here is break-off architectures in cells, such that
+\cite{zhong2018practical} and \cite{zoph2018learning}. What is proposed, is to break-off architectures in cells, such that
 the search space is then designated within a single cell per time. This drastically reduces the search space, as there are
 substantially less layers within a cell in comparison to an entire architecture. Additionally, subdivision of architectures
-into blocks is considered a good design practice, which also enables easy transferability of blocks to other data sets.
+into blocks is considered a good design practice, which also enables easy transferability of blocks to other data sets. The same
+modelling used on multi-branch networks can be used with cells, simply replacing layers with cell architectures.
 
 This drives then the discussion between \textit{micro-architectures} versus \textit{macro-architectures}. The macro perspective
 attempts to determine how cells should be connected and how many are needed to build a model. On the other hand, the micro
-perspective aims to find the optimal structure for each cell. Ideally, both viewpoints should be optimized jointly.
-
+perspective aims to find the optimal structure for each cell. Ideally, both viewpoints should be optimized jointly, which of course
+leads to a complex search space. There have been efforts that aimed to minimize this endeavor by fixing macro-architectures with
+known working topographies such as in \cite{pmlr-v80-cai18a} with DenseNet \cite{Huang_2017_CVPR}. This practice, dubbed as
+\textit{human injection} attempts to reduce the search space whilst using domain knowledge that is known to have effective
+results. This can also be seen as adding human bias.
 
 \subsection{Search Strategy}
+Hello
 
 \section{State of the Art}
 In this section an analysis of the available literature on the topic is done.
@@ -140,5 +145,3 @@ an additional discussion of open points.
 
 %
 \end{document}
-
-
