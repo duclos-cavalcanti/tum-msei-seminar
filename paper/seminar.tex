@@ -49,23 +49,25 @@ which is a process that requires immense domain expertise, intuition and some am
 and error. This is not ideal as it is both time consuming and error-prone. Neural Architecture Search (NAS)
 rises as the next logical step aiming to both automate architecture discovery and further the understanding
 of the inner workings of DNNs. This field has grown remarkably within the last 5 years and among the many challenges
-of NAS, there are concerns regarding computational costs and time feasability. This however becomes a different
-situation within the context of \textit{tinyML}, which is an expanding field at the intersection of machine learning and
-embedded systems. Due to the resource constrained conditions involved in most embedded devices and tinyML
+of NAS, there are concerns regarding computational costs and time feasability. This however changes within the context
+of \textit{tinyML}, which is an expanding field at the intersection of machine learning and embedded systems.
+Due to the resource constrained conditions involved in most embedded devices and tinyML
 applications, the stages concerning training and performance evaluation are substantially faster in comparison to
 the more complex models used in the research of NAS. Thus presenting an interesting opportunity to explore NAS applications
-within this different paradigm. Throughout this work, an overview of existing research in NAS, specifically concerning
-evolutionary algorithms and reinforcement learning will be presented, as well as highlight relevant applicabilities to
-tinyML.
+within a different paradigm. Throughout this work, an overview of existing research in NAS, specifically concerned
+with the use of evolutionary algorithms and reinforcement learning will be presented, as well as highlighting
+relevant applicabilities to tinyML.
 
 \end{abstract}
 
 \section{Introduction}
-The progress of deep learning has brought a continuous demand for architecture engineering. Given the
-growing complexity of designs, this process has become increasingly challenging and more susceptible to errors.
-However, after the work in \cite{zoph2016neural} proposed by Google, it is shown for the first time that NAS algorithms
-have the potential to find models that rival the current state of the art. Since then, many different methods and approaches
-to have appeared.
+The advancement of deep learning, although extremely beneficial, has also caused a continuous demand for
+architecture design. This coupled with a growing model complexity still requires ample time and expert knowledge to
+continue this progress.
+
+Finally, after the work in \cite{zoph2016neural} proposed by Google, it was shown for the first time that NAS algorithms
+have the potential to find models that rival the current state of the art. However, done so in an automated fashion, minimizing
+human participation. Since then, many different methods have appeared.
 
 To better visualize NAS, one can categorize it within three dimensions \cite{wistuba2019survey}:
 \begin{itemize}
@@ -77,16 +79,33 @@ To better visualize NAS, one can categorize it within three dimensions \cite{wis
 \end{itemize}
 
 \subsection{Search Space}
-NAS is an optimization problem, whose \textit{search space} is the defining factor to the difficulty of its solution.
-The smaller the \textit{search space} is, the faster the search algorithm may converge into a result,
-as well as requiring less computational resources. However, this comes at the cost of less freedom to
-explore unseen architectures and also may limit the complexity of the design.
+NAS is an optimization problem, whose search space is the defining factor to its complexity.
+The smaller the search space is, the faster the search may converge,
+as well as requiring less computational resources. This comes at the cost of less freedom to
+explore unseen architectures and also possibly limiting the complexity of the design.
 
 The simplest approach is to define an architecture as a \textit{chain-structured neural network}, which essentially consists of a
 sequence of layers whose inputs are the output of their preceding layer. In this case the space is parametrized by maximum number
 of layers, type of operations per layer, and hyperparameters conditioned on the chosen operation.
 
-There have been approaches that
+The next step consists then of including more modern design elements such as skip connections, which has already been seen
+in \cite{zoph2016neural} and \cite{pmlr-v70-real17a}. This allows to build more complex \textit{multi-branch networks}, which
+cannot be described as simple sequential layer chaining, but as a structure where each layer's input is a function of
+previous layer outputs. This increases significantly the degrees of freedom of architecture design, which leads to a much
+larger search space.
+
+Another predominant trend includes the search within \textit{cells} or \textit{blocks}, initially considered by works such as
+\cite{zhong2018practical} and \cite{zoph2018learning}. The proposal here is break-off architectures in cells, such that
+the search space is then designated within a single cell per time. This drastically reduces the search space, as there are
+substantially less layers within a cell in comparison to an entire architecture. Additionally, subdivision of architectures
+into blocks is considered a good design practice, which also enables easy transferability of blocks to other data sets.
+
+This drives then the discussion between \textit{micro-architectures} versus \textit{macro-architectures}. The macro perspective
+attempts to determine how cells should be connected and how many are needed to build a model. On the other hand, the micro
+perspective aims to find the optimal structure for each cell. Ideally, both viewpoints should be optimized jointly.
+
+
+\subsection{Search Strategy}
 
 \section{State of the Art}
 In this section an analysis of the available literature on the topic is done.

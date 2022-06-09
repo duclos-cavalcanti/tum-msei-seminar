@@ -6,7 +6,6 @@
     2. [Possible Papers](#bp)
 3. [Notebook](#notebook)
     1. [NAS](#nas)
-    2. [Evolutionary Algorithms](#ea)
 4. [Links](#links)
 
 <a name="topic"/>
@@ -25,7 +24,6 @@ Keywords:
 
 - Goal Attainment
     - Selecting the fittest individuals
-
 
 <a name="papers"/>
 
@@ -413,11 +411,7 @@ Enable Deep Learning on Mobile Devices: Methods, Systems, and Applications
 
 ## 3. Notebook
 ### 3.1 NAS
-[First Video](https://www.youtube.com/watch?v=wL-p5cjDG64)
-
-[Second Video](https://www.youtube.com/watch?v=BAtBwgV1fG0)
-
-#### NAS; Dimensions
+#### NAS Dimensions
 NAS Methods can be categorized/differentiated by three dimensions:
 1. `Search Space`
     - Defines which architectures can be represented. Incorporating prior knowledge reduces.
@@ -488,36 +482,6 @@ the end.
 - Continuous relaxation of a discrete search problem.
 - Does mostly cell (micro) search!
 
-### 3.2 Evolutionary Algorithms ([link](https://www.youtube.com/watch?v=CZE86BPDqCI))
-Based on the biological principal of natural selection.
-
-Process:
-- Establish population of control laws
-- Let theme compete, see how effective they are and rate them based on their fitness
-- Breed the "next-generation" of control laws based on the most effective ones
-
-Notes:
-- Miller et al. 1989: First used genetic algorithms to propose architectures and use backpropagation to
-optimize their weights.
-- Nowadays SGD-based weight optimization outperform raw evolutionary ones, however the evolutionary algorithms
-are still used to propose new architectures / optimize the current architecture.
-- Ev. Algorithms mutations in this context are local operations such as adding or removing a layer, altering the hyperparameters
-of a layer, adding skip connections, as well as altering training hyperparameters. After training the offsprings, their fitness
-is evaluated and they are added to the population.
-
-```plantuml
-
-@startuml
-
-(Large-Scale Evolution 2017) -down->(PNAS 2018)
-(PNAS 2018) -down->(Regularized Evolution for IMAS 2019)
-(Regularized Evolution for IMAS 2019) -down->(RENAS 2019)
-(RENAS 2019) -down->(AS-NAS 2020)
-
-@enduml
-
-```
-
 ## 4. Links
 - [Literature on NAS](https://ml4aad.org/automl/literature-on-neural-architecture-search/)
   - Database
@@ -526,8 +490,30 @@ is evaluated and they are added to the population.
 - [Microsoft Research: NAS Directions](https://www.youtube.com/watch?v=BAtBwgV1fG0)
   - Great video on possible NAS directions and what tools are used around it
 
-## Questions
+## Questions/Points
 
-- [ ] Should previous work (2017 - 2020) be placed in introduction or state of the art? (Prob SOTA)
+- [ ] Should previous work (2017 - 2020) be placed in introduction or state of the art? Probably State of the Art.
+  - R:
 - [ ] Should tinyML be in introduction? if so, how in depth should I go?
-- [ ] title is shit
+  - R:
+- [ ] Am I Allowed to refer to Alex's work directly?
+  - R:
+- [ ] Images? Some things are best illustrated, but also pollutes paper.
+  - R:
+- [ ] use of italics for unofficial terms? like cells and blocks
+  - R:
+- [ ] Alex said something along the lines of: "say in the paper something about layers vs block optimization"
+  - R:
+
+## ToDo's
+- [ ] Rethink Title
+- [ ] I have found recent TinyML + NAS Work after 2020! Remember to include it.
+
+```plantuml
+
+@startuml
+class Example
+@enduml
+
+```
+

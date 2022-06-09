@@ -4,7 +4,7 @@
     1. [Machine Learning](#ml)
     2. [Neural Networks](#nn)
     3. [Reinforcement Learning](#rl)
-2. [Links](#links)
+    4. [Evolutionary Algorithms](#ea)
 
 <a name="basics"/>
 
@@ -99,4 +99,19 @@ Value Function:
 
 - Computes the value of being in a certain state(s) given a policy(pi).
 
-## 2. Links
+### 1.4 Evolutionary Algorithms ([link](https://www.youtube.com/watch?v=CZE86BPDqCI))
+Based on the biological principal of natural selection.
+
+Process:
+- Establish population of control laws
+- Let theme compete, see how effective they are and rate them based on their fitness
+- Breed the "next-generation" of control laws based on the most effective ones
+
+Notes:
+- Miller et al. 1989: First used genetic algorithms to propose architectures and use backpropagation to
+optimize their weights.
+- Nowadays SGD-based weight optimization outperform raw evolutionary ones, however the evolutionary algorithms
+are still used to propose new architectures / optimize the current architecture.
+- Ev. Algorithms mutations in this context are local operations such as adding or removing a layer, altering the hyperparameters
+of a layer, adding skip connections, as well as altering training hyperparameters. After training the offsprings, their fitness
+is evaluated and they are added to the population.
