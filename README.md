@@ -421,15 +421,21 @@ node "Base Papers" {
     [ A Survey on Evolutionary Neural Architecture Search ] - A
  }
 
-node "Evolutionary/RL Papers" {
-    B - [ Foo ]
-    [ Bar ] - B
+node "Important Breakthrough Papers" {
+    B - [ Baz ]
+    [ Boo ] - B
  }
 
-node "Important Breakthrough Papers" {
-    C - [ Baz ]
-    [ Boo ] - C
+node "Evolutionary/RL Papers" {
+    C - [ Foo ]
+    [ Bar ] - C
  }
+
+node "tinyML + NAS Papers" {
+    D - [ This ]
+    [ That ] - D
+ }
+
 
 cloud {
      [ Paper ]
@@ -438,6 +444,7 @@ cloud {
 A --> [ Paper ]
 B --> [ Paper ]
 C --> [ Paper ]
+D --> [ Paper ]
 
 @enduml
 
@@ -528,7 +535,9 @@ the end.
 
 ## Questions/Points
 
-- [ ] Bibliography with lines and pages specifically?
+- [ ] Should I include evolutionary algorithms in intro?
+  - R:
+- [ ] Should I include RL in intro? Assume RL is known?
   - R:
 - [ ] Should previous work (2017 - 2020) be placed in introduction or state of the art? Probably State of the Art.
   - R:
@@ -541,6 +550,8 @@ the end.
 - [ ] use of italics for unofficial terms? like cells and blocks
   - R:
 - [ ] Alex said something along the lines of: "say in the paper something about layers vs block optimization"
+  - R:
+- [ ] How "cited" should the paper be?
   - R:
 
 ## ToDo's

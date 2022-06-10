@@ -13,6 +13,7 @@
 %\usepackage[latin1]{inputenc}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
+\usepackage{xcolor}
 % \usepackage[pdftex]{graphicx}
 %\usepackage[cmex10]{amsmath}
 %\usepackage{algorithmic}
@@ -31,8 +32,7 @@
 %
 % paper title
 \title{Neural Architecture Search and tinyML}
-
-\author{Daniel Duclos-Cavalcanti}
+\author{Daniel~Duclos-Cavalcanti}
 
 % The paper headers
 \markboth{Seminar for VLSI Entwurfsverfahren, Summer Term 2022}%
@@ -40,6 +40,9 @@
 
 % make the title area
 \maketitle
+
+%\thanks{Daniel D-C. is with the Department
+%of Electrical and Computer Engineering, Technical University of Munich, Bavaria, DE.}% <-this % stops a space
 
 \begin{abstract}
 There is no denying the increasing success that Deep Neural Networks (DNNs)
@@ -55,10 +58,14 @@ Due to the resource constrained conditions involved in most embedded devices and
 applications, the stages concerning training and performance evaluation are substantially faster in comparison to
 the more complex models used in the research of NAS. Thus presenting an interesting opportunity to explore NAS applications
 within a different paradigm. Throughout this work, an overview of existing research in NAS, specifically concerned
-with the use of evolutionary algorithms and reinforcement learning will be presented, as well as highlighting
-relevant applicabilities to tinyML.
+with the use of evolutionary algorithms and reinforcement learning methods will be presented, as well
+as highlighting relevant applicabilities to tinyML.
 
 \end{abstract}
+
+\begin{IEEEkeywords}
+Neural Architecture Search (NAS), evolutionary computation (EC), Deep Learning, tinyML.
+\end{IEEEkeywords}
 
 \section{Introduction}
 The advancement of deep learning, although extremely beneficial, has also caused a continuous demand for
@@ -101,44 +108,73 @@ substantially less layers within a cell in comparison to an entire architecture.
 into blocks is considered a good design practice, which also enables easy transferability of blocks to other data sets. The same
 modelling used on multi-branch networks can be used with cells, simply replacing layers with cell architectures.
 
-This drives then the discussion between \textit{micro-architectures} versus \textit{macro-architectures}. The macro perspective
+This drives then the discussion between \textit{micro-architectures} versus \textit{macro-architectures}. The macro architecture
 attempts to determine how cells should be connected and how many are needed to build a model. On the other hand, the micro
-perspective aims to find the optimal structure for each cell. Ideally, both viewpoints should be optimized jointly, which of course
+architecture aims to find the optimal structure for each cell. Ideally, both viewpoints should be optimized jointly, which of course
 leads to a complex search space. There have been efforts that aimed to minimize this endeavor by fixing macro-architectures with
 known working topographies such as in \cite{pmlr-v80-cai18a} with DenseNet \cite{Huang_2017_CVPR}. This practice, dubbed as
-\textit{human injection} attempts to reduce the search space whilst using domain knowledge that is known to have effective
-results. This can also be seen as adding human bias.
+\textit{human knowledge injection} attempts to reduce the search space through using domain expertise known to obtain
+effective results. This includes human bias in the model.
 
 \subsection{Search Strategy}
-Hello
+As any space search problem, there is a \textit{exploration-exploitation} trade-off to be considered \cite{wistuba2019survey}.
+Obtaining a high-performing architecture within a feasible amount of time is desired. However, converting too early to a
+suboptimal result is also not the goal.
+
+Based on the current state of the art, NAS search algorithms can be classified mainly intro three different
+categories \cite{liu2021survey}:
+
+\subsubsection{\textbf{Reinforcement Learning} (RL)-based NAS Algorithms}
+If one considers the development of a neural architecture the agent's action, where the action space is the same as
+the search space, it is then possible to frame NAS as a reinforcement learning problem \cite{wistuba2019survey}.
+After evaluating the performance of the given trained architecture on fitness data, it is possible to
+determine the agent's reward. How this estimation is performed will depend on the given method, more to these
+approaches will be seen at \ref{PES}. Furthermore, how the agent's policy is represented and it's optimization will
+also vary. More on trade-offs and details to these approaches will be seen in \ref{SOA}.
+
+\subsubsection{\textbf{Gradient}-based NAS Algorithms}
+\textcolor{red}{
+Consists of transforming the search space from discrete to continuous and performing
+gradient descent with respect to the fitness data set.
+}
+
+\subsubsection{\textbf{Evolutionary Computation} (EC)-based NAS Algorithms}
+By the application of well established EC methods, which are various techniques based on the evolution of
+species within nature, many different efforts were implemented to navigate their respective search space.
+\textcolor{red}{
+These varied from genetic algorithms (GAs), genetic programming (GP) up until particle swarm optimization (PSO)
+techniques.
+}
+
+
+\subsection{Performance Estimation Strategy}
+\label{PES}
+Independent of the search strategy, it is necessary to know how any given architecture performed in order
+to guide the next steps of the algorithm. There are many ways to estimate said performance, whereas the simplest
+form would be complete training and validation. Given the complexity and size of the search spaces within NAS, this
+requires GPU days in the order of thousands \cite{wistuba2019survey}. This is why extensive research has been
+employed to reduce time on performance estimation, since it is by far the greatest bottleneck.
+Some of the approaches such as
+\textcolor{red}{
+lower fidelity techniques, learning curve extrapolation, weight inheritance and one-shot models were utilized
+to ensure achievable periods of search.
+}
 
 \section{State of the Art}
-In this section an analysis of the available literature on the topic is done.
-This section may be split or subdivided into several sections or subsections.
+\label{SOA}
 
-\subsection{Subsection Heading Here}
-Subsection text here.
+\subsection{Overview}
+Currently RL-based algorithms are extremely costly in terms of computation, requiring thousands of
+graphics processing cards (GPUs) for days. This is already the case for median-scale data sets, as
+as data grows more complex, so does the processing time neede to search for a suitable architecture.
 
-% needed in second column of first page if using \IEEEpubid
-%\IEEEpubidadjcol
+\subsection{Evolutionary Computation-based Efforts}
 
-\subsubsection{Subsubsection Heading Here}
-Subsubsection text here.
+\subsection{tinyML and NAS}
 
-\section{Conclusion}
-Put the conclusions of the work here. The conclusion is like the abstract with
-an additional discussion of open points.
-
-% Can use something like this to put references on a page
-% by themselves when using endfloat and the captionsoff option.
-\ifCLASSOPTIONcaptionsoff
-  \newpage
-\fi
-
-
+\section{Conclusion and Future Work}
 
 % references section
-
 \newpage
 \bibliographystyle{IEEEtran}
 \bibliography{refs}
