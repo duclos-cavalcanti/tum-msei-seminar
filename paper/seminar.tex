@@ -244,7 +244,7 @@ differentiated by their \cite{liu2021survey}:
 \begin{itemize}
     \item \textbf{Encoding Space}: contains all valid individuals (architectures) within a given population.
 
-    \item \textbf{Encoding Strategy}: How architectures are represented and introduced.
+    \item \textbf{Encoding Strategy}: How architectures are represented within the encoding space.
 
     \item \textbf{Population Update Method}: These are the selection strategies, how the evolutionary operators are applied
         and how populations are ultimately updated.
@@ -268,10 +268,28 @@ The trivial space approach has been done by \cite{pmlr-v70-real17a}
 and had the benefit of giving much more freedom to the algorithm to explore unseen architectures and also justifies well
 the used of EC-methods instead of any other. However, this comes at the cost of high computational resources.
 
-The rich initialization method, also named \textit{well-designed space}
+The rich initialization method, also named \textit{well-designed space}, consists of initializing the population within
+a set of state-of-the-art architectures. This way, a good architecture can be found early on and potentially decrease
+search time. On the other hand, finding novel architectures is very improbable.
 
-\subsubsection{Encoding Strategy}
+\subsubsection{Encoding Strategy} (TBD)
 \subsubsection{Population Update}
+Genetic Algorithm (GA)-based ENAS is the most popular approach among ENAS methods, since architecture representation is
+very convenient in GA \cite{liu2021survey}. The selection is the first stage of updating the current population and can
+be divided into several strategies, four of whom are widely used: Elitism, Discard worst or oldest, Roulette and Tournament
+Selection.
+
+Works such as \cite{elsken2017simple} take use of elitism, where essentially only the fittest of individuals are selected to
+compose the next population. This can cause a loss of diversity, as there is a chance that similar architectures perform
+similarly well and thus may cause generations to breed only akin individuals, since only the fittest are kept. This in turn,
+can cause the population to fall within a local optima and not being able to explore efficiently.
+
+Other approaches such as \cite{pmlr-v70-real17a} and \cite{zhang2019identify} discarded the oldest individual from the population,
+which is also known as aging evolution. This ensures that the search does not focus on good models too early and therefore
+performs a more broad search of the encoding space in comparison to non-aging evolution.
+
+There is also the possibility to combine different strategies such as in \cite{zhu2019eena}, where both discarding the worst and the oldest
+were used.
 
 \subsection{NAS and tinyML}
 Machine learning on small microcontrollers is a great ambition. TinyML is the field that answers to that challenge
