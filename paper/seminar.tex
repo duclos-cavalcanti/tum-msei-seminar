@@ -242,7 +242,7 @@ goal is reached.
 Having understood the main steps of an ENAS implementation, it becomes clear that ENAS methods can be
 differentiated by their \cite{liu2021survey}:
 \begin{itemize}
-    \item \textbf{Encoding Space}: Combination of the initial and search space.
+    \item \textbf{Encoding Space}: contains all valid individuals (architectures) within a given population.
 
     \item \textbf{Encoding Strategy}: How architectures are represented and introduced.
 
@@ -255,10 +255,21 @@ differentiated by their \cite{liu2021survey}:
 
 In the following subsections, state of the art ENAS methods will be discussed and illustrated through
 the lense of these different elements that compose an ENAS algorithm. Although, ENAS encompasses many different
-techniques such as evolutionary algorithms (EA), Swarm Intelligence (SI) methods and many others. Since the vast majority
-of relevant ENAS research has applied some form of EA, this will be the major focus of this work.
+techniques such as evolutionary algorithms (EA), Swarm Intelligence (SI) methods and many others;
+this work will focus mostly on EA, since the vast majority of relevant ENAS research have utilized it.
 
 \subsubsection{Encoding Space}
+The encoding space can be further divided into the initial space and the search space. These two may be the same in some cases,
+but often are not. The initial space is the set of all possible architectures that any individual in the initial population may
+become. There are three types of architecture initialization approaches \cite{liu2021survey}: starting from trivial conditions,
+rich initialization and random initialization in the encoding space.
+
+The trivial space approach has been done by \cite{pmlr-v70-real17a}
+and had the benefit of giving much more freedom to the algorithm to explore unseen architectures and also justifies well
+the used of EC-methods instead of any other. However, this comes at the cost of high computational resources.
+
+The rich initialization method, also named \textit{well-designed space}
+
 \subsubsection{Encoding Strategy}
 \subsubsection{Population Update}
 
@@ -279,9 +290,9 @@ the speed of inference as well \cite{lin2020mcunet}. This addresses the shortcom
 Micro \cite{abadi2016tensorflow} and CMSIS-NN \cite{lai1801efficient} that opt for runtime interpretation of code instead.
 Finally, this work has shown to be able to reduce memory usage by 2.7x and improve inference speed by 1.7-2.2
 compared to TF-Lite Micro and CMSIS-NN, also decreased code size by up to 4.5X and 5.0x for TF-Lite Micro and CMSIS-NN
-respectively \cite{lin2020mcunet}. MCUnet achieved state of the art performance, taking 300 GPU hours to design a model
+respectively \cite{lin2020mcunet}. MCUnet achieved state of the art performance, taking 12.5 GPU days to design a model
 \cite{lin2020mcunet}. This is a great improvement compared to MnasNET, which took 40,000 GPU hours for the same
-data set \cite{tan2019mnasnet}.
+data set \cite{tan2019mnasnet} and is also faster than most NAS methods performed on regular machines.
 
 \section{Conclusion}
 Throughout this work a brief overview of the current research on NAS has been displayed. NAS is not only
