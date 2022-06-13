@@ -227,8 +227,10 @@ gradient information \cite{liu2021survey}.
 ENAS algorithms are NAS algorithms that leverage existing evolutionary computational methods
 to search for an optimal architecture within a defined search space.
 
-Any ENAS algorithm can be broken down into a series of steps exemplified by Fig. \ref{evol}. A \textit{population} is
-a finite number of \textit{individuals}. An individual is any given neural architecture or model within the search space.
+Any ENAS algorithm can be broken down into a series of steps exemplified by Fig. \ref{evol}. The term \textit{population} seen
+in Fig. \ref{evol} is defined as a
+a finite number of \textit{individuals}, where each individual is any given neural architecture or model within the defined  search space.
+
 At the beginning of the algorithm an initial population is created within a pre-defined initial space.
 Then, their fitness is evaluated, which essentially is the process of performance estimation already covered in \ref{PES}
 for each individual in this generation's population. Finally, this population undergoes a repetitive process that
@@ -243,7 +245,7 @@ differentiated by their \cite{liu2021survey}:
 
     \item \textbf{Encoding Strategy}: How architectures are represented and introduced.
 
-    \item \textbf{Population Updating process}: Selection strategies, how evolutionary operators are applied
+    \item \textbf{Population Updating Process}: Selection strategies, how evolutionary operators are applied
         and how populations are ultimately updated.
 
     \item \textbf{Fitness Evaluation}: The same concept of performance estimation strategy already touched on
@@ -251,8 +253,9 @@ differentiated by their \cite{liu2021survey}:
 \end{itemize}
 
 In the following subsections, state of the art ENAS methods will be discussed and illustrated through
-these different dimensions.
+the lense of these different elements that compose an ENAS algorithm.
 
+\subsubsection{Encoding Space}
 
 \subsection{NAS and tinyML}
 
