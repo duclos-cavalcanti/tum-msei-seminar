@@ -14,22 +14,14 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{xcolor}
-% \usepackage[pdftex]{graphicx}
-%\usepackage[cmex10]{amsmath}
-%\usepackage{algorithmic}
-%\usepackage{array}
-%\usepackage{mdwmath}
-%\usepackage{mdwtab}
-%\usepackage{eqparbox}
-%\usepackage[tight,footnotesize]{subfigure}
-%\usepackage[caption=false]{caption}
-%\usepackage[font=footnotesize]{subfig}
+\usepackage{graphicx}
+\usepackage{subcaption}
 
 % \graphicspath{{../pdf/}{../jpeg/}}
 % \DeclareGraphicsExtensions{.pdf,.jpeg,.png}
 
 \begin{document}
-%
+
 % paper title
 \title{Neural Architecture Search and tinyML: A Survey}
 \author{Daniel~Duclos-Cavalcanti}
@@ -76,7 +68,7 @@ have the potential to find models that rival the current state of the art. Howev
 human participation. Since then, many different methods have appeared.
 
 To better visualize NAS and understand the difference between its different methods,
-one can categorize it within three dimensions \cite{wistuba2019survey}:
+one can categorize it within three dimensions \cite{elsken2019neural}:
 \begin{itemize}
     \item \textbf{Search Space}: defines all the possible architectures that can in principle be considered.
 
@@ -93,13 +85,16 @@ explore unseen architectures and also possibly limiting the complexity of the de
 
 The simplest approach is to define an architecture as a \textit{chain-structured neural network}, which essentially consists of a
 sequence of layers whose inputs are the output of their preceding layer. In this case the space is parametrized by maximum number
-of layers, type of operations per layer, and hyperparameters conditioned by the chosen operation.
+of layers, type of operations per layer, and hyperparameters conditioned by the chosen operation. An illustration to this can be
+seen in Fig. \ref{space}.
 
 The next step consists then of including more modern design elements such as skip connections, which has already been seen
 in \cite{zoph2016neural} and \cite{pmlr-v70-real17a}. This allows to build more complex \textit{multi-branch networks}, which
 cannot be described as simple sequential layer chaining, but as a structure where each layer's input is a function of
-previous layers outputs. Therefore, a chain-structured neural network can be seen as a special case of the multi-branch network.
-This increases significantly the degrees of freedom of architecture design, which leads to a much larger search space.
+previous layers outputs. This increases significantly the degrees of freedom of architecture design,
+which leads to a much larger search space.
+An illustration to this can be seen in Fig. \ref{space}.
+A chain-structured neural network is then a special case of the multi-branch network.
 
 Another predominant trend includes the search within \textit{cells} or \textit{blocks}, initially considered by works such as
 \cite{zhong2018practical} and \cite{zoph2018learning}. What is proposed, is to break-off architectures in cells, such that
@@ -116,8 +111,33 @@ known working topographies such as in \cite{pmlr-v80-cai18a} with DenseNet \cite
 \textit{human knowledge injection} attempts to reduce the search space through applying domain expertise known to obtain
 effective results. This includes human bias in the model.
 
+\begin{figure}[!t]
+    \centering
+    \includegraphics[scale=0.4]{space}
+    \caption{Illustration of different ways to model neural architectures. Left: an example of a chain-structured NN.
+             Right: an example of a multi-branch NN.}
+    \label{space}
+\end{figure}
+
+% \begin{figure}
+% \centering
+%     \begin{subfigure}{0.1\textwidth}
+%     \includegraphics[width=\textwidth]{example}
+%     \caption{First subfigure.}
+%     \label{fig:first}
+% \end{subfigure}
+% \hfill
+%     \begin{subfigure}{0.1\textwidth}
+%     \includegraphics[width=\textwidth]{multi}
+%     \caption{Second subfigure.}
+%     \label{fig:second}
+% \end{subfigure}
+% \caption{Creating subfigures in \LaTeX.}
+% \label{fig:figures}
+% \end{figure}
+
 \subsection{Search Strategy}
-As any space search problem, there is a \textit{exploration-exploitation} trade-off to be considered \cite{wistuba2019survey}.
+As any space search problem, there is a \textit{exploration-exploitation} trade-off to be considered \cite{elsken2019neural}.
 Obtaining a high-performing architecture within a feasible amount of time is desired. However, converging too early to a
 suboptimal result is also not the goal.
 
@@ -126,7 +146,7 @@ categories \cite{liu2021survey}:
 
 \subsubsection{\textbf{Reinforcement Learning} (RL)-based NAS Algorithms}
 Here, one considers the development of a neural architecture the agent's action, where the action space is the same as
-the search space. Therefore, it is then possible to frame NAS as a reinforcement learning problem \cite{wistuba2019survey}.
+the search space. Therefore, it is then possible to frame NAS as a reinforcement learning problem \cite{elsken2019neural}.
 After evaluating the performance of the given trained architecture on fitness data, it is possible to
 determine the agent's reward. How this estimation is performed will depend on the given method, more to these
 approaches will be seen at \ref{PES}. Furthermore, how the agent's policy is represented and it's optimization will
@@ -153,9 +173,9 @@ More on these different techniques will be seen in \ref{EV}.
 Independent of the search strategy, it is necessary to know how any given architecture performed in order
 to guide the next steps of the algorithm. There are many ways to estimate said performance, whereas the simplest
 would be complete training and validation. Given the complexity and size of the search spaces within NAS, this
-requires GPU days in the order of thousands \cite{wistuba2019survey}. This is why extensive research has been
+requires GPU days in the order of thousands \cite{elsken2019neural}. This is why extensive research has been
 employed to reduce time on performance estimation, since it is a significant time bottleneck.
-Some of these approaches include \cite{wistuba2019survey}:
+Some of these approaches include \cite{elsken2019neural}:
 \begin{itemize}
     \item \textbf{Lower Fidelity Techniques}: Shorter training time \cite{zela2018towards}, \cite{zoph2018learning}, training solely on a
         subset of the data \cite{klein2018towards}, training on downscaled data \cite{chrabaszcz2017downsampled} or with downscaled
@@ -197,12 +217,24 @@ gradient information \cite{liu2021survey}.
 \subsection{Evolutionary Neural Architecture Search (ENAS)}
 \label{EV}
 
+\begin{figure}[!h]
+    \centering
+    \includegraphics[scale=0.4]{evol}
+    \caption{Generic flowchart of a typical ENAS algorithm}
+    \label{space}
+\end{figure}
+
 \subsection{tinyML and NAS}
 
 \section{Conclusion}
 Throughout this work a brief overview of the current research on NAS has been displayed. NAS is not only
 a complex optimization problem, but also one that requires significant computational resources in most applications. The
 trade-offs of the mainstream approaches to NAS have also been shown.
+
+TinyML appears to be a promising field to explore NAS utilization, as performance estimation is extremely smaller within
+this paradigm, being able to fully train and validate a model within minutes. However, other challenges are found such as
+the need to train models not only considering performance, but also subgoals such as latency and parameter size, which
+translates respectively to speed and memory on an embedded device.
 
 % references section
 \newpage
