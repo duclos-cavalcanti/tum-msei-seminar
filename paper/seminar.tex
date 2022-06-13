@@ -46,9 +46,10 @@ rises as the next logical step aiming to both automate architecture discovery an
 of the inner workings of DNNs. This field has grown remarkably within the last 5 years and among the many challenges
 of NAS, there are concerns regarding computational costs and time feasability. This however changes within the context
 of \textit{tinyML}, which is an expanding field at the intersection of machine learning and embedded systems.
-Due to the resource constrained conditions involved in most embedded devices and tinyML
-applications, the stages concerning training and performance evaluation are substantially faster in comparison to
-the more complex models used in the research of NAS. Thus presenting an interesting opportunity to explore NAS applications
+Due to the resource constrained conditions involved in most embedded devices, various techniques have been developed
+to reduce size and memory consumption of deep learning models by the tinyML community. Due to that,
+the stages concerning training and performance evaluation become substantially faster in comparison to
+the models used in NAS research. Thus, presenting an interesting opportunity to explore NAS applications
 within a different paradigm. Throughout this work, an overview of existing research in NAS, specifically concerned
 with the use of evolutionary algorithms methods will be presented, as well as highlighting relevant applicabilities to tinyML.
 
@@ -245,7 +246,7 @@ differentiated by their \cite{liu2021survey}:
 
     \item \textbf{Encoding Strategy}: How architectures are represented and introduced.
 
-    \item \textbf{Population Updating Process}: Selection strategies, how evolutionary operators are applied
+    \item \textbf{Population Update Method}: These are the selection strategies, how the evolutionary operators are applied
         and how populations are ultimately updated.
 
     \item \textbf{Fitness Evaluation}: The same concept of performance estimation strategy already touched on
@@ -253,21 +254,44 @@ differentiated by their \cite{liu2021survey}:
 \end{itemize}
 
 In the following subsections, state of the art ENAS methods will be discussed and illustrated through
-the lense of these different elements that compose an ENAS algorithm.
+the lense of these different elements that compose an ENAS algorithm. Although, ENAS encompasses many different
+techniques such as evolutionary algorithms (EA), Swarm Intelligence (SI) methods and many others. Since the vast majority
+of relevant ENAS research has applied some form of EA, this will be the major focus of this work.
 
 \subsubsection{Encoding Space}
+\subsubsection{Encoding Strategy}
+\subsubsection{Population Update}
 
 \subsection{NAS and tinyML}
+Machine learning on small microcontrollers is a great ambition. TinyML is the field that answers to that challenge
+and aims to provide intelligent features to even a \$5 device, such as an off-the-shelf microcontroller. This is not a
+small effort as microcontrollers posess very limited resources, especially concerning memory and storage.
+
+\cite{lin2020mcunet} shows promising results in that regard with the development of the MCUNet framework.
+MCUNet includes two major components, the efficient neural architecture (TinyNAS) and the lightweight inference engine (TinyEngine).
+The TinyNAS algorithm is a two-stage neural architecture search method, where firstly it optimizes the search space according to the
+given resource constraints and then performs an ENAS algorithm to find the best architecture within this new search space.
+Since the performance of NAS methods depend strongly on the search space \cite{radosavovic2020designing}, this technique
+through extra constaints shrinks the search space such that it only considers architectures that fit the desired requirements,
+which can be memory consumption, storage, latency and even energy.
+In addition to that, TinyEngine implements a code generator-based compilation method that not only eliminates memory overhead, but also improves
+the speed of inference as well \cite{lin2020mcunet}. This addresses the shortcomings of similar libraries such as TF-Lite
+Micro \cite{abadi2016tensorflow} and CMSIS-NN \cite{lai1801efficient} that opt for runtime interpretation of code instead.
+Finally, this work has shown to be able to reduce memory usage by 2.7x and improve inference speed by 1.7-2.2
+compared to TF-Lite Micro and CMSIS-NN, also decreased code size by up to 4.5X and 5.0x for TF-Lite Micro and CMSIS-NN
+respectively \cite{lin2020mcunet}. MCUnet achieved state of the art performance, taking 300 GPU hours to design a model
+\cite{lin2020mcunet}. This is a great improvement compared to MnasNET, which took 40,000 GPU hours for the same
+data set \cite{tan2019mnasnet}.
 
 \section{Conclusion}
 Throughout this work a brief overview of the current research on NAS has been displayed. NAS is not only
 a complex optimization problem, but also one that requires significant computational resources in most applications. The
-trade-offs of the mainstream approaches to NAS have also been shown.
+trade-offs of the mainstream approaches to NAS have also been demonstrated, whilst also highlighting efforts done with the
+use of EC-based approaches.
 
-TinyML appears to be a promising field to explore NAS utilization, as performance estimation is extremely smaller within
-this paradigm, being able to fully train and validate a model within minutes. However, other challenges are found such as
-the need to train models not only considering performance, but also subgoals such as latency and parameter size, which
-translates respectively to speed and memory on an embedded device.
+In addition to that, different applications of NAS methods within the tinyML paradigm have been illustrated.
+For IoT devices and microcontrollers it is not only needed to train models considering performance,
+but also considering other parameters such as latency, memory usage and even energy preservation.
 
 % references section
 \newpage
