@@ -173,10 +173,9 @@ Some of these approaches include \cite{wistuba2019survey}:
 
     \item \textbf{One-Shot Models}: also called \textit{weight sharing} is a technique that treats all architectures as subgraphs
         of a supergraph, which is named the one-shot model. Weights are shared between architectures that meet the condition of
-        having edges in common. Finally, only the weights of a single one-shot mode has to be trained and the
+        having edges in common. Finally, only the weights of a single one-shot model has to be trained and the
         sub-graph architectures can be evaluated directly as they inherit weights from the one-shot model. This demonstrates great
-        success by cutting-down the entire process to a few GPU days. However, significant bias is introduced as the underestimation
-        of architectures by this approach is harsh.
+        success by cutting-down the entire process to a few GPU days. However, significant bias is introduced as the underestimation of architectures by this approach is harsh.
 \end{itemize}
 
 \section{State of the Art}
@@ -200,8 +199,10 @@ gradient information \cite{liu2021survey}.
 
 \subsection{tinyML and NAS}
 
-\section{Conclusion and Future Work}
-Throughout this work
+\section{Conclusion}
+Throughout this work a brief overview of the current research on NAS has been displayed. NAS is not only
+a complex optimization problem, but also one that requires significant computational resources in most applications. The
+trade-offs of the mainstream approaches to NAS have also been shown.
 
 % references section
 \newpage
