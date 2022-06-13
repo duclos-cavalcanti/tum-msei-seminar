@@ -167,11 +167,16 @@ Some of these approaches include \cite{wistuba2019survey}:
         architectures are most promising after partial learning. Domhan et al \cite{domhan2015speeding} extrapolated partial
         learning curves to predict and eliminate sub-optimal architectures.
 
-    \item \textbf{Weight Inheritance}
+    \item \textbf{Weight Inheritance}: also dubbed as \textit{network morphisms} is a technique that passes down weights from
+        previously trained models forward to new ones. This approach can cut down computational costs to just a few GPU days
+        \cite{cai2018efficient}.
 
-    \item \textbf{Network Morphism}
-
-    \item \textbf{One-Shot Models}
+    \item \textbf{One-Shot Models}: also called \textit{weight sharing} is a technique that treats all architectures as subgraphs
+        of a supergraph, which is named the one-shot model. Weights are shared between architectures that meet the condition of
+        having edges in common. Finally, only the weights of a single one-shot mode has to be trained and the
+        sub-graph architectures can be evaluated directly as they inherit weights from the one-shot model. This demonstrates great
+        success by cutting-down the entire process to a few GPU days. However, significant bias is introduced as the underestimation
+        of architectures by this approach is harsh.
 \end{itemize}
 
 \section{State of the Art}
