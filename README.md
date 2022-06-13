@@ -417,22 +417,26 @@ Enable Deep Learning on Mobile Devices: Methods, Systems, and Applications
 skinparam componentStyle rectangle
 
 node "Base Papers" {
-    A - [ Neural Architecture Search: A Survey ]
-    [ A Survey on Evolutionary Neural Architecture Search ] - A
+    A - [ Survey 1 ]
+    [ Survey 2 ] - A
  }
 
 node "Important Breakthrough Papers" {
-    B - [ Baz ]
-    [ Boo ] - B
+    [ RL ] - B
+    B - [ EV ]
+    B -down- [ GR ]
+    [ SUR ] -up- B
  }
 
 node "Evolutionary/RL Papers" {
-    C - [ Foo ]
-    [ Bar ] - C
+    C - [ EV1 ]
+    [ EV2 ] - C
+    C -down- [ EV3 ]
+    [ EV4 ] -up- C
  }
 
 node "tinyML + NAS Papers" {
-    D - [ This ]
+    D - [ MicroNets ]
     [ That ] - D
  }
 
@@ -536,17 +540,17 @@ the end.
 ## Questions/Points
 
 - [ ] Should I include evolutionary algorithms in intro?
-  - R:
+  - R: Assume people know it, maybe in paper body briefly as well, kinda like RL
 - [ ] Should I include RL in intro? Assume RL is known?
-  - R:
+  - R: Maybe briefly in paper body
 - [ ] Should previous work (2017 - 2020) be placed in introduction or state of the art? Probably State of the Art.
-  - R:
+  - R: 2020 upwards is SOA, before and OG papers in intro
 - [ ] Should tinyML be in introduction? if so, how in depth should I go?
-  - R:
+  - R: Yes, context
 - [ ] Am I Allowed to refer to Alex's work directly?
-  - R:
+  - R: No
 - [ ] Images? Some things are best illustrated, but also pollutes paper.
-  - R:
+  - R: Use figure if they serve a good purpose, recomneded
 - [ ] use of italics for unofficial terms? like cells and blocks
   - R:
 - [ ] Alex said something along the lines of: "say in the paper something about layers vs block optimization"
@@ -557,4 +561,5 @@ the end.
 ## ToDo's
 - [ ] Rethink Title
 - [ ] I have found recent TinyML + NAS Work after 2020! Remember to include it.
+- Each section, write on sentence, maybe two if important section (should flow)
 

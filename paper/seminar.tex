@@ -58,8 +58,7 @@ Due to the resource constrained conditions involved in most embedded devices and
 applications, the stages concerning training and performance evaluation are substantially faster in comparison to
 the more complex models used in the research of NAS. Thus presenting an interesting opportunity to explore NAS applications
 within a different paradigm. Throughout this work, an overview of existing research in NAS, specifically concerned
-with the use of evolutionary algorithms and reinforcement learning methods will be presented, as well
-as highlighting relevant applicabilities to tinyML.
+with the use of evolutionary algorithms methods will be presented, as well as highlighting relevant applicabilities to tinyML.
 
 \end{abstract}
 
@@ -168,16 +167,15 @@ Currently RL-based algorithms are extremely costly in terms of computation, requ
 graphics processing cards (GPUs) for days. This is already the case for median-scale data sets, as
 as data grows more complex, so does the processing time needed to search for a suitable architecture.
 
-Gradient-based algorithms are however faster, there are cases such as DARTS, where processing power
-is cut down to single digit GPUs \cite{liu2018darts}. However, as many gradient-based approaches they have
-to adapt the problem to be able apply their algorithm. This often causes ill-conditioned architectures due to
-the improper relationship brought by this adaptation \cite{liu2021survey}.
+Gradient-based algorithms are faster, there are examples such as the DARTS algorithm, where processing power
+is cut down to single digit GPUs \cite{liu2018darts}. However, due to the not completely compatible relationship
+of NAS and a gradient-based optimization, frequently sub-optimal architectures are found \cite{liu2021survey}.
 
 On the other hand, EC methods, while not perfect, have been around for decades and are easily applicable
 to solve complex non-convex optimization problems, as they are insensitive to local minima and do not require
 gradient information \cite{liu2021survey}.
 
-\subsection{Evolutionary Computation-based Efforts}
+\subsection{Evolutionary Computation-based NAS Algorithms}
 
 \subsection{tinyML and NAS}
 
