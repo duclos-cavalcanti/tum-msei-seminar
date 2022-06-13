@@ -31,7 +31,7 @@
 \begin{document}
 %
 % paper title
-\title{Neural Architecture Search and tinyML}
+\title{Neural Architecture Search and tinyML: A Survey}
 \author{Daniel~Duclos-Cavalcanti}
 
 % The paper headers
@@ -68,14 +68,15 @@ Neural Architecture Search (NAS), evolutionary computation (EC), Deep Learning, 
 
 \section{Introduction}
 The advancement of deep learning, although extremely beneficial, has also caused a continuous demand for
-architecture design. This coupled with a growing model complexity still requires ample time and expert knowledge to
-continue this progress.
+architecture design. This coupled with a growing model complexity, demands ample time and expert knowledge for
+any individual to not only benefit from it's application, but also be able to improve any given architecture.
 
-Finally, after the work in \cite{zoph2016neural} proposed by Google, it was shown for the first time that NAS algorithms
+After the work in \cite{zoph2016neural} proposed by Google, it was shown for the first time that NAS algorithms
 have the potential to find models that rival the current state of the art. However, done so in an automated fashion, minimizing
 human participation. Since then, many different methods have appeared.
 
-To better visualize NAS, one can categorize it within three dimensions \cite{wistuba2019survey}:
+To better visualize NAS and understand the difference between its different methods,
+one can categorize it within three dimensions \cite{wistuba2019survey}:
 \begin{itemize}
     \item \textbf{Search Space}: defines all the possible architectures that can in principle be considered.
 
@@ -97,14 +98,14 @@ of layers, type of operations per layer, and hyperparameters conditioned by the 
 The next step consists then of including more modern design elements such as skip connections, which has already been seen
 in \cite{zoph2016neural} and \cite{pmlr-v70-real17a}. This allows to build more complex \textit{multi-branch networks}, which
 cannot be described as simple sequential layer chaining, but as a structure where each layer's input is a function of
-previous layer outputs. Therefore, a chain-structured neural network can be seen as an edge-case or simplification of the multi-branch network.
+previous layers outputs. Therefore, a chain-structured neural network can be seen as a special case of the multi-branch network.
 This increases significantly the degrees of freedom of architecture design, which leads to a much larger search space.
 
 Another predominant trend includes the search within \textit{cells} or \textit{blocks}, initially considered by works such as
 \cite{zhong2018practical} and \cite{zoph2018learning}. What is proposed, is to break-off architectures in cells, such that
 the search space is then designated within a single cell per time. This drastically reduces the search space, as there are
 substantially less layers within a cell in comparison to an entire architecture. Additionally, subdivision of architectures
-into blocks is considered a good design practice, which also enables easy transferability of blocks to other data sets. The same
+into units is considered a good design practice, which also enables easy transferability to other data sets. The same
 modelling used on multi-branch networks can be used with cells, simply replacing layers with cell architectures.
 
 This drives then the discussion between \textit{micro-architectures} versus \textit{macro-architectures}. The macro architecture
@@ -112,52 +113,66 @@ attempts to determine how cells should be connected and how many are needed to b
 architecture aims to find the optimal structure for each cell. Ideally, both viewpoints should be optimized jointly, which of course
 leads to a complex search space. There have been efforts that aimed to minimize this endeavor by fixing macro-architectures with
 known working topographies such as in \cite{pmlr-v80-cai18a} with DenseNet \cite{Huang_2017_CVPR}. This practice, dubbed as
-\textit{human knowledge injection} attempts to reduce the search space through using domain expertise known to obtain
+\textit{human knowledge injection} attempts to reduce the search space through applying domain expertise known to obtain
 effective results. This includes human bias in the model.
 
 \subsection{Search Strategy}
 As any space search problem, there is a \textit{exploration-exploitation} trade-off to be considered \cite{wistuba2019survey}.
-Obtaining a high-performing architecture within a feasible amount of time is desired. However, converting too early to a
+Obtaining a high-performing architecture within a feasible amount of time is desired. However, converging too early to a
 suboptimal result is also not the goal.
 
 Based on the current state of the art, NAS search algorithms can be classified mainly intro three different
 categories \cite{liu2021survey}:
 
 \subsubsection{\textbf{Reinforcement Learning} (RL)-based NAS Algorithms}
-If one considers the development of a neural architecture the agent's action, where the action space is the same as
-the search space, it is then possible to frame NAS as a reinforcement learning problem \cite{wistuba2019survey}.
+Here, one considers the development of a neural architecture the agent's action, where the action space is the same as
+the search space. Therefore, it is then possible to frame NAS as a reinforcement learning problem \cite{wistuba2019survey}.
 After evaluating the performance of the given trained architecture on fitness data, it is possible to
 determine the agent's reward. How this estimation is performed will depend on the given method, more to these
 approaches will be seen at \ref{PES}. Furthermore, how the agent's policy is represented and it's optimization will
 also vary. More on trade-offs and details to these approaches will be seen in \ref{SOA}.
 
 \subsubsection{\textbf{Gradient}-based NAS Algorithms}
-\textcolor{red}{
+\textcolor{black}{
 Consists of transforming the search space from discrete to continuous and performing
-gradient descent with respect to the fitness data set.
+gradient descent with respect to the fitness data set. This transformation requires a set of conditions
+and has still not been mathematically proven \cite{liu2021survey}.
 }
 
 \subsubsection{\textbf{Evolutionary Computation} (EC)-based NAS Algorithms}
 By the application of well established EC methods, which are various techniques based on the evolution of
 species within nature, many different efforts were implemented to navigate their respective search space.
-\textcolor{red}{
-These varied from genetic algorithms (GAs), genetic programming (GP) up until particle swarm optimization (PSO)
-techniques.
+\textcolor{black}{
+Among others, genetic algorithms (GAs), genetic programming (GP) and particle swarm optimization (PSO)
+techniques have already been successfully applied.
 }
-
+More on these different techniques will be seen in \ref{EV}.
 
 \subsection{Performance Estimation Strategy}
 \label{PES}
 Independent of the search strategy, it is necessary to know how any given architecture performed in order
 to guide the next steps of the algorithm. There are many ways to estimate said performance, whereas the simplest
-form would be complete training and validation. Given the complexity and size of the search spaces within NAS, this
+would be complete training and validation. Given the complexity and size of the search spaces within NAS, this
 requires GPU days in the order of thousands \cite{wistuba2019survey}. This is why extensive research has been
-employed to reduce time on performance estimation, since it is by far the greatest bottleneck.
-Some of the approaches such as
-\textcolor{red}{
-lower fidelity techniques, learning curve extrapolation, weight inheritance and one-shot models were utilized
-to ensure achievable periods of search.
-}
+employed to reduce time on performance estimation, since it is a significant time bottleneck.
+Some of these approaches include \cite{wistuba2019survey}:
+\begin{itemize}
+    \item \textbf{Lower Fidelity Techniques}: Shorter training time \cite{zela2018towards}, \cite{zoph2018learning}, training solely on a
+        subset of the data \cite{klein2018towards}, training on downscaled data \cite{chrabaszcz2017downsampled} or with downscaled
+        models \cite{zoph2018learning}, \cite{pmlr-v70-real17a}. These methods do introduce bias as performances will normally be
+        underestimated.
+
+    \item \textbf{Learning Curve Extrapolation}: Performance is extrapolated after just a small number of epochs and then
+        decided upon directly. Klein et al. \cite{klein2018towards} considered architectural hyperparameters to predict which
+        architectures are most promising after partial learning. Domhan et al \cite{domhan2015speeding} extrapolated partial
+        learning curves to predict and eliminate sub-optimal architectures.
+
+    \item \textbf{Weight Inheritance}
+
+    \item \textbf{Network Morphism}
+
+    \item \textbf{One-Shot Models}
+\end{itemize}
 
 \section{State of the Art}
 \label{SOA}
@@ -175,11 +190,13 @@ On the other hand, EC methods, while not perfect, have been around for decades a
 to solve complex non-convex optimization problems, as they are insensitive to local minima and do not require
 gradient information \cite{liu2021survey}.
 
-\subsection{Evolutionary Computation-based NAS Algorithms}
+\subsection{Evolutionary Neural Architecture Search (ENAS)}
+\label{EV}
 
 \subsection{tinyML and NAS}
 
 \section{Conclusion and Future Work}
+Throughout this work
 
 % references section
 \newpage
