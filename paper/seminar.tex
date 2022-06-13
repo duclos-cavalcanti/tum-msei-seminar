@@ -294,18 +294,32 @@ were used.
 \subsection{NAS and tinyML}
 Machine learning on small microcontrollers is a great ambition. TinyML is the field that answers to that challenge
 and aims to provide intelligent features to even a \$5 device, such as an off-the-shelf microcontroller. This is not a
-small effort as microcontrollers posess very limited resources, especially concerning memory and storage.
+small effort as microcontrollers possess very limited resources, especially concerning memory and storage. In the following
+subsections, relevant work that combined NAS algorithms within the tinyML universe will be shown.
 
-\cite{lin2020mcunet} shows promising results in that regard with the development of the MCUNet framework.
-MCUNet includes two major components, the efficient neural architecture (TinyNAS) and the lightweight inference engine (TinyEngine).
+\subsubsection{\textbf{MCUNet}}
+
+MCUNet, a framework that shows promising results, is composed of
+two major components: the efficient neural architecture (TinyNAS) and the lightweight inference engine (TinyEngine) \cite{lin2020mcunet}.
 The TinyNAS algorithm is a two-stage neural architecture search method, where firstly it optimizes the search space according to the
 given resource constraints and then performs an ENAS algorithm to find the best architecture within this new search space.
 Since the performance of NAS methods depend strongly on the search space \cite{radosavovic2020designing}, this technique
-through extra constaints shrinks the search space such that it only considers architectures that fit the desired requirements,
-which can be memory consumption, storage, latency and even energy.
+through extra constaints forces the search to consider a smaller set, where only architectures that fit the desired requirements
+can be found. These requirements may be limited memory consumption, storage limits, latency and even energy.
+
+MCUNet used weight sharing \cite{lin2020mcunet}, where a single super network is created, which contains all the
+sub-networks in the search space. This method leverages the graph attribute of these networks to share weights among
+subnetworks and drastically reduce the time needed to train all possible individuals.
+
+The ENAS algorithm used in MCUNet uses elitism as its selection strategy, always choosing the top-20 individuals in
+terms of accuracy within a given generation. Crossover is applied to generate 50 new candidates and then mutation with a
+probablity of 10\% is used to generate the remaining 50. All generations are of size 100. Finally, after 30 iterations,
+the fittest architecture is chosen.
+
 In addition to that, TinyEngine implements a code generator-based compilation method that not only eliminates memory overhead, but also improves
 the speed of inference as well \cite{lin2020mcunet}. This addresses the shortcomings of similar libraries such as TF-Lite
 Micro \cite{abadi2016tensorflow} and CMSIS-NN \cite{lai1801efficient} that opt for runtime interpretation of code instead.
+
 Finally, this work has shown to be able to reduce memory usage by 2.7x and improve inference speed by 1.7-2.2
 compared to TF-Lite Micro and CMSIS-NN, also decreased code size by up to 4.5X and 5.0x for TF-Lite Micro and CMSIS-NN
 respectively \cite{lin2020mcunet}. MCUnet achieved state of the art performance, taking 12.5 GPU days to design a model
