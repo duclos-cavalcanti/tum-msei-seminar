@@ -221,10 +221,40 @@ gradient information \cite{liu2021survey}.
     \centering
     \includegraphics[scale=0.4]{evol}
     \caption{Generic flowchart of a typical ENAS algorithm}
-    \label{space}
+    \label{evol}
 \end{figure}
 
-\subsection{tinyML and NAS}
+ENAS algorithms are NAS algorithms that leverage existing evolutionary computational methods
+to search for an optimal architecture within a defined search space.
+
+Any ENAS algorithm can be broken down into a series of steps exemplified by Fig. \ref{evol}. A \textit{population} is
+a finite number of \textit{individuals}. An individual is any given neural architecture or model within the search space.
+At the beginning of the algorithm an initial population is created within a pre-defined initial space.
+Then, their fitness is evaluated, which essentially is the process of performance estimation already covered in \ref{PES}
+for each individual in this generation's population. Finally, this population undergoes a repetitive process that
+includes \textit{selection}, \textit{evolutionary operations} and once again a fitness evaluation. If the resulting
+population meet the defined goal, the final architecture has been found. Otherwise repeat the last process until this
+goal is reached.
+
+Having understood the main steps of an ENAS implementation, it becomes clear that ENAS methods can be
+differentiated by their \cite{liu2021survey}:
+\begin{itemize}
+    \item \textbf{Encoding Space}: Combination of the initial and search space.
+
+    \item \textbf{Encoding Strategy}: How architectures are represented and introduced.
+
+    \item \textbf{Population Updating process}: Selection strategies, how evolutionary operators are applied
+        and how populations are ultimately updated.
+
+    \item \textbf{Fitness Evaluation}: The same concept of performance estimation strategy already touched on
+        in \ref{PES}.
+\end{itemize}
+
+In the following subsections, state of the art ENAS methods will be discussed and illustrated through
+these different dimensions.
+
+
+\subsection{NAS and tinyML}
 
 \section{Conclusion}
 Throughout this work a brief overview of the current research on NAS has been displayed. NAS is not only
