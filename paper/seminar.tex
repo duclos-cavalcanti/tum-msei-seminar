@@ -279,11 +279,16 @@ become. There are three types of architecture initialization approaches \cite{li
 \end{itemize}
 
 The search space and their constraints have been touched in \ref{search}. Nonetheless, there are more EA specific
-parameters to consider when evaluating the search space of an ENAS algorithm.
+parameters to consider when evaluating the search space of an ENAS algorithm. Evolutionary operators play a role in
+constraining the algorithm's search space and will be touched on in more depth in \ref{pop}. An example would be the
+work of Irwin-Harris \textit{et al.} \cite{irwin2019graph}, which did not specify explicitly the maximum depth of the
+resulting architectures and then used the algorithm's evolutionary operators to extend the individual's architectures
+indefinitely if needed.
 
 \subsubsection{Encoding Strategy} (TBD)
 
 \subsubsection{Population Update}
+\label{pop}
 Genetic Algorithm (GA)-based ENAS is the most popular approach among ENAS methods, since architecture representation is
 very convenient in GA \cite{liu2021survey}. The selection is the first stage of updating the current population and can
 be divided into several strategies, four of whom are widely used: Elitism, Discard worst or oldest, Roulette and Tournament
