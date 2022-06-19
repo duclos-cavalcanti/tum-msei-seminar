@@ -53,6 +53,7 @@ run-clean:
 .PHONY: run
 run: $(if $(call exist-docker-image),,build) run-clean
 	@echo "## Running Docker ##"
+	@ # -t was removed from make, so it can be run in non-interactive/tty envs like nvim
 	@docker run --rm \
 		   --name=${NAME} \
 		   --user=$(shell id -u) \
@@ -60,7 +61,7 @@ run: $(if $(call exist-docker-image),,build) run-clean
 		   -v ${PWD}:/doc \
 		   -w /doc \
 		   --detach-keys="ctrl-@" \
-		   -it ${DOCKER} \
+		   -i ${DOCKER} \
 			bash -c 'make pdf'
 
 .PHONY: pdf

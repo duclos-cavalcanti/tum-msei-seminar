@@ -71,23 +71,32 @@ human participation. Since then, many different methods have appeared.
 To better visualize NAS and understand the difference between its different methods,
 one can categorize it within three dimensions \cite{elsken2019neural}:
 \begin{itemize}
-    \item \textbf{Search Space}: defines all the possible architectures that can in principle be considered.
+    \item \textbf{Search Space}: Space, which defines all the possible architectures that can in principle be considered
+    by the algorithm.
 
-    \item \textbf{Search Strategy}: defines how the \textit{search space} is explored by the algorithm.
+    \item \textbf{Search Strategy}: How the \textit{search space} is explored by the algorithm.
 
-    \item \textbf{Performance Estimation Strategy}: defines how performance is evaluated at every architecture iteration.
+    \item \textbf{Performance Estimation Strategy}: How performance is evaluated at every architecture iteration.
 \end{itemize}
 
 \subsection{Search Space}
 NAS is an optimization problem, whose search space is the defining factor to its complexity.
 The smaller the search space is, the faster the search may converge,
-as well as requiring less computational resources. This comes at the cost of less freedom to
-explore unseen architectures and also possibly limiting the complexity of the design.
+as well as requiring less computational resources. However, this limits the freedom to
+explore unseen architectures and also possibly restricting the complexity of the design.
 
 The simplest approach is to define an architecture as a \textit{chain-structured neural network}, which essentially consists of a
 sequence of layers whose inputs are the output of their preceding layer. In this case the space is parametrized by maximum number
 of layers, type of operations per layer, and hyperparameters conditioned by the chosen operation. An illustration to this can be
 seen in Fig. \ref{space}.
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[scale=0.4]{space}
+    \caption{Illustration of different ways to model neural architectures. Left: an example of a chain-structured NN.
+             Right: an example of a multi-branch NN.}
+    \label{space}
+\end{figure}
 
 The next step consists then of including more modern design elements such as skip connections, which has already been seen
 in \cite{zoph2016neural} and \cite{pmlr-v70-real17a}. This allows to build more complex \textit{multi-branch networks}, which
@@ -111,14 +120,6 @@ leads to a complex search space. There have been efforts that aimed to minimize 
 known working topographies such as in \cite{pmlr-v80-cai18a} with DenseNet \cite{Huang_2017_CVPR}. This practice, dubbed as
 \textit{human knowledge injection} attempts to reduce the search space through applying domain expertise known to obtain
 effective results. This includes human bias in the model.
-
-\begin{figure}[!t]
-    \centering
-    \includegraphics[scale=0.4]{space}
-    \caption{Illustration of different ways to model neural architectures. Left: an example of a chain-structured NN.
-             Right: an example of a multi-branch NN.}
-    \label{space}
-\end{figure}
 
 % \begin{figure}
 % \centering
@@ -189,7 +190,7 @@ Some of these approaches include \cite{elsken2019neural}:
         learning curves to predict and eliminate sub-optimal architectures.
 
     \item \textbf{Weight Inheritance}: also dubbed as \textit{network morphisms} is a technique that passes down weights from
-        previously trained models forward to new ones. This approach can cut down computational costs to just a few GPU days
+        previously trained models to new ones. This approach can cut down computational costs to just a few GPU days
         \cite{cai2018efficient}.
 
     \item \textbf{One-Shot Models}: also called \textit{weight sharing} is a technique that treats all architectures as subgraphs
@@ -205,15 +206,17 @@ Some of these approaches include \cite{elsken2019neural}:
 \subsection{Overview}
 Currently RL-based algorithms are extremely costly in terms of computation, requiring thousands of
 graphics processing cards (GPUs) for days. This is already the case for median-scale data sets, as
-as data grows more complex, so does the processing time needed to search for a suitable architecture.
+data grows more complex, so does the processing time needed to search for a suitable architecture.
 
 Gradient-based algorithms are faster, there are examples such as the DARTS algorithm, where processing power
 is cut down to single digit GPUs \cite{liu2018darts}. However, due to the not completely compatible relationship
-of NAS and a gradient-based optimization, frequently sub-optimal architectures are found \cite{liu2021survey}.
+of NAS and gradient-based optimization, frequently sub-optimal architectures are found \cite{liu2021survey}. This also
+creates an
 
 On the other hand, EC methods, while not perfect, have been around for decades and are easily applicable
 to solve complex non-convex optimization problems, as they are insensitive to local minima and do not require
-gradient information \cite{liu2021survey}.
+gradient information \cite{liu2021survey}. NAS algorithms that leverage the use of EC techniques are also called
+\textit{Evolutionary Neural Architectecture Search} (ENAS) algorithms.
 
 \subsection{Evolutionary Neural Architecture Search (ENAS)}
 \label{EV}
@@ -293,13 +296,12 @@ were used.
 
 \subsection{NAS and tinyML}
 Machine learning on small microcontrollers is a great ambition. TinyML is the field that answers to that challenge
-and aims to provide intelligent features to even a \$5 device, such as an off-the-shelf microcontroller. This is not a
+and aims to provide intelligent features to even the cheapest off-the-shelf microcontrollers. This is not a
 small effort as microcontrollers possess very limited resources, especially concerning memory and storage. In the following
 subsections, relevant work that combined NAS algorithms within the tinyML universe will be shown.
 
 \subsubsection{\textbf{MCUNet}}
-
-MCUNet, a framework that shows promising results, is composed of
+MCUNet is a framework that shows promising results, composed of
 two major components: the efficient neural architecture (TinyNAS) and the lightweight inference engine (TinyEngine) \cite{lin2020mcunet}.
 The TinyNAS algorithm is a two-stage neural architecture search method, where firstly it optimizes the search space according to the
 given resource constraints and then performs an ENAS algorithm to find the best architecture within this new search space.
