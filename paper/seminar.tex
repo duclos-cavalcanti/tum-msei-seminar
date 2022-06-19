@@ -68,10 +68,9 @@ After the work in \cite{zoph2016neural} proposed by Google, it was shown for the
 have the potential to find models that rival the current state of the art. However, done so in an automated fashion, minimizing
 human participation. Since then, many different methods have appeared.
 
-To better visualize NAS and understand the difference between its different methods,
-one can categorize it within three dimensions \cite{elsken2019neural}:
+To better understand NAS, one can categorize it within three dimensions \cite{elsken2019neural}:
 \begin{itemize}
-    \item \textbf{Search Space}: Space, which defines all the possible architectures that can in principle be considered
+    \item \textbf{Search Space}: What is the set of all possible architectures that can in principle be considered
     by the algorithm.
 
     \item \textbf{Search Strategy}: How the \textit{search space} is explored by the algorithm.
@@ -80,15 +79,17 @@ one can categorize it within three dimensions \cite{elsken2019neural}:
 \end{itemize}
 
 \subsection{Search Space}
+\label{search}
 NAS is an optimization problem, whose search space is the defining factor to its complexity.
 The smaller the search space is, the faster the search may converge,
 as well as requiring less computational resources. However, this limits the freedom to
-explore unseen architectures and also possibly restricting the complexity of the design.
+explore unseen architectures and also possibly restricts the complexity of the design.
 
-The simplest approach is to define an architecture as a \textit{chain-structured neural network}, which essentially consists of a
+How an architecture is constructed or described is a core concept to how the search space of an NAS algorithm is defined.
+The simplest approach would be to define an architecture as a \textit{chain-structured neural network}, which essentially consists of a
 sequence of layers whose inputs are the output of their preceding layer. In this case the space is parametrized by maximum number
 of layers, type of operations per layer, and hyperparameters conditioned by the chosen operation. An illustration to this can be
-seen in Fig. \ref{space}.
+seen to the left of Fig. \ref{space}.
 
 \begin{figure}[!h]
     \centering
@@ -98,45 +99,30 @@ seen in Fig. \ref{space}.
     \label{space}
 \end{figure}
 
-The next step consists then of including more modern design elements such as skip connections, which has already been seen
+The next step would consist of including multiple layer connections and other modern design elements such as skip connections, which has already been seen
 in \cite{zoph2016neural} and \cite{pmlr-v70-real17a}. This allows to build more complex \textit{multi-branch networks}, which
 cannot be described as simple sequential layer chaining, but as a structure where each layer's input is a function of
 previous layers outputs. This increases significantly the degrees of freedom of architecture design,
-which leads to a much larger search space.
-An illustration to this can be seen in Fig. \ref{space}.
-A chain-structured neural network is then a special case of the multi-branch network.
+which leads to a much larger search space. An illustration to this can once again be seen to the right of Fig. \ref{space}.
+A chain-structured neural network can therefore be defined as a special case of the multi-branch network.
 
-Another predominant trend includes the search within \textit{cells} or \textit{blocks}, initially considered by works such as
-\cite{zhong2018practical} and \cite{zoph2018learning}. What is proposed, is to break-off architectures in cells, such that
-the search space is then designated within a single cell per time. This drastically reduces the search space, as there are
-substantially less layers within a cell in comparison to an entire architecture. Additionally, subdivision of architectures
-into units is considered a good design practice, which also enables easy transferability to other data sets. The same
-modelling used on multi-branch networks can be used with cells, simply replacing layers with cell architectures.
+The predominant trend is however the search within \textit{cells} or \textit{blocks}, initially considered by works such as
+\cite{zhong2018practical} and \cite{zoph2018learning}. What is proposed, is to break-off architectures into blocks, such that
+the search space is then designated within a single block at a time. This drastically reduces the search space, as there are
+substantially less layers within a block in comparison to an entire architecture. Moreover, not only trying to parametrize a search
+space solely through primitive layers creates a huge design space, but it also does not guarantee the discovery of
+promising architectures. ResNet, a widely recognized performant architecture, is known to achieve its results through the
+implementation of skip connections. Additionally, subdivision of architectures into units is considered a good
+design practice, which also enables easy transferability to other data sets. The same modelling used on multi-branch
+networks can be used with blocks, simply replacing layers with block architectures.
 
 This drives then the discussion between \textit{micro-architectures} versus \textit{macro-architectures}. The macro architecture
-attempts to determine how cells should be connected and how many are needed to build a model. On the other hand, the micro
-architecture aims to find the optimal structure for each cell. Ideally, both viewpoints should be optimized jointly, which of course
-leads to a complex search space. There have been efforts that aimed to minimize this endeavor by fixing macro-architectures with
+attempts to determine how cells or blocks should be connected and how many are needed to build a model. On the other hand, the micro
+architecture aims to find the optimal structure within a block. Ideally, both viewpoints should be optimized jointly, which of course
+leads to a complex search space. There have been efforts to minimize this endeavor by fixing macro-architectures with
 known working topographies such as in \cite{pmlr-v80-cai18a} with DenseNet \cite{Huang_2017_CVPR}. This practice, dubbed as
 \textit{human knowledge injection} attempts to reduce the search space through applying domain expertise known to obtain
-effective results. This includes human bias in the model.
-
-% \begin{figure}
-% \centering
-%     \begin{subfigure}{0.1\textwidth}
-%     \includegraphics[width=\textwidth]{example}
-%     \caption{First subfigure.}
-%     \label{fig:first}
-% \end{subfigure}
-% \hfill
-%     \begin{subfigure}{0.1\textwidth}
-%     \includegraphics[width=\textwidth]{multi}
-%     \caption{Second subfigure.}
-%     \label{fig:second}
-% \end{subfigure}
-% \caption{Creating subfigures in \LaTeX.}
-% \label{fig:figures}
-% \end{figure}
+effective results. This does include human bias in the model.
 
 \subsection{Search Strategy}
 As any space search problem, there is a \textit{exploration-exploitation} trade-off to be considered \cite{elsken2019neural}.
@@ -147,7 +133,7 @@ Based on the current state of the art, NAS search algorithms can be classified m
 categories \cite{liu2021survey}:
 
 \subsubsection{\textbf{Reinforcement Learning} (RL)-based NAS Algorithms}
-Here, one considers the development of a neural architecture the agent's action, where the action space is the same as
+Here, one considers the development of a neural architecture as the agent's action, where the action space is the same as
 the search space. Therefore, it is then possible to frame NAS as a reinforcement learning problem \cite{elsken2019neural}.
 After evaluating the performance of the given trained architecture on fitness data, it is possible to
 determine the agent's reward. How this estimation is performed will depend on the given method, more to these
@@ -187,36 +173,43 @@ Some of these approaches include \cite{elsken2019neural}:
     \item \textbf{Learning Curve Extrapolation}: Performance is extrapolated after just a small number of epochs and then
         decided upon directly. Klein et al. \cite{klein2018towards} considered architectural hyperparameters to predict which
         architectures are most promising after partial learning. Domhan et al \cite{domhan2015speeding} extrapolated partial
-        learning curves to predict and eliminate sub-optimal architectures.
+        learning curves to predict and eliminate sub-optimal architectures. The difficulty here lies in generating good
+        predictions within a small amount of evaluations, in order to speed up the search.
 
     \item \textbf{Weight Inheritance}: also dubbed as \textit{network morphisms} is a technique that passes down weights from
         previously trained models to new ones. This approach can cut down computational costs to just a few GPU days
         \cite{cai2018efficient}.
 
     \item \textbf{One-Shot Models}: also called \textit{weight sharing} is a technique that treats all architectures as subgraphs
-        of a supergraph, which is named the one-shot model. Weights are shared between architectures that meet the condition of
+        of a supergraph, named the one-shot model. Weights are shared between architectures that meet the condition of
         having edges in common. Finally, only the weights of a single one-shot model has to be trained and the
         sub-graph architectures can be evaluated directly as they inherit weights from the one-shot model. This demonstrates great
-        success by cutting-down the entire process to a few GPU days. However, significant bias is introduced as the underestimation of architectures by this approach is harsh.
+        success, as it was one of the main reasons that the DARTS algorithm was able to cut down computational costs
+        to a few GPU days \cite{liu2018darts}. However, significant bias is introduced as the underestimation of
+        architectures by this approach is harsh.
 \end{itemize}
 
 \section{State of the Art}
 \label{SOA}
 
+In the following subsections, the state-of-the-art of NAS and tinyML related techniques will be discussed. In
+\ref{OV}, a general overview of the main NAS approaches will be layed out, as well as their contrasting qualities.
+Then, in \ref{EV} a deeper dive in \textit{Evolutionary Neural Architecture Search} (ENAS) algorithms is presented. Finally, in
+\ref{nasml}, relevant work that brings NAS to tinyML applications will be illustrated.
+
 \subsection{Overview}
+\label{OV}
 Currently RL-based algorithms are extremely costly in terms of computation, requiring thousands of
 graphics processing cards (GPUs) for days. This is already the case for median-scale data sets, as
 data grows more complex, so does the processing time needed to search for a suitable architecture.
 
 Gradient-based algorithms are faster, there are examples such as the DARTS algorithm, where processing power
 is cut down to single digit GPUs \cite{liu2018darts}. However, due to the not completely compatible relationship
-of NAS and gradient-based optimization, frequently sub-optimal architectures are found \cite{liu2021survey}. This also
-creates an
+of NAS and gradient-based optimization, frequently sub-optimal architectures are found \cite{liu2021survey}.
 
 On the other hand, EC methods, while not perfect, have been around for decades and are easily applicable
 to solve complex non-convex optimization problems, as they are insensitive to local minima and do not require
-gradient information \cite{liu2021survey}. NAS algorithms that leverage the use of EC techniques are also called
-\textit{Evolutionary Neural Architectecture Search} (ENAS) algorithms.
+gradient information \cite{liu2021survey}.
 
 \subsection{Evolutionary Neural Architecture Search (ENAS)}
 \label{EV}
@@ -231,7 +224,7 @@ gradient information \cite{liu2021survey}. NAS algorithms that leverage the use 
 ENAS algorithms are NAS algorithms that leverage existing evolutionary computational methods
 to search for an optimal architecture within a defined search space.
 
-Any ENAS algorithm can be broken down into a series of steps exemplified by Fig. \ref{evol}. The term \textit{population} seen
+A ENAS algorithm can be broken down into a series of steps exemplified by Fig. \ref{evol}. The term \textit{population} seen
 in Fig. \ref{evol} is defined as a
 a finite number of \textit{individuals}, where each individual is any given neural architecture or model within the defined  search space.
 
@@ -242,40 +235,54 @@ includes \textit{selection}, \textit{evolutionary operations} and once again a f
 population meet the defined goal, the final architecture has been found. Otherwise repeat the last process until this
 goal is reached.
 
-Having understood the main steps of an ENAS implementation, it becomes clear that ENAS methods can be
-differentiated by their \cite{liu2021survey}:
-\begin{itemize}
-    \item \textbf{Encoding Space}: contains all valid individuals (architectures) within a given population.
+Based on the main steps of an ENAS implementation, it is possible to define ENAS algorithms
+through four dimensions \cite{liu2021survey}: Encoding Space, Encoding Strategy, Population Update Method and
+Fitness Evaluation.
 
-    \item \textbf{Encoding Strategy}: How architectures are represented within the encoding space.
+% \begin{itemize}
+%     \item \textbf{Encoding Space}: contains all valid individuals (architectures) within a given population.
+%
+%     \item \textbf{Encoding Strategy}: How architectures are represented within the encoding space.
+%
+%     \item \textbf{Population Update Method}: These are the selection strategies, how the evolutionary operators are applied
+%         and how populations are ultimately updated.
+%
+%     \item \textbf{Fitness Evaluation}: The same concept of performance estimation strategy already touched on in \ref{PES}.
+% \end{itemize}
 
-    \item \textbf{Population Update Method}: These are the selection strategies, how the evolutionary operators are applied
-        and how populations are ultimately updated.
-
-    \item \textbf{Fitness Evaluation}: The same concept of performance estimation strategy already touched on
-        in \ref{PES}.
-\end{itemize}
-
-In the following subsections, state of the art ENAS methods will be discussed and illustrated through
+In the following subsections, state-of-the-art ENAS methods will be discussed and illustrated through
 the lense of these different elements that compose an ENAS algorithm. Although, ENAS encompasses many different
 techniques such as evolutionary algorithms (EA), Swarm Intelligence (SI) methods and many others;
-this work will focus mostly on EA, since the vast majority of relevant ENAS research have utilized it.
+this work will focus mostly on EA, since the vast majority of relevant ENAS research has utilized it.
 
 \subsubsection{Encoding Space}
-The encoding space can be further divided into the initial space and the search space. These two may be the same in some cases,
+The encoding space contains all the valid individuals or architectures encoded in the population \cite{liu2021survey}.
+It can be further divided into the initial space and the search space. These two may be the same in some cases,
 but often are not. The initial space is the set of all possible architectures that any individual in the initial population may
-become. There are three types of architecture initialization approaches \cite{liu2021survey}: starting from trivial conditions,
-rich initialization and random initialization in the encoding space.
+become. There are three types of architecture initialization approaches \cite{liu2021survey}:
 
-The trivial space approach has been done by \cite{pmlr-v70-real17a}
-and had the benefit of giving much more freedom to the algorithm to explore unseen architectures and also justifies well
-the used of EC-methods instead of any other. However, this comes at the cost of high computational resources.
+\begin{itemize}
+    \item \textbf{Starting from trivial conditions}: This method aims to impose little to no human bias in the initial
+     population. Real \textit{et al.} \cite{pmlr-v70-real17a} had the benefit of giving much more freedom to the algorithm
+     to explore unseen architectures and also justified well the used of EC-methods instead of any other.
+     However, this comes at the cost of high computational resources. The work from Xie and Yuille \cite{xie2017genetic} is
+     also another example of competetive architecture achievements that used a trivial initial space.
 
-The rich initialization method, also named \textit{well-designed space}, consists of initializing the population within
-a set of state-of-the-art architectures. This way, a good architecture can be found early on and potentially decrease
-search time. On the other hand, finding novel architectures is very improbable.
+    \item \textbf{Rich Initialization}: This technique, also named \textit{well-designed space}, consists of initializing
+    the population within a set of state-of-the-art architectures. This way, a good architecture can be found early on
+    and potentially decrease search time. On the other hand, finding novel architectures is very improbable. There has been
+    relevant work that used this method as initialization technique, such as from \cite{fujino2017deep}.
+
+    \item \textbf{Random Initialization}: This form of initialization also aims to reduce human bias or intervention in
+     the process of architecture evolution. Many efforts have utilized this method such as \cite{sun2019evolving} and
+     \cite{sun2019completely}. Here, the search space and the initial space are the same.
+\end{itemize}
+
+The search space and their constraints have been touched in \ref{search}. Nonetheless, there are more EA specific
+parameters to consider when evaluating the search space of an ENAS algorithm.
 
 \subsubsection{Encoding Strategy} (TBD)
+
 \subsubsection{Population Update}
 Genetic Algorithm (GA)-based ENAS is the most popular approach among ENAS methods, since architecture representation is
 very convenient in GA \cite{liu2021survey}. The selection is the first stage of updating the current population and can
@@ -295,6 +302,7 @@ There is also the possibility to combine different strategies such as in \cite{z
 were used.
 
 \subsection{NAS and tinyML}
+\label{nasml}
 Machine learning on small microcontrollers is a great ambition. TinyML is the field that answers to that challenge
 and aims to provide intelligent features to even the cheapest off-the-shelf microcontrollers. This is not a
 small effort as microcontrollers possess very limited resources, especially concerning memory and storage. In the following
