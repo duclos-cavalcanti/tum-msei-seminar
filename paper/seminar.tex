@@ -130,7 +130,6 @@ search, where each block is identical.
 The same modelling used on multi-branch networks can be used with cells or blocks, simply replacing layers with
 these units.
 
-
 \subsection{Search Strategy}
 As any space search problem, there is a \textit{exploration-exploitation} trade-off to be considered \cite{elsken2019neural}.
 Obtaining a high-performing architecture within a feasible amount of time is desired. However, converging too early to a
@@ -246,17 +245,6 @@ Based on the main steps of an ENAS implementation, it is possible to define ENAS
 through four dimensions \cite{liu2021survey}: Encoding Space, Encoding Strategy, Population Update Method and
 Fitness Evaluation.
 
-% \begin{itemize}
-%     \item \textbf{Encoding Space}: contains all valid individuals (architectures) within a given population.
-%
-%     \item \textbf{Encoding Strategy}: How architectures are represented within the encoding space.
-%
-%     \item \textbf{Population Update Method}: These are the selection strategies, how the evolutionary operators are applied
-%         and how populations are ultimately updated.
-%
-%     \item \textbf{Fitness Evaluation}: The same concept of performance estimation strategy already touched on in \ref{PES}.
-% \end{itemize}
-
 In the following subsections, state-of-the-art ENAS methods will be discussed and illustrated through
 the lense of these different elements that compose an ENAS algorithm. Although, ENAS encompasses many different
 techniques such as evolutionary algorithms (EA), Swarm Intelligence (SI) methods and many others;
@@ -286,10 +274,13 @@ become. There are three types of architecture initialization approaches \cite{li
 \end{itemize}
 
 The search space and their constraints have been touched in \ref{search}, where the concept of block-based and cell-based
-search spaces have been introduced. Notable work like in \cite{sun2019completely} used traditional blocks such as ResBlock, DenseBlock
+search spaces have been introduced. Notable works like \cite{sun2019completely} use traditional blocks such as ResBlock, DenseBlock
 and ConvBlock to further constraint the search space and facilitate architecture discovery. Other efforts such as
 \cite{chen2019auto} and \cite{song2020efficient} used different basic blocks to adapt to their respective desired architecture
 use-cases.
+
+Most implementations of cell-based searches has the macro-architecture be determined by human expertise and concentrated mostly
+on optimizing their micro-architectures. This was done by \cite{real2019regularized}.
 
 Nonetheless, there are more EA specific
 parameters to consider when evaluating the search space of an ENAS algorithm. Evolutionary operators play a role in
@@ -298,10 +289,30 @@ work of Irwin-Harris \textit{et al.} \cite{irwin2019graph}, which did not specif
 resulting architectures and then used the algorithm's evolutionary operators to extend the individual's architectures
 indefinitely if needed.
 
-\subsubsection{Encoding Strategy} (TBD)
+\subsubsection{Encoding Strategy}
+The encoding strategy defines how network architectures are encoded into individuals. They can be broadly defined in
+\textit{fixed-length} and \textit{variable-length} encoding strategies. These approaches differ in whether the length
+of an individual varies during the evolutionary process.
 
-\subsubsection{Population Update}
+In the fixed-length variant, all individuals have the same length during the search process. This facilitates
+the process, since standard evolutionary operations are by design to be used individuals with equal lengths. During
+the work of Xie \textit{et al.} \cite{xie2017genetic}, this enabled a much easier implementation of its ENAS
+algorithm, especially with the utilization of crossover. However, for fixed-length implementations, a maximum
+length has to be established, which then also creates a dependency on human expertise.
+
+On the other hand, the variable-length method does not require human knowledge regarding layer depth, which creates
+a potential to a fully-automated implementation. Moreover, the greatest advantage to this approach is that the algorithm
+can define more details of the architecture with freedom. This comes at the cost of a more difficult and complex implementation,
+since evolutionary operators may not be directly compatible with this encoding strategy, requiring a redesign. In addition to that,
+the extra freedom provided by this technique may also cause over-depth architectures, creating overly complex architectures
+with costly performance evaluations. The work of \cite{sun2019evolving} is a prime example of a variable-length encoding strategy
+that needed to redesign its operators.
+
+\subsubsection{Population Update Method}
 \label{pop}
+The population update method includes selection strategies and how evolutionary operators are applied. This will then
+define how populations are ultimately updated.
+
 Genetic Algorithm (GA)-based ENAS is the most popular approach among ENAS methods, since architecture representation is
 very convenient in GA \cite{liu2021survey}. The selection is the first stage of updating the current population and can
 be divided into several strategies, four of whom are widely used: Elitism, Discard worst or oldest, Roulette and Tournament
