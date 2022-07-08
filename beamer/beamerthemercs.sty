@@ -1,0 +1,624 @@
+% This file provides a beamer-theme for the 
+% Institute for Real-Time Computer System (RCS), 
+% TU München, Germany.
+%
+% This LaTeX beamer template is free software: you can redistribute it and/or modify
+% it under the terms of the GNU General Public License as published by
+% the Free Software Foundation, either version 3 of the License, or
+% (at your option) any later version.
+%
+% This program is distributed in the hope that it will be useful,
+% but WITHOUT ANY WARRANTY; without even the implied warranty of
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+% GNU General Public License for more details.
+%
+% You should have received a copy of the GNU General Public License
+% along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+% (c) 2012--2014 Martin Becker <becker@rcs.ei.tum.de>
+% Tweaked by Martin Geier <geier@rcs.ei.tum.de>
+% last changed: 2014-Apr-01
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%   PACKAGE DECLARATION
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ProvidesPackage{beamerthemercs}
+
+%% boolean options
+\newif\ifbeamer@rcs@conference % [conference] -> logos only on title, default=off
+\newif\ifbeamer@rcs@tumfont % [tumfont] -> use normal beamer fonts, default=off
+\newif\ifbeamer@rcs@headfootlines % [headfootlines] -> use lines to separate head and foot. default=off
+\newif\ifbeamer@rcs@nonci % [nonci] -> tighter slides with title above bar, default=off
+\newif\ifbeamer@rcs@rcslogo % [rcslogo] -> RCS logo, default=off
+\newif\ifbeamer@rcs@notumlogo % [notumlogo] -> TUM logo off, default=on
+\newif\ifbeamer@rcs@titleimage % [titleimage] -> background image on title, default=off
+\newif\ifbeamer@rcs@deutsch % [deutsch] -> german logos, default=off
+\beamer@rcs@conferencefalse
+\beamer@rcs@tumfontfalse
+\beamer@rcs@titleimagefalse
+\beamer@rcs@noncifalse
+\beamer@rcs@deutschfalse
+\beamer@rcs@headfootlinesfalse
+\beamer@rcs@rcslogofalse
+\beamer@rcs@notumlogofalse
+
+\DeclareOptionBeamer{color}[white]{\def\beamer@rcs@color{#1}}
+\DeclareOptionBeamer{conference}{\beamer@rcs@conferencetrue}
+\DeclareOptionBeamer{tumfont}{\beamer@rcs@tumfonttrue}
+\DeclareOptionBeamer{deutsch}{\beamer@rcs@deutschtrue}
+\DeclareOptionBeamer{titleimage}{\beamer@rcs@titleimagetrue}
+\DeclareOptionBeamer{rcslogo}{\beamer@rcs@rcslogotrue}
+\DeclareOptionBeamer{notumlogo}{\beamer@rcs@notumlogotrue}
+\DeclareOptionBeamer{headfootlines}{\beamer@rcs@headfootlinestrue}
+\DeclareOptionBeamer{nonci}{\beamer@rcs@noncitrue} % non-ci version is tighter
+\ProcessOptionsBeamer
+\def\beamer@rcs@colorblue{blue} % expected R-value for blue scheme is "blue"
+\def\beamer@rcs@rcsname{Institute for Real-Time Computer Systems}
+\def\beamer@rcs@rcsnameshort{TUM RCS}
+
+%% resolve option clash
+\ifbeamer@rcs@conference
+  \beamer@rcs@noncifalse % conference dominates over nonci
+\fi
+
+%% squeeze on? Yes, if nonci or conference are present.
+\newif\ifbeamer@rcs@squeeze
+\beamer@rcs@squeezefalse
+\ifbeamer@rcs@conference
+  \beamer@rcs@squeezetrue
+\fi
+\ifbeamer@rcs@nonci
+  \beamer@rcs@squeezetrue
+\fi
+
+%% metadata
+\hypersetup{pdfcreator={\LaTeX -Beamer with the TUM RCS theme.}}
+
+%% LOGOS TO USE
+% RCS
+\ifbeamer@rcs@deutsch
+  \newcommand{\beamer@rcs@logo}{logos/logo_text_pantone.pdf}
+  \newcommand{\beamer@rcs@logonegativ}{logos/logo_text_negativ.pdf}
+  \newcommand{\beamer@rcs@logoblack}{logos/logo_text_black.pdf}
+\else
+  % TODO: RCS has no english translation yet
+  \newcommand{\beamer@rcs@logo}{logos/logo_text_pantone.pdf} % TODO
+  \newcommand{\beamer@rcs@logonegativ}{logos/logo_text_negativ.pdf}
+  \newcommand{\beamer@rcs@logoblack}{logos/logo_text_black.pdf}
+\fi
+\newcommand{\beamer@rcs@logonotext}{logos/logo_notext_pantone.pdf}
+\newcommand{\beamer@rcs@logonotextnegativ}{logos/logo_notext_negativ.pdf}
+\newcommand{\beamer@rcs@logonotextblack}{logos/logo_notext_black.pdf}
+
+% TUM
+\ifbeamer@rcs@deutsch
+  % these logos are ugly
+  \newcommand{\beamer@rcs@tlogo}{logos/TUM_Logo_extern_mt_DE_CMYK_neg.pdf}
+  \newcommand{\beamer@rcs@tlogonegativ}{logos/TUM_Logo_extern_mt_DE_CMYK.pdf}
+  \newcommand{\beamer@rcs@tlogoblack}{logos/TUM_Logo_extern_mt_DE_CMYK_schwarz.pdf}
+\else
+  % these logos are ugly
+  \newcommand{\beamer@rcs@tlogo}{logos/TUM_Logo_extern_mt_EN_CMYK_neg.pdf}
+  \newcommand{\beamer@rcs@tlogonegativ}{logos/TUM_Logo_extern_mt_EN_CMYK.pdf}
+  \newcommand{\beamer@rcs@tlogoblack}{logos/TUM_Logo_extern_mt_EN_CMYK_schwarz.pdf}
+\fi
+\newcommand{\beamer@rcs@tlogonotext}{logos/TUMLogo_oZ_Vollfl_blau_CMYK.pdf}
+\newcommand{\beamer@rcs@tlogonotextnegativ}{logos/TUMLogo_oZ_Vollfl_negativ_CMYK.pdf}
+\newcommand{\beamer@rcs@tlogonotextblack}{logos/TUMLogo_oZ_Vollfl_schwarz_CMYK.pdf}
+
+
+
+%% dependencies
+\usepackage{color}
+\usepackage{textpos}
+\usepackage{tikz}
+
+
+%% for the presentation
+\mode<presentation>
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  INNER AND COLOR THEME
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\useinnertheme[shadow=true]{rounded} % prettier blocks appearence
+\usecolortheme{orchid} % Inner color theme: less agressive alternative: rose
+\setbeamerfont{block title}{size={}} %normal size for block titles
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Color definitions (acc. to style guide 2008)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\definecolor{TUMblue}{RGB}   {  0, 101, 189} % "Pantone300"
+%% additional colors (*not* in logo!!!)
+\definecolor{Pantone540}{RGB}{  0,  51,  89}
+\definecolor{Pantone301}{RGB}{  0,  82, 147}
+\definecolor{Pantone285}{RGB}{  0, 115, 207}
+\definecolor{Pantone542}{RGB}{100, 160, 200}
+\definecolor{Pantone283}{RGB}{152, 198, 234}
+\definecolor{TUMdarkgray}{RGB}{ 88, 88, 90}
+\definecolor{TUMgray}{RGB}{ 156, 157, 159}
+\definecolor{TUMlightgray}{RGB}{ 217, 218, 219}
+%% emph colors (use rarely!)
+\definecolor{TUMgreen}{RGB}{162, 173, 0} % Pantone383
+\definecolor{TUMorange}{RGB}{227, 114, 34} % Pantone158
+\definecolor{TUMelfenbein}{RGB}{218, 215, 203} %Pantone7527
+%% for presentations only: emph colors
+\definecolor{TUMpyellow}{RGB}{255, 180, 0}
+\definecolor{TUMporange}{RGB}{255, 128, 0}
+\definecolor{TUMpred}{RGB}{229, 52, 24}
+\definecolor{TUMpdarkred}{RGB}{202, 33, 63}
+\definecolor{TUMpblue}{RGB}{0, 153, 255}
+\definecolor{TUMplightblue}{RGB}{65, 190, 255}
+\definecolor{TUMpgreen}{RGB}{145, 172, 107}
+\definecolor{TUMplightgreen}{RGB}{181, 202, 130}
+% this is similar to style guide
+%\definecolor{TUMpbluethemeupper}{RGB}{0, 82, 147} %=Pantone301
+%\definecolor{TUMpbluethemelower}{RGB}{  0, 115, 207}
+% this is in powerpoint POT, but looks ugly
+\definecolor{TUMpbluethemelower}{RGB}{0, 82, 147} %=Pantone301
+\definecolor{TUMpbluethemeupper}{RGB}{0, 40, 72}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  FONTS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ifbeamer@rcs@tumfont
+  % \changefontsizes{10pt}
+  \renewcommand{\encodingdefault}{T1}
+  \usefonttheme{professionalfonts}
+  % \usefonttheme{structurebold} % bolded fonts
+  \renewcommand{\rmdefault}{glv} % TUM before 2016: lhv (neue helvetica)
+  \renewcommand{\sfdefault}{lhv} % map serif to no serif
+  %% Font theme
+  \usepackage{mathptmx} 
+\else
+  \usepackage{lmodern}
+\fi
+
+\ifbeamer@rcs@squeeze
+  % slightly smaller (non-ci)
+  \setbeamerfont{frametitle}{size={\fontsize{14pt}{18pt}}} 
+  \setbeamerfont{framesubtitle}{size={\fontsize{10pt}{12pt}}} 
+  \setbeamerfont{normal text}{size={\fontsize{8pt}{10pt}}} 
+  \setbeamerfont{footline}{series=\mdseries,size={\fontsize{6pt}{7pt}}} 
+\else
+  % as of CI: beamer has scaling (around factor two?), so font sizes are not gonna match with TUM CI numerically, but their relations are crafted to do so.
+  \setbeamerfont{frametitle}{size={\fontsize{15pt}{20pt}}} 
+  \setbeamerfont{framesubtitle}{size={\fontsize{11pt}{13pt}}} 
+  \setbeamerfont{normal text}{size={\fontsize{8pt}{9pt}}} 
+  \setbeamerfont{footline}{series=\mdseries,size={\fontsize{6pt}{7pt}}} 
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  COLOR MAPPING
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\only<beamer>{
+\ifx\beamer@rcs@color\beamer@rcs@colorblue
+\beamertemplateshadingbackground{TUMpbluethemelower}{TUMpbluethemeupper}% gradient
+  \setbeamercolor{alerted text}{fg = TUMpyellow}
+  \setbeamercolor{block body}{bg=white,fg =TUMdarkgray}
+  \setbeamercolor{block body alerted}{bg=white,fg = TUMdarkgray}
+  \setbeamercolor{block body example}{bg=white,fg = TUMdarkgray}
+  \setbeamercolor{block title}{bg = Pantone540,fg=white}
+  \setbeamercolor{block title alerted}{fg = white,bg=TUMpred}
+  \setbeamercolor{block title example}{fg=white,bg=TUMpgreen}
+  \setbeamercolor{fine separation line}{fg=TUMgray}
+  \setbeamercolor{footline}{fg=white}
+  \setbeamercolor{frametitle}{fg=white}
+  \setbeamercolor{framesubtitle}{fg=white}
+  \setbeamercolor{item projected}{fg=Pantone301} % the numbers in bullets etc.
+  \setbeamercolor{normal text}{fg = white}
+  \setbeamercolor{separation line}{fg=TUMgray}
+  \setbeamercolor{structure}{bg=Pantone301, fg=white}
+  \setbeamercolor{title}{bg=Pantone540,fg=white}  
+  \setbeamercolor{titlelike}{fg=white}
+\else
+  \setbeamercolor{alerted text}{fg = TUMpred}
+  \setbeamercolor{background canvas}{bg=white} %white = default
+  \setbeamercolor{block body}{fg =TUMdarkgray}
+  \setbeamercolor{block body alerted}{fg = TUMdarkgray}
+  \setbeamercolor{block body example}{fg = TUMdarkgray}
+  \setbeamercolor{block title}{fg = white,bg=Pantone301}
+  \setbeamercolor{block title alerted}{fg = white,bg=TUMpred}
+  \setbeamercolor{block title example}{fg=white,bg=TUMpgreen}
+  \setbeamercolor{fine separation line}{fg=TUMgray}
+  \setbeamercolor{footline}{fg=TUMdarkgray}
+  \setbeamercolor{footnote}{fg=TUMdarkgray}
+  \setbeamercolor{footnote mark}{fg=TUMdarkgray}
+  \setbeamercolor{frametitle}{fg=black}
+  \setbeamercolor{framesubtitle}{fg=black}
+  \setbeamercolor{item projected}{fg=white}
+  \setbeamercolor{normal text}{fg = black}
+  \setbeamercolor{separation line}{fg=TUMgray}
+  \setbeamercolor{sidebar}{bg=white}
+  \setbeamercolor{sidebar}{parent=palette primary}
+  \setbeamercolor{structure}{bg=white, fg=Pantone301}
+  \setbeamercolor{subsection in sidebar}{fg=TUMlightblue}
+  \setbeamercolor{subsection in sidebar shaded}{fg=TUMgray}
+  \ifbeamer@rcs@titleimage
+    \setbeamercolor{title}{fg=white}
+    \setbeamercolor{titlelike}{fg=white}
+    \setbeamercolor{author}{fg=white}
+    \setbeamercolor{date}{fg=white}
+    \setbeamercolor{institute}{fg=white}
+  \else
+    \setbeamercolor{title}{fg=TUMblue}
+    \setbeamercolor{titlelike}{fg=TUMblue}
+  \fi
+\fi
+}
+\only<handout| trans| article> {
+  %% FIXME: style it better -> turn colors into font-weight or -style.
+  \setbeamercolor{alerted text}{fg = TUMpred}
+  \setbeamercolor{background canvas}{bg=white} %white = default
+  \setbeamercolor{block body}{fg =TUMdarkgray}
+  \setbeamercolor{block body alerted}{fg = TUMdarkgray}
+  \setbeamercolor{block body example}{fg = TUMdarkgray}
+  \setbeamercolor{block title}{fg = white,bg=TUMdarkgray}
+  \setbeamercolor{block title alerted}{fg = white,bg=TUMpred}
+  \setbeamercolor{block title example}{fg=white,bg=TUMpgreen}
+  \setbeamercolor{fine separation line}{fg=TUMgray}
+  \setbeamercolor{footline}{fg=TUMdarkgray}
+  \setbeamercolor{frametitle}{fg=black}
+  \setbeamercolor{framesubtitle}{fg=TUMdarkgray}
+  \setbeamercolor{item projected}{fg=white}
+  \setbeamercolor{normal text}{fg = black}
+  \setbeamercolor{separation line}{fg=TUMgray}
+  \setbeamercolor{sidebar}{bg=white}
+  \setbeamercolor{sidebar}{parent=palette primary}
+  \setbeamercolor{structure}{bg=white, fg=black}
+  \setbeamercolor{title}{fg=black,bg=white}
+  \setbeamercolor{titlelike}{fg=black}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  STRUCTURE OF A SLIDE (LOGO, TITLE, ...)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Create the shaded title sep line
+\newcommand{\deftitlebar}[5]{\pgfdeclarehorizontalshading{frametitlebarhshad}{#1}{color(#2)=(#3); color(#4)=(#5)}}
+\newcommand{\deftitlebartop}[7]{\pgfdeclarehorizontalshading{frametitlebarhshad}{#1}{color(#2)=(#3); color(#4)=(#5); color(#6)=(#7)}}
+\newcommand{\deftitlebarbot}[7]{\pgfdeclarehorizontalshading{framebotbarhshad}{#1}{color(#2)=(#3); color(#4)=(#5); color(#6)=(#7)}}
+
+% when in beamer mode...
+\only<beamer> {
+\ifx\beamer@rcs@color\beamer@rcs@colorblue
+  % blue scheme
+  \deftitlebartop{0.002\paperheight}{0\paperwidth}{TUMpbluethemeupper}{0.5\paperwidth}{white}{\the\paperwidth}{TUMpbluethemeupper} 
+  \deftitlebarbot{0.002\paperheight}{0\paperwidth}{TUMpbluethemelower}{0.5\paperwidth}{white}{\the\paperwidth}{TUMpbluethemelower} 
+\else
+  % white scheme
+  \deftitlebartop{0.002\paperheight}{0\paperwidth}{white}{0.5\paperwidth}{TUMblue}{\the\paperwidth}{white} 
+  \deftitlebarbot{0.002\paperheight}{0\paperwidth}{white}{0.5\paperwidth}{TUMblue}{\the\paperwidth}{white} 
+\fi
+}
+% when in handout or similar...
+\only<handout| trans| article> {
+  \deftitlebartop{0.002\paperheight}{0\paperwidth}{black}{0.5\paperwidth}{black}{\the\paperwidth}{black} 
+  \deftitlebarbot{0.002\paperheight}{0\paperwidth}{black}{0.5\paperwidth}{black}{\the\paperwidth}{black} 
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% LOGO PLACEMENT COMMANDS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand*\rcsbeamerputlogoright{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TITLE PAGE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\setbeamertemplate{title page}{
+  \only<beamer>{
+    % experimental
+    \ifbeamer@rcs@titleimage
+    \tikz[overlay,remember picture] \node[opacity=1.0, at=(current page.center)] {
+     \includegraphics[height=\paperheight,width=\paperwidth]{logos/titlebg.jpg}};
+     \vspace{-.25cm}
+    \fi
+  }
+  %% TUM Logo
+  \only<beamer>{
+    \ifbeamer@rcs@notumlogo
+    \else
+    \ifx\beamer@rcs@color\beamer@rcs@colorblue
+    \begin{textblock}{5}(11.2,0)
+      \vspace*{-6.5cm}\hspace*{1.55cm}\includegraphics[width=.85cm]{\beamer@rcs@tlogonotextnegativ}
+    \end{textblock}   
+    \else
+      \ifbeamer@rcs@titleimage
+        \begin{textblock}{5}(11.2,0)      
+          \vspace*{-6.5cm}\hspace*{1.55cm}\includegraphics[width=.85cm]{\beamer@rcs@tlogonotextnegativ}
+        \end{textblock}   
+      \else
+        \begin{textblock}{5}(11.2,0)      
+          \vspace*{-6.5cm}\hspace*{1.55cm}\includegraphics[width=.85cm]{\beamer@rcs@tlogonotext}
+        \end{textblock}   
+      \fi
+    \fi
+    \fi
+  }
+  \only<handout| trans| article>{
+    \ifbeamer@rcs@notumlogo
+    \else
+    \begin{textblock}{5}(11.2,-0.25)      
+      \vspace*{-6.5cm}\hspace*{1.55cm}\includegraphics[width=.85cm]{\beamer@rcs@tlogonotextblack}
+    \end{textblock}
+    \fi
+  }
+
+  \ifbeamer@rcs@titleimage
+  \else
+  \vskip1.0cm
+  \fi
+
+  %\vbox{}
+  \vskip0.1cm%
+%  \begin{centering}
+    %% TITLE
+    \begin{beamercolorbox}[sep=6pt]{author}
+      \usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle\par%
+      \ifx\insertsubtitle\@empty%
+      \else%
+        \vskip0.25em%
+        {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
+      \fi%     
+    \end{beamercolorbox}%
+
+    \vskip1em\par
+    %% AUTHOR
+    \begin{beamercolorbox}[sep=8pt]{author}
+      \usebeamerfont{author}\insertauthor
+    \end{beamercolorbox}
+%    \vskip1em\par
+    %% INSTITUTE
+    \begin{beamercolorbox}[sep=8pt]{institute}
+      \usebeamerfont{institute}\insertinstitute
+    \end{beamercolorbox}
+%    \vskip1em\par
+    %% DATE
+    \begin{beamercolorbox}[sep=8pt]{date}
+      \usebeamerfont{institute}\insertdate
+    \end{beamercolorbox}%\vskip0.5em
+%  \end{centering}
+
+  \vfill
+
+  %% RCS Logo
+  \only<beamer>{
+    \ifx\beamer@rcs@color\beamer@rcs@colorblue
+      \begin{textblock}{5}(.25,0)      
+        \includegraphics[height=.7cm]{\beamer@rcs@logonegativ}
+      \end{textblock}
+    \else
+      \ifbeamer@rcs@titleimage
+        \begin{textblock}{5}(.25,0)      
+          \includegraphics[height=.7cm]{\beamer@rcs@logonegativ}
+        \end{textblock}
+      \else
+        \begin{textblock}{5}(.25,0)      
+          \includegraphics[height=.7cm]{\beamer@rcs@logo}
+        \end{textblock}
+      \fi
+    \fi
+  }
+  \only<handout| trans| article>{
+    \begin{textblock}{5}(.25,0)      
+      \includegraphics[height=.7cm]{\beamer@rcs@logoblack}
+    \end{textblock}
+  }
+} % title page
+
+
+\ifbeamer@rcs@squeeze
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% WHEN SQUEEZE: TITLE ABOVE HEADSEPLINE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbeamertemplate{frametitle}
+{%FIXME: is vspace{-1.7em} really necessary? why is the title down there in the first place?
+  \par{\usebeamerfont*{frametitle}\vspace{-.85cm}{\usebeamercolor[fg]{frametitle} \hspace*{-0.042\paperwidth}\insertframetitle}\strut\par}
+  \ifx\insertframesubtitle\@empty%
+    \strut\par%
+    \vspace{-1.5em}
+  \else
+    \par{\usebeamerfont*{framesubtitle}{\usebeamercolor[fg]{framesubtitle}\vspace{.25em}\hspace*{-0.042\paperwidth}\insertframesubtitle}\strut\par}%
+  \fi%
+}
+
+\else
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% WITHOUT SQUEEZE: TITLE BELOW HEADSEPLINE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbeamertemplate{frametitle}
+{
+  \par{\usebeamerfont*{frametitle}{\usebeamercolor[fg]{frametitle} \hspace*{-0.035\paperwidth}\insertframetitle}\strut\par}
+  \ifx\insertframesubtitle\@empty%
+    \strut\par%
+    \vspace{-1.5em}
+  \else
+    \par{\usebeamerfont*{framesubtitle}{\usebeamercolor[fg]{framesubtitle}\vspace{.25em}\hspace*{-0.035\paperwidth}\insertframesubtitle}\strut\par}%
+  \fi%
+}
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  PLACEMENT OF LOGOS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ifbeamer@rcs@nonci
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+    % NON-CI: if rcslogo=false, then TUM logo. always at right side
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %% couldn't get it into headline without trouble...
+    \setbeamertemplate{sidebar canvas right}{
+      \only<beamer>{        
+        \ifx\beamer@rcs@color\beamer@rcs@colorblue
+          \ifbeamer@rcs@rcslogo
+            \vspace*{-.9cm}\hspace*{-1.15cm}\includegraphics[height=.8cm]{\beamer@rcs@logonotextnegativ} % OK: 2016 RCS negativ.
+          \else
+            \vspace*{-.6cm}\hspace*{-1.3cm}%
+            \includegraphics[width=.85cm]{\beamer@rcs@tlogonotextnegativ} % OK: short version, white, 2016.
+          \fi
+        \else
+          \ifbeamer@rcs@rcslogo
+            \vspace*{-.9cm}\hspace*{-1.15cm}\includegraphics[height=.8cm]{\beamer@rcs@logonotext} % ok: logonotext
+          \else
+            \vspace*{-.6cm}\hspace*{-1.3cm}%
+            \includegraphics[width=.85cm]{\beamer@rcs@tlogonotext} % OK: short version, blue, 2016.
+          \fi
+        \fi
+      }
+      \only<handout| trans| article>{
+        \ifbeamer@rcs@rcslogo
+          \vspace*{-.9cm}\hspace*{-1.15cm}\includegraphics[height=.8cm]{\beamer@rcs@logonotextblack} %OK: black RCS logo, 2016.
+        \else
+          \vspace*{-.6cm}\hspace*{-1.3cm}%
+          \includegraphics[width=.85cm]{\beamer@rcs@tlogonotextblack} % OK: TUM logo short, black, 2016.
+        \fi
+      }
+    }
+\else % nonci=false:
+    \ifbeamer@rcs@conference
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        % Conference version: logos only at title page
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+    \else
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        % CI version: TUM right, optional RCS logo left
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+        \setbeamertemplate{sidebar canvas right}{
+          \only<beamer>{
+            \ifx\beamer@rcs@color\beamer@rcs@colorblue
+              \vspace*{-.6cm}\hspace*{-1.3cm}%
+              \includegraphics[width=.85cm]{\beamer@rcs@tlogonotextnegativ} % OK: 2016.
+            \else
+              \vspace*{-.6cm}\hspace*{-1.3cm}%
+              \includegraphics[width=.85cm]{\beamer@rcs@tlogonotext} % OK: 2016.
+            \fi
+          }
+          \only<handout| trans| article>{
+            \vspace*{-.6cm}\hspace*{-1.3cm}%
+           \includegraphics[width=.85cm]{\beamer@rcs@tlogonotextblack} % OK: TUM logo short, black, 2016.
+          }
+        }
+        \ifbeamer@rcs@rcslogo
+        \setbeamertemplate{sidebar canvas left}{
+          \only<beamer>{
+            \ifx\beamer@rcs@color\beamer@rcs@colorblue
+              \vspace*{-.8cm}\hspace*{.48cm}%new: ok
+              \includegraphics[height=.7cm]{\beamer@rcs@logonegativ} % OK. 2016.
+            \else
+              \vspace*{-.8cm}\hspace*{.48cm}
+              \includegraphics[height=.7cm]{\beamer@rcs@logo} % OK. 2016.
+            \fi
+          }
+          \only<handout| trans| article>{
+            \vspace*{-.8cm}\hspace*{.48cm}%
+            \includegraphics[height=.7cm]{\beamer@rcs@logoblack} % OK. 2016.
+          }
+        }
+        \fi % rcslogo
+    \fi % conference
+\fi % nonci
+
+%% Precise head- and footlines
+\setbeamertemplate{headline}{
+  \vspace{1cm}
+  \ifbeamer@rcs@headfootlines
+    %\hspace*{-0.035\paperwidth} \vbox{}
+    %\hspace*{-0.045\paperwidth}
+    \pgfuseshading{frametitlebarhshad} 
+  \fi
+}
+\setbeamertemplate{footline}{
+  \ifbeamer@rcs@headfootlines
+    %\hspace*{-0.045\paperwidth
+    \pgfuseshading{framebotbarhshad}
+  \fi
+% taken from theme infolines and adapted
+  \leavevmode%
+  \vspace{.5em}\newline
+  \hbox{%
+  \begin{beamercolorbox}[wd=.19\paperwidth,ht=2.25ex,dp=1ex,center]{}%
+    \insertshortdate
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.60\paperwidth,ht=2.25ex,dp=1ex,center]{}%
+    \insertshortauthor:~\insertshorttitle
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.19\paperwidth,ht=2.25ex,dp=1ex,right]{}%
+    page \insertframenumber{} of \inserttotalframenumber \hspace*{2ex} 
+  \end{beamercolorbox}}%
+\vspace{.5em}
+  \vskip0pt%
+}
+
+%% styling of tableofcontents
+\setbeamertemplate{sections/subsections in toc}[square]%[ball]
+\setbeamertemplate{items}[square]%[ball unnumbered]
+
+% no nav symbols anywhere (rarely ever used, messes wit layout)
+\setbeamertemplate{navigation symbols}{}
+
+% no nav symbols in handout
+%\only<handout>{\setbeamertemplate{navigation symbols}{}}
+% \only<beamer| trans| article>{\setbeamertemplate{navigation symbols}{
+% \insertslidenavigationsymbol
+% \insertframenavigationsymbol
+% \insertsubsectionnavigationsymbol
+% \insertsectionnavigationsymbol
+% \insertdocnavigationsymbol
+% \insertbackfindforwardnavigationsymbol
+% \hspace*{.25cm}
+%}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%   OTHER STYLINGS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% listings in TUM colors, but more importantly *beautiful* ones.
+\usepackage{listings}
+\lstset{ captionpos=t, basicstyle=\ttfamily\scriptsize,%
+	 extendedchars=true,%
+	 numbers=left,%
+	 numbersep=5pt,%
+	 numberstyle=\tiny\color{TUMgray},%
+	 stepnumber=5, % Z.nr in 5er schritten
+	 breaklines=true, % Zeilenumbruch
+	 breakautoindent=true, % Bei Zeilenumbruch einrücken
+	 tabsize=2, % Breite eines Tabulators
+	 postbreak=\space,
+	 showspaces=false, % Keine Leerzeichensymbole
+	 showtabs=false, % Keine Tabsymbole
+         showstringspaces=false,% Leerzeichen in Strings         
+         frame=l,%
+         rulecolor=\color{TUMgray},
+       }
+
+\ifx\beamer@rcs@color\beamer@rcs@colorblue
+\lstset{ commentstyle=\color{TUMgray},
+         keywordstyle=[1]\bfseries\color{white},
+         keywordstyle=[2]\bfseries\color{white},
+         keywordstyle=[3]\bfseries\color{white},
+         keywordstyle=[4]\itshape\color{white},
+         stringstyle=\color{TUMpred},
+         identifierstyle=\color{white}}
+\else
+\lstset{ commentstyle=\color{TUMgray},
+         keywordstyle=[1]\bfseries\color{Pantone301},
+         keywordstyle=[2]\bfseries\color{Pantone301},
+         keywordstyle=[3]\bfseries\color{Pantone301},
+         keywordstyle=[4]\itshape\color{Pantone301},
+         stringstyle=\color{TUMpdarkred},
+         identifierstyle=\color{black}}
+\fi
+
+\mode<handout>
+\usepackage{pgfpages}
+
+\IfFileExists{handoutWithNotes.sty}
+{% true
+  \usepackage{handoutWithNotes}
+  \pgfpagesuselayout{4 on 1 with notes}[a4paper,border shrink=5mm]
+}
+{%false
+  \pgfpagesuselayout{2 on 1}[a4paper,border shrink=5mm]
+}
+
+\mode
+<all>
