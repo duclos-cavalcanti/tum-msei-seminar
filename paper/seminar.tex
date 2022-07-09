@@ -61,14 +61,15 @@ Neural Architecture Search (NAS), evolutionary computation (EC), Deep Learning, 
 
 \section{Introduction}
 The advancement of deep learning, although extremely beneficial, has also caused a continuous demand for
-architecture design. This coupled with a growing model complexity, demands ample time and expert knowledge for
-any individual to not only benefit from it's application, but also be able to improve any given architecture.
+architecture design. This coupled with a growing model complexity, demands ample time and expert knowledge to
+either improve existing architectures or create new ones for novel applications or problems.
+
 
 After the work in \cite{zoph2016neural} proposed by Google, it was shown for the first time that NAS algorithms
 have the potential to find models that rival the current state of the art. However, done so in an automated fashion, minimizing
 human participation. Since then, many different methods have appeared.
 
-To better understand NAS, one can categorize it within three dimensions \cite{elsken2019neural}:
+To better understand NAS, one can categorize it using the following characteristics \cite{elsken2019neural}:
 \begin{itemize}
     \item \textbf{Search Space}: What is the set of all possible architectures that can in principle be considered
     by the algorithm.
@@ -83,7 +84,7 @@ To better understand NAS, one can categorize it within three dimensions \cite{el
 NAS is an optimization problem, whose search space is the defining factor to its complexity.
 The smaller the search space is, the faster the search may converge,
 as well as requiring less computational resources. However, this limits the freedom to
-explore unseen architectures and also possibly restricts the complexity of the design.
+explore architectures that have never been conceived before, and also possibly restricts the complexity of the design.
 
 How an architecture is constructed or described is a core concept to how the search space of an NAS algorithm is defined.
 The simplest approach would be to define an architecture as a \textit{chain-structured neural network}, which essentially consists of a
@@ -111,21 +112,21 @@ A trend is however the search within \textit{cells}, initially considered by wor
 the search space is then designated within a single cell instead of an entire architecture. This cell is the basic unit of the
 resulting architecture, which can be then combined with other identical cells in various fashions to produce a final design.
 This strongly reduces the search space, as there are substantially less layers within a single cell in comparison to
-an entire architecture. Additionally, subdivision of architectures into units is considered a good design practice,
-which also enables easy transferability to other data sets.
+an entire architecture.
 
-Cells drive the discussion between \textit{micro-architectures} versus \textit{macro-architectures}. The macro architecture
-attempts to determine how cells should be connected and how many are needed to build a model. On the other hand, the micro
-architecture aims to find the optimal structure within a cell. Ideally, both viewpoints should be optimized jointly, which of course
+Cells drive the discussion between \textit{micro-architectures} versus \textit{macro-architectures} \cite{elsken2019neural}. The macro architecture
+attempts to determine how cells should be connected and how many are needed to build a model \cite{elsken2019neural}. On the other hand, the micro
+architecture aims to find the optimal structure within a cell \cite{elsken2019neural}. Ideally, both should be optimized simultaneously, which of course
 leads to a complex search space. There have been efforts to minimize this endeavor by fixing macro-architectures with
 known working topographies such as in \cite{pmlr-v80-cai18a} with DenseNet \cite{Huang_2017_CVPR}. This practice, dubbed as
-\textit{human knowledge injection} attempts to reduce the search space through applying domain expertise known to obtain
+\textit{human knowledge injection} attempts to reduce the search space through applying domain expertise known to obtain good
+results.
 
 Another trend, predominantly used, is the utilization of \textit{blocks} as the basic units of the search space. Here, various layers of different types
 are combined to produce basic blocks such as ResBlock, DenseBlock, ConvBlock and so on. These blocks are fixed in their topology
 and require less parameters to build an architecture. Therefore, they drastically reduce the search space. Various blocks can be combined
 in different manners and quantities to produce competetive architectures. Cells can be considered as a special case of block-based
-search, where each block is identical.
+search, where each block is identical \cite{liu2021survey}.
 
 The same modelling used on multi-branch networks can be used with cells or blocks, simply replacing layers with
 these units.
@@ -143,11 +144,11 @@ Here, one considers the development of a neural architecture as the agent's acti
 the search space. Therefore, it is then possible to frame NAS as a reinforcement learning problem \cite{elsken2019neural}.
 After evaluating the performance of the given trained architecture on fitness data, it is possible to
 determine the agent's reward. How this estimation is performed will depend on the given method, more to these
-approaches will be seen at \ref{PES}. Furthermore, how the agent's policy is represented and it's optimization will
+approaches will be seen at section \ref{PES}. Furthermore, how the agent's policy is represented and it's optimization will
 also vary. More on trade-offs and details to these approaches will be seen in \ref{SOA}.
 
 \subsubsection{\textbf{Gradient}-based NAS Algorithms}
-\textcolor{black}{
+\textcolor{red}{
 Consists of transforming the search space from discrete to continuous and performing
 gradient descent with respect to the fitness data set. This transformation requires a set of conditions
 and has still not been mathematically proven \cite{liu2021survey}.
@@ -156,11 +157,11 @@ and has still not been mathematically proven \cite{liu2021survey}.
 \subsubsection{\textbf{Evolutionary Computation} (EC)-based NAS Algorithms}
 By the application of well established EC methods, which are various techniques based on the evolution of
 species within nature, many different efforts were implemented to navigate their respective search space.
-\textcolor{black}{
+\textcolor{red}{
 Among others, genetic algorithms (GAs), genetic programming (GP) and particle swarm optimization (PSO)
 techniques have already been successfully applied.
 }
-More on these different techniques will be seen in \ref{EV}.
+More on these different techniques will be seen in section \ref{EV}.
 
 \subsection{Performance Estimation Strategy}
 \label{PES}
