@@ -147,20 +147,28 @@ determine the agent's reward. How this estimation is performed will depend on th
 approaches will be seen at section \ref{PES}. Furthermore, how the agent's policy is represented and it's optimization will
 also vary. More on trade-offs and details to these approaches will be seen in \ref{SOA}.
 
-\subsubsection{\textbf{Gradient}-based NAS Algorithms}
-\textcolor{red}{
-Consists of transforming the search space from discrete to continuous and performing
-gradient descent with respect to the fitness data set. This transformation requires a set of conditions
-and has still not been mathematically proven \cite{liu2021survey}.
-}
-
 \subsubsection{\textbf{Evolutionary Computation} (EC)-based NAS Algorithms}
 By the application of well established EC methods, which are various techniques based on the evolution of
 species within nature, many different efforts were implemented to navigate their respective search space.
-\textcolor{red}{
-Among others, genetic algorithms (GAs), genetic programming (GP) and particle swarm optimization (PSO)
-techniques have already been successfully applied.
-}
+
+% \textcolor{red}{
+% Among others, genetic algorithms (GAs), genetic programming (GP) and particle swarm optimization (PSO)
+% techniques have already been successfully applied.
+% }
+
+\subsubsection{\textbf{Gradient}-based NAS Algorithms}
+EC and Reinforcement learning methods consider an approach, where neural architectures
+are spread across a discrete and non-differentiable search space. There are many reasons for this, as networks may vary
+through many different variables other than numerical parameters or weights. Gradient-based approaches however
+impose restrictions and reformulate the problem to obtain a continuous search space. This allows an algorithm
+to use gradient-based methods to pursue an optimal model, which leads many times to competetive and fast techniques.
+
+%% \textcolor{red}{
+%% Consists of transforming the search space from discrete to continuous and performing
+%% gradient descent with respect to the fitness data set. This transformation requires a set of conditions
+%% and has still not been mathematically proven \cite{liu2021survey}.
+%% }
+
 More on these different techniques will be seen in section \ref{EV}.
 
 \subsection{Performance Estimation Strategy}
@@ -199,15 +207,15 @@ Some of these approaches include \cite{elsken2019neural}:
 \section{State of the Art}
 \label{SOA}
 
-In the following subsections, the state-of-the-art of NAS and tinyML related techniques will be discussed. In
-\ref{OV}, a general overview of the main NAS approaches will be layed out, as well as their contrasting qualities.
-Then, in \ref{EV} a deeper dive in \textit{Evolutionary Neural Architecture Search} (ENAS) algorithms is presented. Finally, in
-\ref{nasml}, relevant work that brings NAS to tinyML applications will be illustrated.
+In the following sections, the state-of-the-art of NAS and tinyML-NAS crossovers will be discussed. In
+section \ref{OV}, a general overview of the main NAS approaches will be presented, as well as their contrasting qualities.
+Then, in section \ref{EV} a deeper dive in \textit{Evolutionary Neural Architecture Search} (ENAS) algorithms is presented. Finally, in
+section \ref{nasml}, relevant work that brings NAS to tinyML applications will be illustrated.
 
 \subsection{Overview}
 \label{OV}
-Currently RL-based algorithms are extremely costly in terms of computation, requiring thousands of
-graphics processing cards (GPUs) for days. This is already the case for median-scale data sets, as
+Currently RL-based algorithms are extremely costly in terms of computation, requiring hundreds of
+GPUs for days. This is already the case for median-scale data sets, so as
 data grows more complex, so does the processing time needed to search for a suitable architecture.
 
 Gradient-based algorithms are faster, there are examples such as the DARTS algorithm, where processing power
@@ -215,8 +223,8 @@ is cut down to single digit GPUs \cite{liu2018darts}. However, due to the not co
 of NAS and gradient-based optimization, frequently sub-optimal architectures are found \cite{liu2021survey}.
 
 On the other hand, EC methods, while not perfect, have been around for decades and are easily applicable
-to solve complex non-convex optimization problems, as they are insensitive to local minima and do not require
-gradient information \cite{liu2021survey}.
+to solve complex non-convex optimization problems \cite{sun2018igd}, as they are insensitive to local minima
+and do not require gradient information \cite{liu2021survey}.
 
 \subsection{Evolutionary Neural Architecture Search (ENAS)}
 \label{EV}
@@ -229,25 +237,27 @@ gradient information \cite{liu2021survey}.
 \end{figure}
 
 ENAS algorithms are NAS algorithms that leverage existing evolutionary computational methods
-to search for an optimal architecture within a defined search space.
-
-A ENAS algorithm can be broken down into a series of steps exemplified by Fig. \ref{evol}. The term \textit{population} seen
-in Fig. \ref{evol} is defined as a
-a finite number of \textit{individuals}, where each individual is any given neural architecture or model within the defined  search space.
+to search for an optimal architecture within a defined search space. It can be broken
+down into a series of steps exemplified by Fig. \ref{evol}. The term \textit{population} seen
+in Fig. \ref{evol} is defined as a finite number of \textit{individuals}, where each individual
+is an iteration of a single neural architecture within the defined  search space.
 
 At the beginning of the algorithm an initial population is created within a pre-defined initial space.
-Then, their fitness is evaluated, which essentially is the process of performance estimation already covered in \ref{PES}
+Then, their fitnesses are evaluated, which essentially is the process of performance estimation already covered in \ref{PES}
 for each individual in this generation's population. Finally, this population undergoes a repetitive process that
-includes \textit{selection}, \textit{evolutionary operations} and once again a fitness evaluation. If the resulting
+includes
+\textcolor{red} {
+\textit{selection}, \textit{evolutionary operations} and once again a fitness evaluation. If the resulting
 population meet the defined goal, the final architecture has been found. Otherwise repeat the last process until this
 goal is reached.
+}
 
 Based on the main steps of an ENAS implementation, it is possible to define ENAS algorithms
 through four dimensions \cite{liu2021survey}: Encoding Space, Encoding Strategy, Population Update Method and
 Fitness Evaluation.
 
-In the following subsections, state-of-the-art ENAS methods will be discussed and illustrated through
-the lense of these different elements that compose an ENAS algorithm. Although, ENAS encompasses many different
+In the following subsections, state-of-the-art ENAS methods will be discussed and categorized by the
+different elements that compose an ENAS algorithm. Although, ENAS encompasses many different
 techniques such as evolutionary algorithms (EA), Swarm Intelligence (SI) methods and many others;
 this work will focus mostly on EA, since the vast majority of relevant ENAS research has utilized it.
 
@@ -274,7 +284,7 @@ become. There are three types of architecture initialization approaches \cite{li
      \cite{sun2019completely}. Here, the search space and the initial space are the same.
 \end{itemize}
 
-The search space and their constraints have been touched in \ref{search}, where the concept of block-based and cell-based
+The search space and their constraints have been touched in section \ref{search}, where the concept of block-based and cell-based
 search spaces have been introduced. Notable works like \cite{sun2019completely} use traditional blocks such as ResBlock, DenseBlock
 and ConvBlock to further constraint the search space and facilitate architecture discovery. Other efforts such as
 \cite{chen2019auto} and \cite{song2020efficient} used different basic blocks to adapt to their respective desired architecture
@@ -302,10 +312,10 @@ algorithm, especially with the utilization of crossover. However, for fixed-leng
 length has to be established, which then also creates a dependency on human expertise.
 
 On the other hand, the variable-length method does not require human knowledge regarding layer depth, which creates
-a potential to a fully-automated implementation. Moreover, the greatest advantage to this approach is that the algorithm
+a potential to have a fully-automated implementation. Moreover, the greatest advantage to this approach is that the algorithm
 can define more details of the architecture with freedom. This comes at the cost of a more difficult and complex implementation,
 since evolutionary operators may not be directly compatible with this encoding strategy, requiring a redesign. In addition to that,
-the extra freedom provided by this technique may also cause over-depth architectures, creating overly complex architectures
+the extra freedom provided by this technique may also cause overly complex architectures
 with costly performance evaluations. The work of \cite{sun2019evolving} is a prime example of a variable-length encoding strategy
 that needed to redesign its operators.
 
@@ -315,9 +325,9 @@ The population update method includes selection strategies and how evolutionary 
 define how populations are ultimately updated.
 
 Genetic Algorithm (GA)-based ENAS is the most popular approach among ENAS methods, since architecture representation is
-very convenient in GA \cite{liu2021survey}. The selection is the first stage of updating the current population and can
-be divided into several strategies, four of whom are widely used: Elitism, Discard worst or oldest, Roulette and Tournament
-Selection.
+very convenient in GA \cite{liu2021survey}. Selection is the first stage of updating the current population and can
+be divided into several strategies, four of whom are widely used: Elitism, Discard worst or oldest, Roulette and
+\textcolor{red}{Tournament Selection. }
 
 Works such as \cite{elsken2017simple} take use of elitism, where essentially only the fittest of individuals are selected to
 compose the next population. This can cause a loss of diversity, as there is a chance that similar architectures perform
