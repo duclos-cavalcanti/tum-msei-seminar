@@ -186,7 +186,7 @@ Some of these approaches include \cite{elsken2019neural}:
         underestimated.
 
     \item \textbf{Learning Curve Extrapolation}: Performance is extrapolated after just a small number of epochs and then
-        decided upon directly. Klein et al. \cite{klein2018towards} considered architectural hyperparameters to predict which
+        decided upon directly. The work of \cite{klein2018towards} considered architectural hyperparameters to predict which
         architectures are most promising after partial learning. Domhan et al \cite{domhan2015speeding} extrapolated partial
         learning curves to predict and eliminate sub-optimal architectures. The difficulty here lies in generating good
         predictions within a small amount of evaluations, in order to speed up the search.
@@ -269,7 +269,7 @@ become. There are three types of architecture initialization approaches \cite{li
 
 \begin{itemize}
     \item \textbf{Starting from trivial conditions}: This method aims to impose little to no human bias in the initial
-     population. Real \textit{et al.} \cite{pmlr-v70-real17a} had the benefit of giving much more freedom to the algorithm
+     population. The groundbreaking work in \cite{pmlr-v70-real17a} had the benefit of giving much more freedom to the algorithm
      to explore unseen architectures and also justified well the used of EC-methods instead of any other.
      However, this comes at the cost of high computational resources. The work from Xie and Yuille \cite{xie2017genetic} is
      also another example of competetive architecture achievements that used a trivial initial space.
@@ -296,7 +296,7 @@ on optimizing their micro-architectures. This was done by \cite{real2019regulari
 Nonetheless, there are more EA specific
 parameters to consider when evaluating the search space of an ENAS algorithm. Evolutionary operators play a role in
 constraining the algorithm's search space and will be touched on in more depth in \ref{pop}. An example would be the
-work of Irwin-Harris \textit{et al.} \cite{irwin2019graph}, which did not specify explicitly the maximum depth of the
+work of in \cite{irwin2019graph}, which did not specify explicitly the maximum depth of the
 resulting architectures and then used the algorithm's evolutionary operators to extend the individual's architectures
 indefinitely if needed.
 
@@ -306,8 +306,8 @@ The encoding strategy defines how network architectures are encoded into individ
 of an individual varies during the evolutionary process.
 
 In the fixed-length variant, all individuals have the same length during the search process. This facilitates
-the process, since standard evolutionary operations are by design to be used individuals with equal lengths. During
-the work of Xie \textit{et al.} \cite{xie2017genetic}, this enabled a much easier implementation of its ENAS
+the process, since standard evolutionary operations are by design to be used individuals with equal lengths. For example,
+in the work of \cite{xie2017genetic}, this enabled a much easier implementation of its ENAS
 algorithm, especially with the utilization of crossover. However, for fixed-length implementations, a maximum
 length has to be established, which then also creates a dependency on human expertise.
 
