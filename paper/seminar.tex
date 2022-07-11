@@ -47,7 +47,7 @@ of the inner workings of DNNs. This field has grown remarkably within the last 5
 of NAS, there are concerns regarding computational costs and time feasability. This however changes within the context
 of \textit{tinyML}, which is an expanding field at the intersection of machine learning and embedded systems.
 Due to the resource constrained conditions involved in most embedded devices, various techniques have been developed
-to reduce size and memory consumption of deep learning models by the tinyML community. Due to that,
+to reduce size and memory consumption of deep learning models by the tinyML community. Therefore,
 the stages concerning training and performance evaluation become substantially faster in comparison to
 the models used in NAS research. Thus, presenting an interesting opportunity to explore NAS applications
 within a different paradigm. Throughout this work, an overview of existing research in NAS, specifically concerned
@@ -66,7 +66,7 @@ either improve existing architectures or create new ones for novel applications 
 
 
 After the work in \cite{zoph2016neural} proposed by Google, it was shown for the first time that NAS algorithms
-have the potential to find models that rival the current state of the art. However, done so in an automated fashion, minimizing
+have the potential to find models that rival the current state of the art. However, done so in an automated fashion and minimizing
 human participation. Since then, many different methods have appeared.
 
 To better understand NAS, one can categorize it using the following characteristics \cite{elsken2019neural}:
@@ -84,7 +84,7 @@ To better understand NAS, one can categorize it using the following characterist
 NAS is an optimization problem, whose search space is the defining factor to its complexity.
 The smaller the search space is, the faster the search may converge,
 as well as requiring less computational resources. However, this limits the freedom to
-explore architectures that have never been conceived before, and also possibly restricts the complexity of the design.
+explore architectures that have not been conceived before, and also possibly restricts the complexity of the design.
 
 How an architecture is constructed or described is a core concept to how the search space of an NAS algorithm is defined.
 The simplest approach would be to define an architecture as a \textit{chain-structured neural network}, which essentially consists of a
@@ -246,6 +246,7 @@ At the beginning of the algorithm an initial population is created within a pre-
 Then, their fitnesses are evaluated, which essentially is the process of performance estimation already covered in \ref{PES}
 for each individual in this generation's population. Finally, this population undergoes a repetitive process that
 includes
+
 \textcolor{red} {
 \textit{selection}, \textit{evolutionary operations} and once again a fitness evaluation. If the resulting
 population meet the defined goal, the final architecture has been found. Otherwise repeat the last process until this
