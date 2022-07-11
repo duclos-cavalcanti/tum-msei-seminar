@@ -145,7 +145,7 @@ the search space. Therefore, it is then possible to frame NAS as a reinforcement
 After evaluating the performance of the given trained architecture on fitness data, it is possible to
 determine the agent's reward. How this estimation is performed will depend on the given method, more to these
 approaches will be seen at section \ref{PES}. Furthermore, how the agent's policy is represented and it's optimization will
-also vary. More on trade-offs and details to these approaches will be seen in \ref{SOA}.
+also vary. More on trade-offs and details to these approaches will be seen in section \ref{SOA}.
 
 \subsubsection{\textbf{Evolutionary Computation} (EC)-based NAS Algorithms}
 By the application of well established EC methods, which are various techniques based on the evolution of
@@ -168,15 +168,15 @@ to use gradient-based methods to pursue an optimal model, which leads many times
 %% gradient descent with respect to the fitness data set. This transformation requires a set of conditions
 %% and has still not been mathematically proven \cite{liu2021survey}.
 %% }
-
 More on these different techniques will be seen in section \ref{EV}.
 
 \subsection{Performance Estimation Strategy}
 \label{PES}
-Independent of the search strategy, it is necessary to know how any given architecture performed in order
-to guide the next steps of the algorithm. There are many ways to estimate said performance, whereas the simplest
-would be complete training and validation. Given the complexity and size of the search spaces within NAS, this
-requires GPU days in the order of thousands \cite{elsken2019neural}. This is why extensive research has been
+Evaluating the performance of a given architecture is crucial to guide the next steps of the algorithm, regardless of the search
+strategy. There are many ways to estimate said performance, whereas the simplest would be complete training and validation.
+However, given the complexity and size of the search spaces within most NAS formulations, this
+may require GPU days in the order of thousands \cite{elsken2019neural}.
+This is why extensive research has been
 employed to reduce time on performance estimation, since it is a significant time bottleneck.
 Some of these approaches include \cite{elsken2019neural}:
 \begin{itemize}
@@ -187,7 +187,7 @@ Some of these approaches include \cite{elsken2019neural}:
 
     \item \textbf{Learning Curve Extrapolation}: Performance is extrapolated after just a small number of epochs and then
         decided upon directly. The work of \cite{klein2018towards} considered architectural hyperparameters to predict which
-        architectures are most promising after partial learning. Domhan et al \cite{domhan2015speeding} extrapolated partial
+        architectures are most promising after partial learning. The work in \cite{domhan2015speeding} extrapolated partial
         learning curves to predict and eliminate sub-optimal architectures. The difficulty here lies in generating good
         predictions within a small amount of evaluations, in order to speed up the search.
 
