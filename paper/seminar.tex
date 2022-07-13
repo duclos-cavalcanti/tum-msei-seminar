@@ -345,6 +345,11 @@ Roulette selection, as the name implies, applies a probability to each invidivid
 a chance associated to each individual's survival. This means that any individual can theoretically be discarded independent
 of performance or not. Finally, Tournament selection will chose from en equally likely sampling of individuals the single best one.
 
+Finally, the most common operations in ENAS are crossover and mutation. Crossover needs two individuals to generate
+an offspring, while mutation is applied solely to a single individual. Mutation wishes to reach the global optimum around
+the individual which it is applied upon and generally introduces exploration \cite{liu2021survey}. Crossover on the other hand
+contributes mainly to exploitation as it reunites different characteristics from ancestors into a single offspring \cite{liu2021survey}.
+
 \subsection{NAS and tinyML}
 \label{nasml}
 Machine learning on small microcontrollers is a great ambition. TinyML is the field that answers to that challenge
